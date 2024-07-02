@@ -1,0 +1,193 @@
+
+simulateCoreRecord <- function(
+                kdeRescaled,
+                sampleSpeciesGradient,
+                origAbundData,
+                eventChangeScale,
+                bgGradientValue,
+                fullGradientRange,
+                eventSampleWidthRatio,
+                sampleWidth,
+                eventDuration,
+                sedRatePerYear,
+                samplingCompleteness,
+                transitionDurationRatio,
+                bioturbDepthRatio,
+                bioturbIntensity,     
+                nEvents,
+                foramsPerYear,
+                nSpecimensPicked,
+                singularDCA,
+                inclusiveDCA,
+                rawDCA,
+                includeInitialBackgroundPhase,
+                plot = FALSE){
+  
+
+    # fix secondary parameters, get implicit parameters
+    implicitParameters <- calculateImplicitParameters(
+          # gradient scale parameters
+          eventChangeScale = eventChangeScale,
+          bgGradientValue = bgGradientValue,  
+          fullGradientRange = fullGradientRange,
+    
+          # event to sample scale ratio
+          eventSampleWidthRatio = eventSampleWidthRatio,
+          # initial secondary parameters
+          sampleWidth = sampleWidth,
+          eventDuration = eventDuration,
+          sedRatePerYear = sedRatePerYear,
+    
+          # additional primary paramters
+          samplingCompleteness = samplingCompleteness,
+          transitionDurationRatio = transitionDurationRatio,
+          bioturbDepthRatio = bioturbDepthRatio
+          )
+    
+    # replace secondary parameters
+    #eventSampleWidthRatio <- implicitParameters$eventSampleWidthRatio
+    #sampleWidth <- implicitParameters$sampleWidth
+    #eventDuration <- implicitParameters$eventDuration
+    #sedRatePerYear <- implicitParameters$sedRatePerYear
+
+    if(includeInitialBackgroundPhase){
+        includeInitialSetUpPhases <- TRUE
+        initialBackgroundIntervalIncluded <- TRUE
+    }else{
+        includeInitialSetUpPhases <- FALSE
+        initialBackgroundIntervalIncluded <- FALSE
+        }
+        
+    # Set Up the Pattern of Simulated Gradient Change Over Time
+    simGradientChangeOut <- setupSimulatedGradientChange(
+          nEvents = nEvents,
+          fullGradientRange = fullGradientRange,
+          peakGradientValue = implicitParameters$peakGradientValue, 
+          bgGradientValue = bgGradientValue,
+          bgDurationRange = implicitParameters$bgDurationRange,
+          transitionDuration = implicitParameters$transitionDuration,
+          eventDuration = implicitParameters$eventDuration,
+          includeInitialSetUpPhases = includeInitialSetUpPhases,
+          plot = plot
+          )
+    
+    #approxGradientSeriesFunction <- approxGradientSeriesFunction
+    
+    maxTime <- max(simGradientChangeOut$simGradient$time)
+    
+    # pulling variables I don't actually need...
+    #eventPhaseStartTimes <- simGradientChangeOut$eventPhaseStartTimes
+    #backgroundStartEnd <- simGradientChangeOut$backgroundStartEnd
+    # What are the start times for each seperate event phase?
+      # eventPhaseStartTimes
+    # And start-end for the background interval?
+      # backgroundStartEnd
+    
+    ###########################################################
+    # Figure out which samples will be taken and at what core depths. 
+    # First, make a matrix with age, depth, gradient values
+    simTimeVar <- data.frame(
+        year = 1:maxTime,
+        # reverse core depth so oldest time is at bottom (biggest depths)
+          # 07-08-21: subtract one to start from 0
+        coreDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerYear,
+        gradientValue = simGradientChangeOut$
+            approxGradientSeriesFunction(1:maxTime)
+        )
+    
+    # Simulate actual specimen abundances for each time step
+    # using KDEs and occurrence probabilities from empirical data
+    timestepAbundances <- getTimestepAbundances(
+        kdeRescaled = kdeRescaled,
+        foramsPerYear = foramsPerYear,
+        sampleSpeciesGradient = sampleSpeciesGradient,
+        gradientValues = simTimeVar$gradientValue
+        )
+    colnames(timestepAbundances) <- names(kdeRescaled)
+    
+    # Running the Simulation
+    coreRecord <- sampleCoreRecord(    
+        bioturbIntensity = bioturbIntensity, 
+        bioturbZoneDepth = implicitParameters$bioturbZoneDepth,  
+        distBetweenSamples = implicitParameters$distBetweenSamples, 
+        sampleWidth = implicitParameters$sampleWidth, 
+        simTimeVar = simTimeVar,
+        timestepAbundances = timestepAbundances,
+        nSpecimensPicked = nSpecimensPicked
+        )
+
+    # checks for debugging    
+    # total number sampled for each species
+    #colSums(abundanceTable)[1:10]
+    # total number of specimens in each sediment sample
+    #rowSums(abundanceTable)[1:10]
+
+    # Check abundances and make sure there is: 
+      # (a) sufficient sample in each picked sample, 
+      # (b) not an excessive sample in each picked sample, 
+      # (c) samples aren't over-dominated by a single taxon. 
+    # The first two issues shouldn't arise as problems 
+      # when we use a fixed, non-stochastic sample size.
+    
+    if(runChecks){
+        coreRecord <- checkCoreRecordAbundanceTable(
+            coreRecord = coreRecord, 
+            minPickedSampleSize = minPickedSampleSize, 
+            maxPickedSampleSize = maxPickedSampleSize,
+            maxDominance = maxDominance
+            )
+        }
+
+    ###################################################################
+    # Prepping Simulation Data for Post- Simulation Analysis
+    sampleProperties <- getSampleProperties(
+        simTimeVar = coreRecord$simTimeVar, 
+        coreRecord = coreRecord,
+        eventStartEndTimes = simGradientChangeOut$eventStartEndTimes,
+        initialBackgroundIntervalIncluded = initialBackgroundIntervalIncluded,
+        backgroundStartEnd = simGradientChangeOut$backgroundStartEnd
+        )
+    
+    # check event sampling
+    if(samplingCompleteness == 1){
+        # test if any unsampled events
+            uniqueEvents <- unique(sampleProperties$eventID[!is.na(sampleProperties$eventID)])
+            if(length(uniqueEvents) != nEvents){
+                stop("Fully sampled record but not all events sampled -- that's impossible Dave!")
+               }
+        }
+
+    
+    # get sample DCA1 scores
+    ecologyOutList <- quantifyCommunityEcology(
+        origAbundData = origAbundData,
+        coreRecord = coreRecord,
+        singularDCA = singularDCA,
+        inclusiveDCA = inclusiveDCA,
+        rawDCA = rawDCA
+        )
+
+    # add DCA1 scores to sample properties
+    if(singularDCA){
+        sampleProperties$scoreDCA1_singular <- ecologyOutList$scoreDCA1_singular 
+        }
+    if(inclusiveDCA){
+        sampleProperties$scoreDCA1_inclusive <- ecologyOutList$scoreDCA1_inclusive 
+        }
+    if(rawDCA){
+        sampleProperties$scoreDCA1_raw <- ecologyOutList$scoreDCA1_raw 
+        }
+        
+    ##########################################################################
+    outList <- list(
+        implicitParameters = implicitParameters,
+        simGradientChangeOut = simGradientChangeOut,
+        maxTime = maxTime,
+        simTimeVar = simTimeVar,
+        coreRecord = coreRecord,
+        ecology = ecologyOutList,
+        sampleProperties = sampleProperties
+        )
+    
+    return(outList)
+    }
