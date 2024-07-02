@@ -12,6 +12,10 @@ calculateImplicitParameters <- function(
         sampleWidth,
         eventDuration,
         sedRatePerYear,
+        # number of time-step assemblages
+            # to simulate per sample
+        maxSampleTimeStep = 500,
+        minSampleTimeStep = 3,
   
         # additional primary paramters
         samplingCompleteness,
@@ -28,13 +32,13 @@ calculateImplicitParameters <- function(
     
     # fixing secondary parameters
     
-    # To calculate the necessary parameters, we need to set *two* of *three* arbitrary 'nuisance' parameters: 
+    # To calculate the necessary parameters, we need to set *THREE* of *FOUR* arbitrary 'nuisance' parameters: 
       # **sample width** (in cm),
-      # the **duration** that an event 'plateaus' at some peak value (in years) 
-      # or **sedimentation rate** (in cm per year). 
-    # Combining the three above with the sample/peak width ratio, 
-      # any three of this combined set of four composes a closed system, 
-      # and the fourth can be calculated from the other three variables.
+      # **duration** that an event 'plateaus' at some peak value (in years) 
+      # **sedimentation rate** (in cm per year)
+      # **sample/peak width ratio** (the ratio of the length of the event relative to the sample width
+    # Combining the three known variables composes a closed system, 
+      # and the fourth unknown can be calculated from the other three variables.
     # Ultimately the choice of values for the above do not matter to many analyses, 
       # as phenomena should scale with our key parameter, 
       # the relationship between sample width and peak width.
@@ -72,6 +76,21 @@ calculateImplicitParameters <- function(
         # Given the above, we can calculate the effective sedimentation rate as:
         sedRatePerYear <- sampleWidth * eventSampleWidthRatio / eventDuration 
         }
+    
+    # adjust all four of above so we don't simulate too many time-steps per sample
+    #multPar <- maxSampleTimeStep / (sampleWidth/sedRatePerYear) 
+    # adjust sampling rate or sampleWidth? Hmmmmm. Both?
+    #sampleWidth <- sampleWidth * multPar
+    #sedRatePerYear <- multPar/sedRatePerYear
+    #eventSampleWidthRatio <- 
+    expStepsPerSample <- (sampleWidth/sedRatePerYear)
+    if(maxSampleTimeStep < expStepsPerSample){
+        stop("More time steps expected in a sample than maxSampleTimeStep -- may be too computationally intensive")
+        }
+    if(minSampleTimeStep > expStepsPerSample){
+        stop("Fewer time steps expected in a sample than minSampleTimeStep -- may be too computationally intensive")
+        }
+    
     
     nAbsentSecParam <- sum(c(
         is.null(eventSampleWidthRatio), 
@@ -138,7 +157,10 @@ calculateImplicitParameters <- function(
       # to avoid artificial patterns of hits and misses for spikes
     # Constrain so buffer around events is always at as large 
       # as the effective duration represented by a sample's width
-    baseDurationBG <- max(c(eventDuration, sampleDuration, bioturbZoneDepth, distBetweenSamples)) * 1.1
+    baseDurationBG <- max(
+        c(eventDuration, sampleDuration, bioturbZoneDepth, distBetweenSamples)
+        ) * 1.1
+
     minBgDuration <- baseDurationBG * 2
     maxBgDuration <- baseDurationBG * 5
     bgDurationRange <- c(minBgDuration, maxBgDuration)
@@ -190,11 +212,12 @@ calculateImplicitParameters <- function(
         peakGradientValue = peakGradientValue,
         sampleDuration = sampleDuration,
         transitionDuration = transitionDuration,
-           # samplingIntervalWidth = samplingIntervalWidth,
+        # samplingIntervalWidth = samplingIntervalWidth,
         bioturbZoneDepth = bioturbZoneDepth,
         bgDurationRange = bgDurationRange,
         distBetweenSamples = distBetweenSamples,
         samplingEventResolution = samplingEventResolution
         )
+    
     return(outputList)
     }

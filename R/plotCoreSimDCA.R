@@ -8,7 +8,7 @@ plotCoreSimDCA <- function(
     # calculate y limits
     DCA1lump <- c(simTimeVar$gradientValue, scoreDCA1)
     DCA1_ylims <- c(min(DCA1lump),max(DCA1lump))
-    DCA1_ylims[2] <- DCA1_ylims[2] + ((DCA1_ylims[2] - DCA1_ylims[1])/10)
+    DCA1_ylims[2] <- DCA1_ylims[2] + ((DCA1_ylims[2] - DCA1_ylims[1])/3)
     
     #par(mar = c(5,5,6,1))
     

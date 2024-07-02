@@ -6,6 +6,7 @@ setupSimulatedGradientChange <- function(
                 bgDurationRange,
                 transitionDuration,
                 eventDuration,
+                halfGradientOnly = "full",
                 includeInitialSetUpPhases = TRUE,
                 plot = FALSE
                 ){
@@ -14,6 +15,12 @@ setupSimulatedGradientChange <- function(
     
     # This will effectively be a time-series of gradient values, 
     # with irregular intervals between dates.
+    
+    if(halfGradientOnly != "full"){
+        if(nEvents != 1){
+            stop("halfGradientOnly options can only be used if simulating a single event")
+            }
+        }
     
     # Background intervals are of uneven duration and thus will be obtained using runif
     bgDuration <- function(n=1, min = bgDurationRange[1], max = bgDurationRange[2]){
@@ -78,19 +85,39 @@ setupSimulatedGradientChange <- function(
         eventPhaseStartTimes[i] <- lastTime
         newGradientTime <- lastTime + bgDuration()
         lastTime <- newGradientTime
-        newGradientTime <- c(newGradientTime,
-            lastTime + transitionDuration,
-            lastTime + transitionDuration + eventDuration,
-            lastTime + transitionDuration + eventDuration + transitionDuration,
-            lastTime + transitionDuration + eventDuration + transitionDuration + bgDuration()
-            )
-        eventStartEndTimes[i,] <- newGradientTime[2:3]
-        simGradientTime <- c(simGradientTime, newGradientTime)
-        #
-        newGradientValue <- c(bgGradientValue,
-            peakGradientValue, peakGradientValue,
-            bgGradientValue, bgGradientValue)
-        simGradientValue <- c(simGradientValue, newGradientValue)
+        
+        if(halfGradientOnly == "full"){
+            newGradientTime <- c(newGradientTime,
+                lastTime + transitionDuration,
+                lastTime + transitionDuration + eventDuration,
+                lastTime + transitionDuration + eventDuration + transitionDuration,
+                lastTime + transitionDuration + eventDuration + transitionDuration + bgDuration()
+                )
+            eventStartEndTimes[i,] <- newGradientTime[2:3]
+            simGradientTime <- c(simGradientTime, newGradientTime)
+            #
+            newGradientValue <- c(bgGradientValue,
+                peakGradientValue, peakGradientValue,
+                bgGradientValue, bgGradientValue)
+            simGradientValue <- c(simGradientValue, newGradientValue)
+            
+            }else{
+                if(halfGradientOnly == "riseOnly"){
+                    
+                    newGradientTime <- rev(c(newGradientTime,
+                        lastTime + transitionDuration,
+                        lastTime + transitionDuration + eventDuration
+                        ))
+                
+                    eventStartEndTimes[i,] <- newGradientTime[2:3]
+                    simGradientTime <- c(newGradientTime, simGradientTime)
+                    #
+                    newGradientValue <- rev(c(bgGradientValue,
+                        peakGradientValue, peakGradientValue))
+                    
+                    simGradientValue <- c(newGradientValue, simGradientValue)
+                    }
+                }
         }
     
     # get total gradient time -> maxTime
@@ -102,7 +129,8 @@ setupSimulatedGradientChange <- function(
     if(length(simGradientTime) != length(simGradientValue)){
         stop(paste0("simGradientTime length (", length(simGradientTime), 
              ") is not equal to simGradientValue length (",
-             length(simGradientValue)))
+             length(simGradientValue),")"
+             ))
         }
     
     # 07-26-21

@@ -1,5 +1,13 @@
-quantifyCommunityEcology <- function(origAbundData, coreRecord, 
-    singularDCA = TRUE, inclusiveDCA = FALSE, rawDCA = FALSE){
+quantifyCommunityEcology <- function(
+        origAbundData, 
+        coreRecord, 
+        useTransformedRelAbundance = TRUE,
+        projectIntoOrigDCA = TRUE,
+        powerRootTransform = 1, 
+        singularDCA = TRUE, 
+        inclusiveDCA = FALSE, 
+        rawDCA = FALSE
+        ){
     
     #require(vegan)
   
@@ -14,16 +22,16 @@ quantifyCommunityEcology <- function(origAbundData, coreRecord,
     if(singularDCA){
         scoreDCA1_singular <- numeric()
         for(i in 1:nrow(coreRecord$abundanceTable)){
-            abundanceTable <- rbind(coreRecord$abundanceTable[i,], origAbundData)
-            # Transform the abundance table to relative abundances, 
-                # and get the pair-wise Bray-Curtis distances.
-                # recalculate relative abundance table
-            relAbundanceTable <- t(apply(abundanceTable, 1, function(x) x/sum(x)))
-            # get bray-curtis distances
-            bcdist <- vegan::vegdist(relAbundanceTable, method = "bray")
-            ## Doing a DCA on the Simulated Data
-            dcaOut <- vegan::decorana(relAbundanceTable)
-            scoreDCA1_singular[i] <- vegan::scores(dcaOut)[1, 1]
+            # use getSampleDCA
+            scoreDCA1_singular[i] <- getSampleDCA(
+                simPickedSample = coreRecord$abundanceTable[i,],
+                origAbundData = origAbundData,
+                useTransformedRelAbundance = useTransformedRelAbundance,
+                projectIntoOrigDCA = projectIntoOrigDCA,
+                returnDCAforOrigAndSim = FALSE,
+                whichAxes = 1,
+                powerRootTransform = powerRootTransform
+                )
             }
         
         ecologyOutList$scoreDCA1_singular <- scoreDCA1_singular
@@ -44,7 +52,8 @@ quantifyCommunityEcology <- function(origAbundData, coreRecord,
         }    
     
     if(inclusiveDCA){
-        # 05-15-21: Need to combine original abundance data into simulated to properly scale DCA (maybe?)
+        # 05-15-21: Need to combine original abundance data 
+          # into simulated to properly scale DCA (maybe?)
           # combine abundance table with original abundance table
           # add TEN copies of the original data
         abundanceTable <- rbind(coreRecord$abundanceTable, origAbundData)  # 1

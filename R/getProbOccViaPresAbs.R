@@ -6,6 +6,7 @@ getProbOccViaPresAbs <- function(
         nBreaksGradientHist = 20, 
         plot = FALSE
         ){
+
     # get Probability of Occurrence Along Gradient Using Presence-Absence
     # Get the presence-absence version of the abundance data
     
@@ -79,3 +80,4 @@ getProbOccViaPresAbs <- function(
     
     return(sampleSpeciesGradient)
     }
+

@@ -17,10 +17,15 @@ simulateCoreRecord <- function(
                 nEvents,
                 foramsPerYear,
                 nSpecimensPicked,
-                singularDCA,
-                inclusiveDCA,
-                rawDCA,
+                halfGradientOnly = "full",
+                useTransformedRelAbundance = TRUE,
+                projectIntoOrigDCA = TRUE,
+                powerRootTransform = 1,                 
+                singularDCA = TRUE,
+                inclusiveDCA = FALSE, # BAD IDEA
+                rawDCA = FALSE,
                 includeInitialBackgroundPhase,
+                # runChecks = TRUE,
                 plot = FALSE){
   
 
@@ -49,14 +54,6 @@ simulateCoreRecord <- function(
     #sampleWidth <- implicitParameters$sampleWidth
     #eventDuration <- implicitParameters$eventDuration
     #sedRatePerYear <- implicitParameters$sedRatePerYear
-
-    if(includeInitialBackgroundPhase){
-        includeInitialSetUpPhases <- TRUE
-        initialBackgroundIntervalIncluded <- TRUE
-    }else{
-        includeInitialSetUpPhases <- FALSE
-        initialBackgroundIntervalIncluded <- FALSE
-        }
         
     # Set Up the Pattern of Simulated Gradient Change Over Time
     simGradientChangeOut <- setupSimulatedGradientChange(
@@ -67,7 +64,8 @@ simulateCoreRecord <- function(
           bgDurationRange = implicitParameters$bgDurationRange,
           transitionDuration = implicitParameters$transitionDuration,
           eventDuration = implicitParameters$eventDuration,
-          includeInitialSetUpPhases = includeInitialSetUpPhases,
+          halfGradientOnly = halfGradientOnly,
+          includeInitialSetUpPhases = includeInitialBackgroundPhase,
           plot = plot
           )
     
@@ -129,14 +127,14 @@ simulateCoreRecord <- function(
     # The first two issues shouldn't arise as problems 
       # when we use a fixed, non-stochastic sample size.
     
-    if(runChecks){
-        coreRecord <- checkCoreRecordAbundanceTable(
-            coreRecord = coreRecord, 
-            minPickedSampleSize = minPickedSampleSize, 
-            maxPickedSampleSize = maxPickedSampleSize,
-            maxDominance = maxDominance
-            )
-        }
+    #if(runChecks){
+    #    coreRecord <- checkCoreRecordAbundanceTable(
+    #        coreRecord = coreRecord, 
+    #        minPickedSampleSize = minPickedSampleSize, 
+    #        maxPickedSampleSize = maxPickedSampleSize,
+    #        maxDominance = maxDominance
+    #        )
+    #    }
 
     ###################################################################
     # Prepping Simulation Data for Post- Simulation Analysis
@@ -144,7 +142,7 @@ simulateCoreRecord <- function(
         simTimeVar = coreRecord$simTimeVar, 
         coreRecord = coreRecord,
         eventStartEndTimes = simGradientChangeOut$eventStartEndTimes,
-        initialBackgroundIntervalIncluded = initialBackgroundIntervalIncluded,
+        initialBackgroundIntervalIncluded = includeInitialBackgroundPhase,
         backgroundStartEnd = simGradientChangeOut$backgroundStartEnd
         )
     
@@ -162,11 +160,14 @@ simulateCoreRecord <- function(
     ecologyOutList <- quantifyCommunityEcology(
         origAbundData = origAbundData,
         coreRecord = coreRecord,
+        useTransformedRelAbundance = useTransformedRelAbundance,
+        projectIntoOrigDCA = projectIntoOrigDCA,
+        powerRootTransform = powerRootTransform, 
         singularDCA = singularDCA,
         inclusiveDCA = inclusiveDCA,
         rawDCA = rawDCA
         )
-
+    
     # add DCA1 scores to sample properties
     if(singularDCA){
         sampleProperties$scoreDCA1_singular <- ecologyOutList$scoreDCA1_singular 
@@ -188,6 +189,14 @@ simulateCoreRecord <- function(
         ecology = ecologyOutList,
         sampleProperties = sampleProperties
         )
+    
+    if(plot){
+        plotCoreSimDCA(
+            simTimeVar = simTimeVar, 
+            scoreDCA1 = ecologyOutList$scoreDCA1_singular,
+            sampleAge = sampleProperties$sampleMidAge
+            )
+        }
     
     return(outList)
     }

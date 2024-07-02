@@ -29,9 +29,9 @@ sampleCoreRecord <- function(
         }
     
     #drop all but the last row)
-    sampleIntervals <- sampleIntervals[1:(nrow(sampleIntervals) - 1), ]
+    sampleIntervals <- sampleIntervals[1:(nrow(sampleIntervals) - 1), , drop = FALSE]
     rownames(sampleIntervals) <- NULL
-    sampleIntervals <- sampleIntervals[ , 2:1]
+    sampleIntervals <- sampleIntervals[ , 2:1, drop = FALSE]
     colnames(sampleIntervals) <- c("sampleDepth_start", "sampleDepth_end")
     # number of samples
     nSamples <- nrow(sampleIntervals)
