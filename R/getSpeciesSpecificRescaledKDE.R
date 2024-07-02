@@ -1,4 +1,3 @@
-
 #' This is a function for Fitting a KDE to a specific species in Community Ecology Data
 
 #' @details
@@ -6,20 +5,22 @@
 
 #' @param
 #' gradientOrigDCA The environmental gradient along which abundance varies, which you are fitting a KDE to.
+
 #' origAbundData The abundance data of the data you wish to model the abundance of.
-#' abundanceFloorRatio The minimum that I made up out of my \emph{butt}. Default is 0.5
+
+#' abundanceFloorRatio The minimum value for the abundance in a given interval along the gradient -- a probably arbitration value that is set to 0.5 by default.
+ 
 #' nBreaksGradientHist The default is 20. Twenty what they asked? Twenty something.
+
 #' modeledSiteAbundance The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.
+
 #' reportTests Should the result of tests checking the KDE results be reported to the terminal? Default is /code{FALSE}.
 
-# badArgument This was the explanation of a bad argument.
-
 #' # example
-#' # load some data
-#' calculating our KDE along some gradient
+#' 
 #' gradientOrigDCA <- 
 
-# @export
+
 getSpeciesSpecificRescaledKDE <- function(
         gradientOrigDCA, 
         origAbundData,
