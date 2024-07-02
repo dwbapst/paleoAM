@@ -18,8 +18,17 @@
 
 #' # example
 #' 
-#' gradientOrigDCA <- 
-
+#' # load data
+#' data(gulfOfAlaska_ShannonEtAl)
+#' 
+#' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
+#'     gradientOrigDCA, 
+#'     origAbundData, 
+#'     abundanceFloorRatio = 0.5, 
+#'     nBreaksGradientHist = 20, 
+#'     modeledSiteAbundance = 10000, 
+#'     reportTests = FALSE)
+#'     
 
 getSpeciesSpecificRescaledKDE <- function(
         gradientOrigDCA, 
