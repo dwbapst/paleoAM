@@ -53,7 +53,7 @@
 #' # Loading the data files used by Belanger & Bapst 2023
 #'     # taken from Sharon et al. supplemental
 #' fullDataTable_GOA <- read.table(
-#'     "~/workspace/simulating_fossil_indices/data/foram_abundances_forSimulations.txt",
+#'     "foram_abundances_forSimulations.txt",
 #'     header = TRUE)
 #' 
 #' DCA1_GOA <- fullDataTable_GOA$DCA1
