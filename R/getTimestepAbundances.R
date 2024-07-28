@@ -2,7 +2,7 @@ getTimestepAbundances <- function(
               kdeRescaled, 
               sampleSpeciesGradient, 
               gradientValues, 
-              foramsPerYear
+              specimensPerTimestep
               ){
     
     nSpecies <- length(kdeRescaled)
@@ -90,7 +90,7 @@ getTimestepAbundances <- function(
 
     # now simulate actual specimen abundances for each time step    
     timestepAbundances <- simulateTimestepAbundances(
-        foramsPerYear = foramsPerYear, 
+        specimensPerTimestep = specimensPerTimestep, 
         nSpecies = nSpecies, 
         nTimeSteps = nTimeSteps, 
         speciesPresent_List = speciesPresent_List, 
@@ -103,7 +103,7 @@ getTimestepAbundances <- function(
 
 
 simulateTimestepAbundances <- function(
-            foramsPerYear, 
+            specimensPerTimestep, 
             nSpecies, 
             nTimeSteps, 
             speciesPresent_List, 
@@ -125,15 +125,15 @@ simulateTimestepAbundances <- function(
         # turn into expected relative abundances
         expRelativeAbundances <- expAbundFromKDE/sum(expAbundFromKDE)
         
-        # sample "foramsPerYear" fossil specimens for each year
+        # sample "specimensPerTimestep" fossil specimens for each year
         # We treat each year as having a fixed non-stochastic number of individuals 
-        # sampled from that community (foramsPerYear) 
+        # sampled from that community (specimensPerTimestep) 
         
         species <- (1:nSpecies)[expRelativeAbundances > 0]
         species <- as.integer(species)
         expRelativeAbundances <- expRelativeAbundances[expRelativeAbundances > 0]
             
-        fossilSamples <- sample(size = foramsPerYear, 
+        fossilSamples <- sample(size = specimensPerTimestep, 
                 x = species, replace = TRUE, 
                 prob = expRelativeAbundances)
         

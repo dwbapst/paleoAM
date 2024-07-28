@@ -2,7 +2,7 @@ simForamSample <- function(
             kdeRescaled, 
             sampleSpeciesGradient, 
             gradientValues, 
-            foramsPerYear,
+            specimensPerTimestep,
             nSpecies,
             nPickedSpecimens     
             ){
@@ -15,7 +15,7 @@ simForamSample <- function(
             kdeRescaled = kdeRescaled, 
             sampleSpeciesGradient = sampleSpeciesGradient, 
             gradientValues = gradientValues, 
-            foramsPerYear = foramsPerYear
+            specimensPerTimestep = specimensPerTimestep
             )
         )
     

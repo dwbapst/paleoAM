@@ -5,7 +5,7 @@ simulateGradientQuantile <- function(
             origAbundData,
             kdeRescaled,
             sampleSpeciesGradient,
-            foramsPerYear,
+            specimensPerTimestep,
             nSpecimensPicked
             ){
     
@@ -32,7 +32,7 @@ simulateGradientQuantile <- function(
         gradientValues = simTimeVar$gradientValue,
         kdeRescaled = kdeRescaled,
         sampleSpeciesGradient = sampleSpeciesGradient,
-        foramsPerYear = foramsPerYear
+        specimensPerTimestep = specimensPerTimestep
         )
     colnames(timestepAbundances) <- names(kdeRescaled)
         
