@@ -67,8 +67,8 @@ sampleCoreRecord <- function(
         # Build picked-sample abundance table and fill with species abundances 
         # for each picked sample, looking at each sample individually. 
     # Treat each sample as a lumped mega-sample, 
-        # where each year contained within a sample is a separately simulated community. 
-    # We lump all the sampled forams from all the years within a picked sample together, 
+        # where each timestep contained within a sample is a separately simulated community. 
+    # We lump all the sampled forams from all the timesteps within a picked sample together, 
         # and resample to approximate the time-averaging of the real microfossil record.
         
     # make an empty species by sites matrix for abundances
@@ -83,45 +83,45 @@ sampleCoreRecord <- function(
         if(bioturbProportion > 0){        
             #IF bioturbZoneDepth > sampleWidth
             
-            # selected years are the sample years + the years mixed in by bioturbation
-            years_After   <- (simTimeVar$coreDepth <= bioturbIntervals[i,1])
-            years_Before  <- (bioturbIntervals[i,2] <= simTimeVar$coreDepth)
-            selectedYears <- years_After & years_Before
-            selectedYears <- which(selectedYears)
+            # selected timesteps are the sample timesteps + the timesteps mixed in by bioturbation
+            timesteps_After   <- (simTimeVar$coreDepth <= bioturbIntervals[i,1])
+            timesteps_Before  <- (bioturbIntervals[i,2] <= simTimeVar$coreDepth)
+            selectedTimesteps <- timesteps_After & timesteps_Before
+            selectedTimesteps <- which(selectedTimesteps)
 
-            # 'sample years' are those 'selected years' that are the years in the 'actual' sample
-            years_After  <- (simTimeVar$coreDepth[selectedYears] <= sampleIntervals[i,1])
-            years_Before <- (sampleIntervals[i,2] <= simTimeVar$coreDepth[selectedYears])
-            sampleYears  <- years_After & years_Before
-            sampleYears  <- which(sampleYears)
+            # 'sample timesteps' are those 'selected timesteps' that are the timesteps in the 'actual' sample
+            timesteps_After  <- (simTimeVar$coreDepth[selectedTimesteps] <= sampleIntervals[i,1])
+            timesteps_Before <- (sampleIntervals[i,2] <= simTimeVar$coreDepth[selectedTimesteps])
+            sampleTimesteps  <- timesteps_After & timesteps_Before
+            sampleTimesteps  <- which(sampleTimesteps)
             
             nSampleSpecPicked <- round((1 - bioturbProportion) * nSpecimensPicked)   
             nBioturbSpecPicked <- round(bioturbProportion * nSpecimensPicked)
             
         }else{
-            # which year-layers are in this sample
-            years_After   <- (simTimeVar$coreDepth <= sampleIntervals[i,1])
-            years_Before  <- (sampleIntervals[i,2] <= simTimeVar$coreDepth)
-            selectedYears <- years_After & years_Before
-            selectedYears <- which(selectedYears)
+            # which timestep-layers are in this sample
+            timesteps_After   <- (simTimeVar$coreDepth <= sampleIntervals[i,1])
+            timesteps_Before  <- (sampleIntervals[i,2] <= simTimeVar$coreDepth)
+            selectedTimesteps <- timesteps_After & timesteps_Before
+            selectedTimesteps <- which(selectedTimesteps)
             
-            sampleYears <- 1:length(selectedYears)
+            sampleTimesteps <- 1:length(selectedTimesteps)
             
             nSampleSpecPicked <- nSpecimensPicked
             }
         
-        if(length(selectedYears)<1){
+        if(length(selectedTimesteps)<1){
             stop("No sedimentary samples within this interval?!")
             }
-        if(length(sampleYears)<1){
+        if(length(sampleTimesteps)<1){
             stop("No sedimentary samples within this interval?!")
             }        
         
         # lump the abundances together
         # make an empty matrix
-        lumpedAbundanceTable <- timestepAbundances[selectedYears, , drop = FALSE]
+        lumpedAbundanceTable <- timestepAbundances[selectedTimesteps, , drop = FALSE]
         # now do colSums to lump the abundances together for *just* the sample
-        lumpedSample <- colSums(lumpedAbundanceTable[sampleYears, , drop = FALSE])
+        lumpedSample <- colSums(lumpedAbundanceTable[sampleTimesteps, , drop = FALSE])
         # un-table() the lumped community abundance data
         lumpedSample <- rep(1:nSpecies, lumpedSample)
         # down-sample the lumped specimens to "nSpecimensPicked" 
@@ -130,9 +130,9 @@ sampleCoreRecord <- function(
                 
         # combine with the bioturbated interval *beyond* the sample, if there is bioturbation
         
-        # if there are selected years outside of sample years
-        if(length(selectedYears) > length(sampleYears)){
-            lumpedBioturb <- colSums(lumpedAbundanceTable[-sampleYears, , drop = FALSE])
+        # if there are selected timesteps outside of sample timesteps
+        if(length(selectedTimesteps) > length(sampleTimesteps)){
+            lumpedBioturb <- colSums(lumpedAbundanceTable[-sampleTimesteps, , drop = FALSE])
             # un-table() the community abundance data
             lumpedBioturb <- rep(1:nSpecies, lumpedBioturb)
             
