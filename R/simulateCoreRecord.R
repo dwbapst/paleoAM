@@ -9,13 +9,13 @@ simulateCoreRecord <- function(
                 eventSampleWidthRatio,
                 sampleWidth,
                 eventDuration,
-                sedRatePerYear,
+                sedRatePerTimestep,
                 samplingCompleteness,
                 transitionDurationRatio,
                 bioturbDepthRatio,
                 bioturbIntensity,     
                 nEvents,
-                foramsPerYear,
+                specimensPerTimestep,
                 nSpecimensPicked,
                 halfGradientOnly = "full",
                 useTransformedRelAbundance = TRUE,
@@ -41,7 +41,7 @@ simulateCoreRecord <- function(
           # initial secondary parameters
           sampleWidth = sampleWidth,
           eventDuration = eventDuration,
-          sedRatePerYear = sedRatePerYear,
+          sedRatePerTimestep = sedRatePerTimestep,
     
           # additional primary paramters
           samplingCompleteness = samplingCompleteness,
@@ -53,7 +53,7 @@ simulateCoreRecord <- function(
     #eventSampleWidthRatio <- implicitParameters$eventSampleWidthRatio
     #sampleWidth <- implicitParameters$sampleWidth
     #eventDuration <- implicitParameters$eventDuration
-    #sedRatePerYear <- implicitParameters$sedRatePerYear
+    #sedRatePerTimestep <- implicitParameters$sedRatePerTimestep
         
     # Set Up the Pattern of Simulated Gradient Change Over Time
     simGradientChangeOut <- setupSimulatedGradientChange(
@@ -85,10 +85,10 @@ simulateCoreRecord <- function(
     # Figure out which samples will be taken and at what core depths. 
     # First, make a matrix with age, depth, gradient values
     simTimeVar <- data.frame(
-        year = 1:maxTime,
+        timestep = 1:maxTime,
         # reverse core depth so oldest time is at bottom (biggest depths)
           # 07-08-21: subtract one to start from 0
-        coreDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerYear,
+        coreDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerTimestep,
         gradientValue = simGradientChangeOut$
             approxGradientSeriesFunction(1:maxTime)
         )
@@ -97,7 +97,7 @@ simulateCoreRecord <- function(
     # using KDEs and occurrence probabilities from empirical data
     timestepAbundances <- getTimestepAbundances(
         kdeRescaled = kdeRescaled,
-        foramsPerYear = foramsPerYear,
+        specimensPerTimestep = specimensPerTimestep,
         sampleSpeciesGradient = sampleSpeciesGradient,
         gradientValues = simTimeVar$gradientValue
         )

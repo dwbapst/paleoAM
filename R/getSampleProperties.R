@@ -13,7 +13,7 @@ getSampleProperties <- function(
     
     # get ages and the 'true' gradient values
       # approximate the age of each sample based on mid-depth
-      # note ages may not be exact years due to rounding issues
+      # note ages may not be exact timesteps due to rounding issues
     
     # 07-26-21
         # time always runs backwards now, like a real geologic record
@@ -22,21 +22,21 @@ getSampleProperties <- function(
     # age mid points
     #sampleMidAge <- approx(
     #    x = simTimeVar$coreDepth, 
-    #    y = simTimeVar$year, 
+    #    y = simTimeVar$timestep, 
     #    xout = coreRecord$sampleMidDepth
     #    )$y
     
     # age as an interval
     sampleInterval_start <- approx(
         x = simTimeVar$coreDepth, 
-        y = simTimeVar$year, 
+        y = simTimeVar$timestep, 
         xout = coreRecord$sampleIntervals[,1]
         )$y
     
     # and the other interval
     sampleInterval_end <- approx(
         x = simTimeVar$coreDepth, 
-        y = simTimeVar$year, 
+        y = simTimeVar$timestep, 
         xout = coreRecord$sampleIntervals[,2]
         )$y
     
