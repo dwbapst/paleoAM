@@ -125,8 +125,8 @@ simulateTimestepAbundances <- function(
         # turn into expected relative abundances
         expRelativeAbundances <- expAbundFromKDE/sum(expAbundFromKDE)
         
-        # sample "specimensPerTimestep" fossil specimens for each year
-        # We treat each year as having a fixed non-stochastic number of individuals 
+        # sample "specimensPerTimestep" fossil specimens for each timestep
+        # We treat each timestep as having a fixed non-stochastic number of individuals 
         # sampled from that community (specimensPerTimestep) 
         
         species <- (1:nSpecies)[expRelativeAbundances > 0]

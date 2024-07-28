@@ -19,7 +19,7 @@ simulateGradientQuantile <- function(
     # Figure out which samples will be taken and at what core depths. 
     # First, make a matrix with age, depth, gradient values
     simTimeVar <- data.frame(
-        year = 1:(nSamplesSim*3),
+        timestep = 1:(nSamplesSim*3),
         # reverse core depth so oldest time is at bottom (biggest depths)
           # 07-08-21: subtract one to start from 0
         coreDepth = ((1:nSamplesSim) -1) * 3,

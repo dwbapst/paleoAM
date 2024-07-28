@@ -134,7 +134,7 @@ setupSimulatedGradientChange <- function(
         }
     
     # 07-26-21
-    # invert time scale so years increases with depth
+    # invert time scale so timesteps increases with depth
         # like in a real core, you nut job
     eventStartEndTimes <- max(simGradientTime) - eventStartEndTimes
     eventPhaseStartTimes <- max(simGradientTime) - eventPhaseStartTimes
