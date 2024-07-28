@@ -68,7 +68,7 @@ sampleCoreRecord <- function(
         # for each picked sample, looking at each sample individually. 
     # Treat each sample as a lumped mega-sample, 
         # where each timestep contained within a sample is a separately simulated community. 
-    # We lump all the sampled forams from all the timesteps within a picked sample together, 
+    # We lump all the sampled specimens from all the timesteps within a picked sample together, 
         # and resample to approximate the time-averaging of the real microfossil record.
         
     # make an empty species by sites matrix for abundances
