@@ -1,4 +1,4 @@
-simForamSample <- function(
+simAssemblageSample <- function(
             kdeRescaled, 
             sampleSpeciesGradient, 
             gradientValues, 
