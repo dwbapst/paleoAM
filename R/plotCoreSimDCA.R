@@ -12,10 +12,10 @@ plotCoreSimDCA <- function(
     
     #par(mar = c(5,5,6,1))
     
-    plot(simTimeVar$year, simTimeVar$gradientValue,
+    plot(simTimeVar$timestep, simTimeVar$gradientValue,
          main = "Original vs Measured Values for DCA-1 Score",
          #main = paramTitle,
-         xlab = "Age (years)",
+         xlab = "Age (time-steps)",
          ylab = "DCA Score 1",
          lty = 1, lwd = 1,
          ylim = DCA1_ylims,
