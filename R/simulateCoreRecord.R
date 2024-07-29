@@ -24,9 +24,10 @@ simulateCoreRecord <- function(
                 singularDCA = TRUE,
                 inclusiveDCA = FALSE, # BAD IDEA
                 rawDCA = FALSE,
-                includeInitialBackgroundPhase,
+                includeInitialBackgroundPhase = FALSE,
                 # runChecks = TRUE,
-                plot = FALSE){
+                plot = FALSE
+                ){
   
 
     # fix secondary parameters, get implicit parameters
