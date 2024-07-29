@@ -39,7 +39,7 @@ getSpeciesSpecificRescaledKDE <- function(
         reportTests = FALSE
         ){
     
-    # Species-Specific Kernal Density Estimates on the Original Empirical DCA-1 Gradient
+    # Species-Specific Kernel Density Estimates on the Original Empirical DCA-1 Gradient
     # Obtain species KDEs for simulating from an empirical DCA-1 gradient
     
     if(length(gradientOrigDCA) != nrow(origAbundData)){
@@ -256,7 +256,7 @@ getSpeciesSpecificRescaledKDE <- function(
     # Get mean relative abundance as well. 
     # Assign max/min and mean relative abundance to
         # elements stored within the list object from
-        # the kernal density estimation function
+        # the kernel density estimation function
 
     for(i in 1:length(kdePerTaxa)){
         
