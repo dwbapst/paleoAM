@@ -1,3 +1,36 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param kdeRescaled 
+
+#' @param probSpeciesOccur 
+
+#' @param gradientValues 
+
+#' @param specimensPerTimestep 
+
+#' @param nSpecies 
+
+#' @param nPickedSpecimens 
+
+#' @name
+#' @rdname
+#' @export
+
+
 simAssemblageSample <- function(
             kdeRescaled, 
             probSpeciesOccur, 

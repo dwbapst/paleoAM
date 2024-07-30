@@ -1,3 +1,51 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param kdeRescaled 
+#'
+#' @param probSpeciesOccur 
+#' @param origAbundData 
+#' @param eventChangeScale 
+#' @param bgGradientValue 
+#' @param fullGradientRange 
+#' @param eventSampleWidthRatio 
+#' @param sampleWidth 
+#' @param eventDuration 
+#' @param sedRatePerTimestep 
+#' @param samplingCompleteness 
+#' @param transitionDurationRatio 
+#' @param bioturbDepthRatio 
+#' @param bioturbIntensity 
+#' @param nEvents 
+#' @param nSpecimensPicked 
+#' @param specimensPerTimestep 
+#' @param halfGradientOnly 
+#' @param useTransformedRelAbundance 
+#' @param projectIntoOrigDCA 
+#' @param powerRootTransform 
+#' @param singularDCA 
+#' @param inclusiveDCA 
+#' @param rawDCA 
+#' @param includeInitialBackgroundPhase 
+#' @param plot 
+#'
+#' @name
+#' @rdname
+#' @export
+
 
 simulateFossilAssemblageSeries <- function(
                 kdeRescaled,
