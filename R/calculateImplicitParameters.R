@@ -1,5 +1,46 @@
 # calculateImplicitParameters
+#' @details
 
+#' @inheritParams
+
+#' @param eventChangeScale 
+
+#' @param bgGradientValue 
+
+#' @param fullGradientRange 
+
+#' @param eventSampleWidthRatio 
+
+#' @param sampleWidth 
+
+#' @param eventDuration 
+
+#' @param sedRatePerTimestep 
+
+#' @param maxSampleTimeStep 
+
+#' @param minSampleTimeStep 
+
+#' @param samplingCompleteness 
+
+#' @param transitionDurationRatio 
+
+#' @param bioturbDepthRatio 
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+
+#' @name
+#' @rdname
+#' @export
 calculateImplicitParameters <- function(
         # gradient scale parameters
         eventChangeScale,

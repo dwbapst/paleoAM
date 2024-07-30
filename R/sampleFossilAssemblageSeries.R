@@ -6,7 +6,14 @@
 
 #' @inheritParams
 
-#' @param
+#' @param bioturbIntensity 
+#' @param bioturbZoneDepth 
+#' @param distBetweenSamples 
+#' @param sampleWidth 
+#' @param simTimeVar 
+#' @param timestepAbundances 
+#' @param nSpecimensPicked 
+
 
 #' @return
 
@@ -18,23 +25,11 @@
 
 #' @examples
 
+
+
 #' @name
 #' @rdname
 #' @export
-
-
-#' @param bioturbIntensity 
-#' @param bioturbZoneDepth 
-#' @param distBetweenSamples 
-#' @param sampleWidth 
-#' @param simTimeVar 
-#' @param timestepAbundances 
-#' @param nSpecimensPicked 
-#'
-#' @return
-#' @export
-#'
-#' @examples
 sampleFossilAssemblageSeries <- function(
             bioturbIntensity, 
             bioturbZoneDepth,  

@@ -40,8 +40,7 @@
 #' Academy of Sciences 113, no. 30 (2016): 8380-8385. 
 #' https://doi.org/10.1073/pnas.1602102113
 
-# @seealso 
-
+#' @seealso gulfOfAlaska
 
 #' @keywords datasets
 

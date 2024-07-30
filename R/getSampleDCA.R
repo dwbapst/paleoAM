@@ -1,3 +1,33 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param simPickedSample 
+#'
+#' @param origAbundData 
+#' @param useTransformedRelAbundance 
+#' @param projectIntoOrigDCA 
+#' @param returnDCAforOrigAndSim 
+#' @param whichAxes 
+#' @param powerRootTransform 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 getSampleDCA <- function(
             simPickedSample,
             origAbundData,

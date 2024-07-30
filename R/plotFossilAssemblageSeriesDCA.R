@@ -1,3 +1,29 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param ... 
+#'
+#' @param colSimTrue 
+#' @param colSimCalc 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 plotFossilAssemblageSeriesDCA <- function(
             ..., colSimTrue = "black", colSimCalc = "navy"
             ){

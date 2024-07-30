@@ -1,3 +1,34 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param origAbundData 
+#'
+#' @param fossilSeries 
+#' @param useTransformedRelAbundance 
+#' @param projectIntoOrigDCA 
+#' @param powerRootTransform 
+#' @param singularDCA 
+#' @param inclusiveDCA 
+#' @param rawDCA 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 quantifyCommunityEcology <- function(
         origAbundData, 
         fossilSeries, 

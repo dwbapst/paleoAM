@@ -1,3 +1,34 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param quantileProbs 
+#'
+#' @param nSamplesSim 
+#' @param gradientValue 
+#' @param origAbundData 
+#' @param kdeRescaled 
+#' @param probSpeciesOccur 
+#' @param specimensPerTimestep 
+#' @param nSpecimensPicked 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 simulateGradientQuantile <- function(
             quantileProbs = c(0.95),
             nSamplesSim,

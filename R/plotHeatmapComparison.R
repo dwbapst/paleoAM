@@ -1,3 +1,49 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param x 
+#'
+#' @param y 
+#' @param z 
+#' @param xlim 
+#' @param ylim 
+#' @param zlim 
+#' @param xlog 
+#' @param ylog 
+#' @param xtick 
+#' @param ytick 
+#' @param contourLevels 
+#' @param nlevels 
+#' @param contourLineLevels 
+#' @param contour.lwd 
+#' @param additionalFeatures 
+#' @param key.axes 
+#' @param palette 
+#' @param xlab 
+#' @param ylab 
+#' @param main 
+#' @param gradientKeyLabel 
+#' @param mtext_line 
+#' @param margins 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 plotHeatmapComparison <- function(
     
             x, y, z,  

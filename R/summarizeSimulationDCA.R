@@ -1,3 +1,30 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param sampleData 
+#'
+#' @param nEvents 
+#' @param backgroundUpperBound 
+#' @param eventMagnitudesAbsolute 
+#' @param eventLowerBound 
+#' @param eventUpperBound 
+#'
+#' @name
+#' @rdname
+#' @export
 
 summarizeSimulationDCA <- function(
             sampleData,

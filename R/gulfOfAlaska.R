@@ -55,7 +55,7 @@
 #' 36, no. 2 (2021): e2020PA003986.
 #' https://doi.org/10.1029/2020PA003986
 
-# @seealso 
+#' @seealso hirnantian
 
 
 #' @keywords datasets

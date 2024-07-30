@@ -1,3 +1,30 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param kdeRescaled 
+#'
+#' @param probSpeciesOccur 
+#' @param gradientValues 
+#' @param specimensPerTimestep 
+#'
+#' @name
+#' @rdname
+#' @export
+
+
 getTimestepAbundances <- function(
               kdeRescaled, 
               probSpeciesOccur, 

@@ -1,3 +1,29 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param origAbundData 
+#'
+#' @param gradientOrigDCA 
+#' @param occurrenceFloor 
+#' @param nBreaksGradientHist 
+#' @param plot 
+#'
+#' @name
+#' @rdname
+#' @export
 
 getProbOccViaPresAbs <- function(
         origAbundData, 

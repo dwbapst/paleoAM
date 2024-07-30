@@ -1,3 +1,28 @@
+#' @details
+
+#' @inheritParams
+
+#' @param
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+#' @param fossilSeries 
+#'
+#' @param minPickedSampleSize 
+#' @param maxPickedSampleSize 
+#' @param maxDominance 
+#'
+#' @name
+#' @rdname
+#' @export
 
 checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
