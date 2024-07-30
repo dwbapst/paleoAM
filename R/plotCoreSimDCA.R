@@ -1,5 +1,34 @@
+plotFossilAssemblageSeriesDCA <- function(
+            ..., colSimTrue = "black", colSimCalc = "navy"
+            ){
+    arguments <- list(...)
+    #
+    if(length(arguments) == 1){
+        simFossilAssemblageSeriesOut <- arguments[[1]]
+        plotFossilAssemblageSeriesDCA_sepVariables(
+            simTimeVar = simFossilAssemblageSeriesOut$simTimeVar, 
+            scoreDCA1 = simFossilAssemblageSeriesOut$ecology$scoreDCA1_singular,
+            sampleAge = simFossilAssemblageSeriesOut$sampleProperties$sampleMidAge,
+            colSimTrue = colSimTrue, 
+            colSimCalc = colSimCalc
+            )
+    }else{
+    if(length(arguments) == 3){
+        plotFossilAssemblageSeriesDCA_sepVariables(
+            simTimeVar = arguments$simTimeVar, 
+            scoreDCA1 = arguments$scoreDCA1, 
+            sampleAge = arguments$sampleAge,
+            colSimTrue = colSimTrue, 
+            colSimCalc = colSimCalc
+            )
+    }else{
+        stop(
+            "Wrong number of input arguments for plotting: use either output from\n simulateFossilAssemblageSeries or use the\n three elements 'simTimeVar', 'scoreDCA1', 'sampleAge'"
+            )}
+        }
+    }
 
-plotCoreSimDCA <- function(
+plotFossilAssemblageSeriesDCA_sepVariables <- function(
                     simTimeVar, scoreDCA1, sampleAge,
                     colSimTrue = "black", 
                     colSimCalc = "navy"
