@@ -84,13 +84,13 @@ simulateFossilAssemblageSeries <- function(
       # backgroundStartEnd
     
     ###########################################################
-    # Figure out which samples will be taken and at what core depths. 
+    # Figure out which samples will be taken and at what core depths / outcrop heights
     # First, make a matrix with age, depth, gradient values
     simTimeVar <- data.frame(
         timestep = 1:maxTime,
         # reverse core depth so oldest time is at bottom (biggest depths)
           # 07-08-21: subtract one to start from 0
-        coreDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerTimestep,
+        sedColumnDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerTimestep,
         gradientValue = simGradientChangeOut$
             approxGradientSeriesFunction(1:maxTime)
         )
@@ -193,7 +193,7 @@ simulateFossilAssemblageSeries <- function(
         )
     
     if(plot){
-        plotCoreSimDCA(
+        plotFossilAssemblageSeriesDCA(
             simTimeVar = outList$simTimeVar, 
             scoreDCA1 = outList$ecology$scoreDCA1_singular,
             sampleAge = outList$sampleProperties$sampleMidAge

@@ -22,7 +22,7 @@ sampleFossilAssemblageSeries <- function(
     # make a matrix
     sampleIntervals <- matrix(c(distBetweenSamples, distBetweenSamples + sampleWidth), 1, 2)
     # run a while loop
-    while(max(sampleIntervals[,1]) < (max(simTimeVar$coreDepth) - sampleWidth - distBetweenSamples)){
+    while(max(sampleIntervals[,1]) < (max(simTimeVar$sedColumnDepth) - sampleWidth - distBetweenSamples)){
         newSampleInterval <- sampleIntervals[nrow(sampleIntervals),2] + distBetweenSamples
         newSampleInterval <- c(newSampleInterval, newSampleInterval + sampleWidth)
         sampleIntervals <- rbind(sampleIntervals, newSampleInterval)
@@ -50,10 +50,10 @@ sampleFossilAssemblageSeries <- function(
         bioturbIntervals <- sampleMidDepth + bioturbZoneDepth/2
         bioturbIntervals <- cbind(bioturbIntervals, sampleMidDepth - bioturbZoneDepth/2)
         #
-        bioturbIntervals[bioturbIntervals[,1] < min(simTimeVar$coreDepth), 1] <- min(simTimeVar$coreDepth)
-        bioturbIntervals[bioturbIntervals[,2] < min(simTimeVar$coreDepth), 2] <- min(simTimeVar$coreDepth)
-        bioturbIntervals[bioturbIntervals[,1] > max(simTimeVar$coreDepth), 1] <- max(simTimeVar$coreDepth)
-        bioturbIntervals[bioturbIntervals[,2] > max(simTimeVar$coreDepth), 2 ] <- max(simTimeVar$coreDepth)
+        bioturbIntervals[bioturbIntervals[,1] < min(simTimeVar$sedColumnDepth), 1] <- min(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,2] < min(simTimeVar$sedColumnDepth), 2] <- min(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,1] > max(simTimeVar$sedColumnDepth), 1] <- max(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,2] > max(simTimeVar$sedColumnDepth), 2 ] <- max(simTimeVar$sedColumnDepth)
         
     }else{
 
@@ -84,14 +84,14 @@ sampleFossilAssemblageSeries <- function(
             #IF bioturbZoneDepth > sampleWidth
             
             # selected timesteps are the sample timesteps + the timesteps mixed in by bioturbation
-            timesteps_After   <- (simTimeVar$coreDepth <= bioturbIntervals[i,1])
-            timesteps_Before  <- (bioturbIntervals[i,2] <= simTimeVar$coreDepth)
+            timesteps_After   <- (simTimeVar$sedColumnDepth <= bioturbIntervals[i,1])
+            timesteps_Before  <- (bioturbIntervals[i,2] <= simTimeVar$sedColumnDepth)
             selectedTimesteps <- timesteps_After & timesteps_Before
             selectedTimesteps <- which(selectedTimesteps)
 
             # 'sample timesteps' are those 'selected timesteps' that are the timesteps in the 'actual' sample
-            timesteps_After  <- (simTimeVar$coreDepth[selectedTimesteps] <= sampleIntervals[i,1])
-            timesteps_Before <- (sampleIntervals[i,2] <= simTimeVar$coreDepth[selectedTimesteps])
+            timesteps_After  <- (simTimeVar$sedColumnDepth[selectedTimesteps] <= sampleIntervals[i,1])
+            timesteps_Before <- (sampleIntervals[i,2] <= simTimeVar$sedColumnDepth[selectedTimesteps])
             sampleTimesteps  <- timesteps_After & timesteps_Before
             sampleTimesteps  <- which(sampleTimesteps)
             
@@ -100,8 +100,8 @@ sampleFossilAssemblageSeries <- function(
             
         }else{
             # which timestep-layers are in this sample
-            timesteps_After   <- (simTimeVar$coreDepth <= sampleIntervals[i,1])
-            timesteps_Before  <- (sampleIntervals[i,2] <= simTimeVar$coreDepth)
+            timesteps_After   <- (simTimeVar$sedColumnDepth <= sampleIntervals[i,1])
+            timesteps_Before  <- (sampleIntervals[i,2] <= simTimeVar$sedColumnDepth)
             selectedTimesteps <- timesteps_After & timesteps_Before
             selectedTimesteps <- which(selectedTimesteps)
             

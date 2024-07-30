@@ -16,13 +16,13 @@ simulateGradientQuantile <- function(
         # for the purpose of testing whether an event sample was significant different
         # from the background values
     
-    # Figure out which samples will be taken and at what core depths. 
+    # Figure out which samples will be taken and at what core depths / outcrop heights 
     # First, make a matrix with age, depth, gradient values
     simTimeVar <- data.frame(
         timestep = 1:(nSamplesSim*3),
         # reverse core depth so oldest time is at bottom (biggest depths)
           # 07-08-21: subtract one to start from 0
-        coreDepth = ((1:nSamplesSim) -1) * 3,
+        sedColumnDepth = ((1:nSamplesSim) -1) * 3,
         gradientValue = gradientValue
         )
         

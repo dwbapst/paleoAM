@@ -146,7 +146,7 @@ calculateImplicitParameters <- function(
       # somewhat stable background phases at the beginning, the end, and between pulsed spikes. 
     # However, if we make these have the same identical duration, 
       # then we get artificial patterns of which peaks we sample 
-      # that are identical to our patterns of how we took sample from the core. 
+      # that are identical to our patterns of how we took sample from the core / outcrop. 
     # That makes sense but also is completely weird-looking and hard to explain. 
     
     # So we'll add a small stochastic element to these simulations by pulling 

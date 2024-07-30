@@ -21,21 +21,21 @@ getSampleProperties <- function(
     
     # age mid points
     #sampleMidAge <- approx(
-    #    x = simTimeVar$coreDepth, 
+    #    x = simTimeVar$sedColumnDepth, 
     #    y = simTimeVar$timestep, 
     #    xout = fossilSeries$sampleMidDepth
     #    )$y
     
     # age as an interval
     sampleInterval_start <- approx(
-        x = simTimeVar$coreDepth, 
+        x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$timestep, 
         xout = fossilSeries$sampleIntervals[,1]
         )$y
     
     # and the other interval
     sampleInterval_end <- approx(
-        x = simTimeVar$coreDepth, 
+        x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$timestep, 
         xout = fossilSeries$sampleIntervals[,2]
         )$y
@@ -56,7 +56,7 @@ getSampleProperties <- function(
     # also approx the generating gradient values
       # for each sample
     sampleGradientValues <- approx(
-        x = simTimeVar$coreDepth, 
+        x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$gradientValue, 
         xout = apply(sampleIntervalAges, 1, mean)
         )$y
@@ -97,8 +97,8 @@ getSampleProperties <- function(
     output <- data.frame(    
         sampleInterval_start = sampleInterval_start,
         sampleInterval_end = sampleInterval_end,
-        sampleCoreDepth_start = fossilSeries$sampleIntervals[,1],
-        sampleCoreDepth_end = fossilSeries$sampleIntervals[,2],
+        sampleSedColumnDepth_start = fossilSeries$sampleIntervals[,1],
+        sampleSedColumnDepth_end = fossilSeries$sampleIntervals[,2],
         sampleMidAge = apply(sampleIntervalAges, 1, mean),
         bioturbInterval_start = fossilSeries$bioturbIntervals[,1], 
         bioturbInterval_end = fossilSeries$bioturbIntervals[,2],
