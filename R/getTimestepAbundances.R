@@ -1,6 +1,6 @@
 getTimestepAbundances <- function(
               kdeRescaled, 
-              sampleSpeciesGradient, 
+              probSpeciesOccur, 
               gradientValues, 
               specimensPerTimestep
               ){
@@ -47,15 +47,15 @@ getTimestepAbundances <- function(
     # 05-19-21
     # only certain species can be sampled at some point along the gradient
         # use proportion of samples in each 0.2 bin as a rough approximation    
-    #OLD: speciesPresent_List <- lapply(unqGradient, sampleSpeciesGradient)
-    speciesPresent_List <- sampleSpeciesGradient(unqGradient) 
+    #OLD: speciesPresent_List <- lapply(unqGradient, probSpeciesOccur)
+    speciesPresent_List <- probSpeciesOccur(unqGradient) 
     #that produce a list that is nspecies long, 
         # with each species-specific element 
         # containing values for each unique gradient value
     
     # test
     if(length(speciesPresent_List) != nSpecies){
-        stop("not getting right number of species from sampleSpeciesGradient")
+        stop("not getting right number of species from probSpeciesOccur")
         }
     
     # need to make it a list with elements for each unique gradient value...

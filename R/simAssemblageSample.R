@@ -1,6 +1,6 @@
 simAssemblageSample <- function(
             kdeRescaled, 
-            sampleSpeciesGradient, 
+            probSpeciesOccur, 
             gradientValues, 
             specimensPerTimestep,
             nSpecies,
@@ -13,7 +13,7 @@ simAssemblageSample <- function(
     lumpedSample <- colSums(
         getTimestepAbundances(
             kdeRescaled = kdeRescaled, 
-            sampleSpeciesGradient = sampleSpeciesGradient, 
+            probSpeciesOccur = probSpeciesOccur, 
             gradientValues = gradientValues, 
             specimensPerTimestep = specimensPerTimestep
             )

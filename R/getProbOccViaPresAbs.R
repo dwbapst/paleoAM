@@ -66,7 +66,7 @@ getProbOccViaPresAbs <- function(
     
     # Define the relationship between gradient and probability of occurrence
     # as an approximate function with `approx`
-    sampleSpeciesGradient <- function(gradientValue){
+    probSpeciesOccur <- function(gradientValue){
         approxProbs <- lapply(gradientPropPresence, function(x)
             approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
             )  
@@ -74,10 +74,10 @@ getProbOccViaPresAbs <- function(
 
     # testing lines for checking out calculations
         # when debugging
-    #which(sampleSpeciesGradient(-0.5))
-    #sampleSpeciesGradient(1)
-    #sampleSpeciesGradient(2)
+    #which(probSpeciesOccur(-0.5))
+    #probSpeciesOccur(1)
+    #probSpeciesOccur(2)
     
-    return(sampleSpeciesGradient)
+    return(probSpeciesOccur)
     }
 

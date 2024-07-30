@@ -1,7 +1,7 @@
 
-simulateCoreRecord <- function(
+simulateFossilAssemblageSeries <- function(
                 kdeRescaled,
-                sampleSpeciesGradient,
+                probSpeciesOccur,
                 origAbundData,
                 eventChangeScale,
                 bgGradientValue,
@@ -15,8 +15,9 @@ simulateCoreRecord <- function(
                 bioturbDepthRatio,
                 bioturbIntensity,     
                 nEvents,
-                specimensPerTimestep,
                 nSpecimensPicked,
+                #
+                specimensPerTimestep = 10000,
                 halfGradientOnly = "full",
                 useTransformedRelAbundance = TRUE,
                 projectIntoOrigDCA = TRUE,
@@ -99,7 +100,7 @@ simulateCoreRecord <- function(
     timestepAbundances <- getTimestepAbundances(
         kdeRescaled = kdeRescaled,
         specimensPerTimestep = specimensPerTimestep,
-        sampleSpeciesGradient = sampleSpeciesGradient,
+        probSpeciesOccur = probSpeciesOccur,
         gradientValues = simTimeVar$gradientValue
         )
     colnames(timestepAbundances) <- names(kdeRescaled)
@@ -193,9 +194,9 @@ simulateCoreRecord <- function(
     
     if(plot){
         plotCoreSimDCA(
-            simTimeVar = simTimeVar, 
-            scoreDCA1 = ecologyOutList$scoreDCA1_singular,
-            sampleAge = sampleProperties$sampleMidAge
+            simTimeVar = outList$simTimeVar, 
+            scoreDCA1 = outList$ecology$scoreDCA1_singular,
+            sampleAge = outList$sampleProperties$sampleMidAge
             )
         }
     

@@ -21,17 +21,18 @@ getSampleDCA <- function(
             ## Doing a DCA just on the original data
             if(useTransformedRelAbundance){
                 # root transform
-                abundanceTable <- t(apply(abundanceTable, 1, function(x) 
-                    x/sum(x)))^(1/powerRootTransform)  
+                abundanceTable <- powerRootTransformFun(abundanceTable, 
+                    powerRootTransform = powerRootTransform)   
                 }
             dcaOut <- vegan::decorana(abundanceTable)
             
             newSample <- rbind(origAbundData,simPickedSample)
             if(useTransformedRelAbundance){        
-                newSample <- t(apply(newSample, 1, function(x) 
-                    x/sum(x)))^(1/powerRootTransform)  
+                newSample <- powerRootTransformFun(newSample, 
+                    powerRootTransform = powerRootTransform)   
                 }
-            newSample <- vegan:::predict.decorana(
+
+            newSampleDCA <- vegan:::predict.decorana(
                 object = dcaOut,
                 newdata = newSample,
                 rank = 1, type = "sites"
@@ -39,10 +40,10 @@ getSampleDCA <- function(
             
             if(returnDCAforOrigAndSim){
                 # get DCA value for sim assemblages AND empirical data
-                output <- newSample[ , 1]
+                output <- newSampleDCA[ , 1]
             }else{
                 # get DCA value for the simulated mixed assemblage
-                output <- newSample[nrow(newSample), 1]
+                output <- newSampleDCA[nrow(newSample), 1]
                 }
             
         }else{
@@ -58,8 +59,8 @@ getSampleDCA <- function(
                     # recalculate relative abundance table
                 #relAbundanceTable <- t(apply(abundanceTable, 1, function(x) x/sum(x)))
                 # root transform?
-                abundanceTable <- t(apply(abundanceTable, 1, function(x) 
-                    x/sum(x)))^(1/powerRootTransform)  
+                abundanceTable <- powerRootTransformFun(abundanceTable, 
+                    powerRootTransform = powerRootTransform)  
                 }
             ## Doing a DCA on the Simulated Data
             dcaOut <- vegan::decorana(abundanceTable)
@@ -79,3 +80,11 @@ getSampleDCA <- function(
 
         return(output)
         }
+
+powerRootTransformFun <- function(abundTable, powerRootTransform){
+    # convert to relative abundance
+    out <- apply(abundTable, 1, function(x) x/sum(x))
+    out <- t(out) ^ (1/powerRootTransform)  
+    return(out)
+    }
+
