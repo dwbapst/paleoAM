@@ -130,7 +130,7 @@ simulateFossilAssemblageSeries <- function(
       # when we use a fixed, non-stochastic sample size.
     
     #if(runChecks){
-    #    fossilSeries <- checkCoreRecordAbundanceTable(
+    #    fossilSeries <- checkFossilSeriesAbundanceTable(
     #        fossilSeries = fossilSeries, 
     #        minPickedSampleSize = minPickedSampleSize, 
     #        maxPickedSampleSize = maxPickedSampleSize,

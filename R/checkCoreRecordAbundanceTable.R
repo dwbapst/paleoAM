@@ -1,5 +1,5 @@
 
-checkCoreRecordAbundanceTable <- function(
+checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
             minPickedSampleSize,
             maxPickedSampleSize,

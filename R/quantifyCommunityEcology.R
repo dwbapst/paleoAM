@@ -1,6 +1,6 @@
 quantifyCommunityEcology <- function(
         origAbundData, 
-        coreRecord, 
+        fossilSeries, 
         useTransformedRelAbundance = TRUE,
         projectIntoOrigDCA = TRUE,
         powerRootTransform = 1, 
@@ -12,7 +12,7 @@ quantifyCommunityEcology <- function(
     #require(vegan)
   
     ecologyOutList <- list(
-        simAbundanceTable = coreRecord$abundanceTable,
+        simAbundanceTable = fossilSeries$abundanceTable,
         origAbundanceTable = origAbundData
         #artificialAbundanceTable = abundanceTable,
         #braycurtisDistMat = bcdist,
@@ -21,10 +21,10 @@ quantifyCommunityEcology <- function(
 
     if(singularDCA){
         scoreDCA1_singular <- numeric()
-        for(i in 1:nrow(coreRecord$abundanceTable)){
+        for(i in 1:nrow(fossilSeries$abundanceTable)){
             # use getSampleDCA
             scoreDCA1_singular[i] <- getSampleDCA(
-                simPickedSample = coreRecord$abundanceTable[i,],
+                simPickedSample = fossilSeries$abundanceTable[i,],
                 origAbundData = origAbundData,
                 useTransformedRelAbundance = useTransformedRelAbundance,
                 projectIntoOrigDCA = projectIntoOrigDCA,
@@ -38,7 +38,7 @@ quantifyCommunityEcology <- function(
         }
     
     if(rawDCA){
-        abundanceTable <- coreRecord$abundanceTable                        # 1
+        abundanceTable <- fossilSeries$abundanceTable                        # 1
         # Transform the abundance table to relative abundances, 
           # and get the pair-wise Bray-Curtis distances.
         # recalculate relative abundance table
@@ -56,7 +56,7 @@ quantifyCommunityEcology <- function(
           # into simulated to properly scale DCA (maybe?)
           # combine abundance table with original abundance table
           # add TEN copies of the original data
-        abundanceTable <- rbind(coreRecord$abundanceTable, origAbundData)  # 1
+        abundanceTable <- rbind(fossilSeries$abundanceTable, origAbundData)  # 1
         abundanceTable <- rbind(abundanceTable, origAbundData)             # 2
         abundanceTable <- rbind(abundanceTable, origAbundData)             # 3
         abundanceTable <- rbind(abundanceTable, origAbundData)             # 4
@@ -74,7 +74,7 @@ quantifyCommunityEcology <- function(
         bcdist <- vegan::vegdist(relAbundanceTable, method = "bray")
         ## Doing a DCA on the Simulated Data
         dcaOut <- vegan::decorana(relAbundanceTable)
-        scoreDCA1_inclusive <- vegan::scores(dcaOut)[1:nrow(coreRecord$abundanceTable), 1]
+        scoreDCA1_inclusive <- vegan::scores(dcaOut)[1:nrow(fossilSeries$abundanceTable), 1]
         ecologyOutList$scoreDCA1_inclusive <- scoreDCA1_inclusive
         }
         
