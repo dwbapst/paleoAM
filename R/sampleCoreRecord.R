@@ -1,8 +1,8 @@
-# sampleCoreRecord
+# sampleFossilAssemblageSeries
 
 # importantly, this function is where bioturbation is handled
 
-sampleCoreRecord <- function(
+sampleFossilAssemblageSeries <- function(
             bioturbIntensity, 
             bioturbZoneDepth,  
             distBetweenSamples, 
@@ -154,12 +154,12 @@ sampleCoreRecord <- function(
         abundanceTable[i,] <- pickedSample
         }
     
-    coreRecord <- list(
+    fossilSeries <- list(
         simTimeVar = simTimeVar,
         abundanceTable = abundanceTable,
         sampleIntervals = sampleIntervals,
         bioturbIntervals = bioturbIntervals
         )
     
-    return(coreRecord)
+    return(fossilSeries)
     }

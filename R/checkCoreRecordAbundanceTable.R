@@ -1,14 +1,14 @@
 
 checkCoreRecordAbundanceTable <- function(
-            coreRecord,
+            fossilSeries,
             minPickedSampleSize,
             maxPickedSampleSize,
             maxDominance
             ){
     
-    abundanceTable <- coreRecord$abundanceTable
-    sampleIntervals <- coreRecord$sampleIntervals
-    bioturbIntervals <- coreRecord$bioturbIntervals
+    abundanceTable <- fossilSeries$abundanceTable
+    sampleIntervals <- fossilSeries$sampleIntervals
+    bioturbIntervals <- fossilSeries$bioturbIntervals
     
     # need to throw out samples with too few individuals
     sufficientSampleSize <- rowSums(abundanceTable) >= minPickedSampleSize
@@ -64,9 +64,9 @@ checkCoreRecordAbundanceTable <- function(
         stop("All samples obtained were over-dominated (>80%) by a single taxon")
         }
     
-    coreRecord$abundanceTable <- abundanceTable
-    coreRecord$sampleIntervals <- sampleIntervals
-    coreRecord$bioturbIntervals <- bioturbIntervals
+    fossilSeries$abundanceTable <- abundanceTable
+    fossilSeries$sampleIntervals <- sampleIntervals
+    fossilSeries$bioturbIntervals <- bioturbIntervals
     
-    return(coreRecord)
+    return(fossilSeries)
     }

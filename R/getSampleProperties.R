@@ -1,6 +1,6 @@
 getSampleProperties <- function(
             simTimeVar, 
-            coreRecord, 
+            fossilSeries, 
             eventStartEndTimes,
             initialBackgroundIntervalIncluded,
             backgroundStartEnd
@@ -23,21 +23,21 @@ getSampleProperties <- function(
     #sampleMidAge <- approx(
     #    x = simTimeVar$coreDepth, 
     #    y = simTimeVar$timestep, 
-    #    xout = coreRecord$sampleMidDepth
+    #    xout = fossilSeries$sampleMidDepth
     #    )$y
     
     # age as an interval
     sampleInterval_start <- approx(
         x = simTimeVar$coreDepth, 
         y = simTimeVar$timestep, 
-        xout = coreRecord$sampleIntervals[,1]
+        xout = fossilSeries$sampleIntervals[,1]
         )$y
     
     # and the other interval
     sampleInterval_end <- approx(
         x = simTimeVar$coreDepth, 
         y = simTimeVar$timestep, 
-        xout = coreRecord$sampleIntervals[,2]
+        xout = fossilSeries$sampleIntervals[,2]
         )$y
     
     # combine
@@ -87,7 +87,7 @@ getSampleProperties <- function(
     
     if(any(c(length(sampleInterval_start), 
              length(sampleInterval_end), 
-             nrow(coreRecord$bioturbIntervals), 
+             nrow(fossilSeries$bioturbIntervals), 
              length(sampleGradientValues), 
              length(isBackgroundSegment)
              ) != length(eventID))){
@@ -97,11 +97,11 @@ getSampleProperties <- function(
     output <- data.frame(    
         sampleInterval_start = sampleInterval_start,
         sampleInterval_end = sampleInterval_end,
-        sampleCoreDepth_start = coreRecord$sampleIntervals[,1],
-        sampleCoreDepth_end = coreRecord$sampleIntervals[,2],
+        sampleCoreDepth_start = fossilSeries$sampleIntervals[,1],
+        sampleCoreDepth_end = fossilSeries$sampleIntervals[,2],
         sampleMidAge = apply(sampleIntervalAges, 1, mean),
-        bioturbInterval_start = coreRecord$bioturbIntervals[,1], 
-        bioturbInterval_end = coreRecord$bioturbIntervals[,2],
+        bioturbInterval_start = fossilSeries$bioturbIntervals[,1], 
+        bioturbInterval_end = fossilSeries$bioturbIntervals[,2],
         trueGradientValue = sampleGradientValues,
         isBackgroundSegment = isBackgroundSegment,
         eventID = eventID

@@ -37,7 +37,7 @@ simulateGradientQuantile <- function(
     colnames(timestepAbundances) <- names(kdeRescaled)
         
     # Running the Simulation
-    coreRecord <- sampleCoreRecord(    
+    fossilSeries <- sampleFossilAssemblageSeries(    
         bioturbIntensity = 0, 
         bioturbZoneDepth = 0,  
         distBetweenSamples = 0, 
@@ -50,7 +50,7 @@ simulateGradientQuantile <- function(
     # get sample DCA1 scores
     ecologyOutList <- quantifyCommunityEcology(
         origAbundData = origAbundData,
-        coreRecord = coreRecord,
+        fossilSeries = fossilSeries,
         singularDCA = TRUE,
         inclusiveDCA = FALSE,
         rawDCA = FALSE

@@ -106,7 +106,7 @@ simulateFossilAssemblageSeries <- function(
     colnames(timestepAbundances) <- names(kdeRescaled)
     
     # Running the Simulation
-    coreRecord <- sampleCoreRecord(    
+    fossilSeries <- sampleFossilAssemblageSeries(    
         bioturbIntensity = bioturbIntensity, 
         bioturbZoneDepth = implicitParameters$bioturbZoneDepth,  
         distBetweenSamples = implicitParameters$distBetweenSamples, 
@@ -130,8 +130,8 @@ simulateFossilAssemblageSeries <- function(
       # when we use a fixed, non-stochastic sample size.
     
     #if(runChecks){
-    #    coreRecord <- checkCoreRecordAbundanceTable(
-    #        coreRecord = coreRecord, 
+    #    fossilSeries <- checkCoreRecordAbundanceTable(
+    #        fossilSeries = fossilSeries, 
     #        minPickedSampleSize = minPickedSampleSize, 
     #        maxPickedSampleSize = maxPickedSampleSize,
     #        maxDominance = maxDominance
@@ -141,8 +141,8 @@ simulateFossilAssemblageSeries <- function(
     ###################################################################
     # Prepping Simulation Data for Post- Simulation Analysis
     sampleProperties <- getSampleProperties(
-        simTimeVar = coreRecord$simTimeVar, 
-        coreRecord = coreRecord,
+        simTimeVar = fossilSeries$simTimeVar, 
+        fossilSeries = fossilSeries,
         eventStartEndTimes = simGradientChangeOut$eventStartEndTimes,
         initialBackgroundIntervalIncluded = includeInitialBackgroundPhase,
         backgroundStartEnd = simGradientChangeOut$backgroundStartEnd
@@ -161,7 +161,7 @@ simulateFossilAssemblageSeries <- function(
     # get sample DCA1 scores
     ecologyOutList <- quantifyCommunityEcology(
         origAbundData = origAbundData,
-        coreRecord = coreRecord,
+        fossilSeries = fossilSeries,
         useTransformedRelAbundance = useTransformedRelAbundance,
         projectIntoOrigDCA = projectIntoOrigDCA,
         powerRootTransform = powerRootTransform, 
@@ -187,7 +187,7 @@ simulateFossilAssemblageSeries <- function(
         simGradientChangeOut = simGradientChangeOut,
         maxTime = maxTime,
         simTimeVar = simTimeVar,
-        coreRecord = coreRecord,
+        fossilSeries = fossilSeries,
         ecology = ecologyOutList,
         sampleProperties = sampleProperties
         )
