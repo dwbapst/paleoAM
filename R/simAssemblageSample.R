@@ -43,15 +43,14 @@ simAssemblageSample <- function(
         # and event assemblages into a single assemblage    
 
     # lump, then pick the sample
-    lumpedSample <- colSums(
-        getTimestepAbundances(
+    lumpedSample <- getTimestepAbundances(
             kdeRescaled = kdeRescaled, 
             probSpeciesOccur = probSpeciesOccur, 
             gradientValues = gradientValues, 
             specimensPerTimestep = specimensPerTimestep
             )
-        )
-    
+    lumpedSample <- colSums(lumpedSample)    
+        
     # un-table() the lumped community abundance data
     lumpedSample <- rep(1:nSpecies, lumpedSample)
     
