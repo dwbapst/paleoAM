@@ -203,7 +203,7 @@ calculateImplicitParameters <- function(
         ) * 1.1
 
     minBgDuration <- baseDurationBG * 2
-    maxBgDuration <- baseDurationBG * 5
+    maxBgDuration <- baseDurationBG * 3
     bgDurationRange <- c(minBgDuration, maxBgDuration)
     
     # At `r sedRatePerTimestep` cm/yr sedimentation rate, 
