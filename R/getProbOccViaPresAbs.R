@@ -19,7 +19,6 @@
 #' @param gradientOrigDCA 
 #' @param occurrenceFloor 
 #' @param nBreaksGradientHist 
-#' @param plot 
 #'
 #' @name
 #' @rdname
