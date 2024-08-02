@@ -24,7 +24,7 @@
 
 #' @param nSpecies 
 
-#' @param nPickedSpecimens 
+#' @param nSpecimens 
 
 #' @name
 #' @rdname
@@ -37,7 +37,7 @@ simAssemblageSample <- function(
             gradientValues, 
             specimensPerTimestep,
             nSpecies,
-            nPickedSpecimens     
+            nSpecimens     
             ){
     # simulate a mixed sample, generated from lumping 'background'
         # and event assemblages into a single assemblage    
@@ -54,11 +54,11 @@ simAssemblageSample <- function(
     # un-table() the lumped community abundance data
     lumpedSample <- rep(1:nSpecies, lumpedSample)
     
-    # down-sample the lumped specimens to "nSpecimensPicked" 
+    # down-sample the lumped specimens to "nSpecimens" 
     pickedSample <- sample(x = lumpedSample, 
-               replace = FALSE, size = nPickedSpecimens)
+               replace = FALSE, size = nSpecimens)
     
-    # down-sample the lumped specimens to "nSpecimensPicked" 
+    # down-sample the lumped specimens to "nSpecimens" 
     pickedSample <- tabulate(pickedSample, nbins = nSpecies)    
         
     return(pickedSample)

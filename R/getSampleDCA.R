@@ -14,7 +14,7 @@
 
 #' @examples
 
-#' @param simPickedSample 
+#' @param simSample 
 #'
 #' @param origAbundData 
 #' @param useTransformedRelAbundance 
@@ -29,7 +29,7 @@
 
 
 getSampleDCA <- function(
-            simPickedSample,
+            simSample,
             origAbundData,
             useTransformedRelAbundance = TRUE,
             projectIntoOrigDCA = TRUE,
@@ -56,7 +56,7 @@ getSampleDCA <- function(
                 }
             dcaOut <- vegan::decorana(abundanceTable)
             
-            newSample <- rbind(origAbundData,simPickedSample)
+            newSample <- rbind(origAbundData,simSample)
             if(useTransformedRelAbundance){        
                 newSample <- powerRootTransformFun(newSample, 
                     powerRootTransform = powerRootTransform)   
@@ -81,7 +81,7 @@ getSampleDCA <- function(
                 # apply DCA and get the DCA-1 value
 
             # combined picked sample with original abundance data
-            abundanceTable <- rbind(origAbundData, simPickedSample)
+            abundanceTable <- rbind(origAbundData, simSample)
             #    
             if(useTransformedRelAbundance){        
                 # Transform the abundance table to relative abundances, 

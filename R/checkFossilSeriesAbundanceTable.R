@@ -16,8 +16,8 @@
 
 #' @param fossilSeries 
 #'
-#' @param minPickedSampleSize 
-#' @param maxPickedSampleSize 
+#' @param minSampleSize 
+#' @param maxSampleSize 
 #' @param maxDominance 
 #'
 #' @name
@@ -26,8 +26,8 @@
 
 checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
-            minPickedSampleSize,
-            maxPickedSampleSize,
+            minSampleSize,
+            maxSampleSize,
             maxDominance
             ){
     
@@ -36,7 +36,7 @@ checkFossilSeriesAbundanceTable <- function(
     bioturbIntervals <- fossilSeries$bioturbIntervals
     
     # need to throw out samples with too few individuals
-    sufficientSampleSize <- rowSums(abundanceTable) >= minPickedSampleSize
+    sufficientSampleSize <- rowSums(abundanceTable) >= minSampleSize
     if(sum(sufficientSampleSize) > 2) {
         if(sum(!sufficientSampleSize)!=0){
             message(paste0(sum(!sufficientSampleSize),
@@ -51,7 +51,7 @@ checkFossilSeriesAbundanceTable <- function(
         }
     
     # down-sample samples with too many individuals (>500)
-    largeSamples <- rowSums(abundanceTable) > maxPickedSampleSize
+    largeSamples <- rowSums(abundanceTable) > maxSampleSize
     while(any(largeSamples)){
         # use a splitter (cut them in half)
         for(i in which(largeSamples)){
@@ -67,7 +67,7 @@ checkFossilSeriesAbundanceTable <- function(
                 abundanceTable[i, speciesMatch] <- splitSample[j]
                 }
             }
-        largeSamples <- rowsum(abundanceTable) > maxPickedSampleSize
+        largeSamples <- rowsum(abundanceTable) > maxSampleSize
         }
     
     # test for over-dominated samples

@@ -12,7 +12,7 @@
 #' @param sampleWidth 
 #' @param simTimeVar 
 #' @param timestepAbundances 
-#' @param nSpecimensPicked 
+#' @param nSpecimens 
 
 
 #' @return
@@ -37,7 +37,7 @@ sampleFossilAssemblageSeries <- function(
             sampleWidth, 
             simTimeVar, 
             timestepAbundances,
-            nSpecimensPicked
+            nSpecimens
             ){
             
     nSpecies <- ncol(timestepAbundances)
@@ -123,8 +123,8 @@ sampleFossilAssemblageSeries <- function(
             sampleTimesteps  <- timesteps_After & timesteps_Before
             sampleTimesteps  <- which(sampleTimesteps)
             
-            nSampleSpecPicked <- round((1 - bioturbProportion) * nSpecimensPicked)   
-            nBioturbSpecPicked <- round(bioturbProportion * nSpecimensPicked)
+            nSampleSpec <- round((1 - bioturbProportion) * nSpecimens)   
+            nBioturbSpec <- round(bioturbProportion * nSpecimens)
             
         }else{
             # which timestep-layers are in this sample
@@ -135,7 +135,7 @@ sampleFossilAssemblageSeries <- function(
             
             sampleTimesteps <- 1:length(selectedTimesteps)
             
-            nSampleSpecPicked <- nSpecimensPicked
+            nSampleSpec <- nSpecimens
             }
         
         if(length(selectedTimesteps)<1){
@@ -152,9 +152,9 @@ sampleFossilAssemblageSeries <- function(
         lumpedSample <- colSums(lumpedAbundanceTable[sampleTimesteps, , drop = FALSE])
         # un-table() the lumped community abundance data
         lumpedSample <- rep(1:nSpecies, lumpedSample)
-        # down-sample the lumped specimens to "nSpecimensPicked" 
+        # down-sample the lumped specimens to "nSpecimens" 
         pickedSample <- sample(x = lumpedSample, 
-               replace = FALSE, size = nSampleSpecPicked)
+               replace = FALSE, size = nSampleSpec)
                 
         # combine with the bioturbated interval *beyond* the sample, if there is bioturbation
         
@@ -170,12 +170,12 @@ sampleFossilAssemblageSeries <- function(
             
             # and now sample the bioturbated remainder interval
             pickedBioturb <- sample(x = lumpedBioturb, 
-                                    replace = FALSE, size = nBioturbSpecPicked)
+                                    replace = FALSE, size = nBioturbSpec)
             # combine
             pickedSample <- c(pickedSample, pickedBioturb)
             }
         
-        # down-sample the lumped specimens to "nSpecimensPicked" 
+        # down-sample the lumped specimens to "nSpecimens" 
         pickedSample <- tabulate(pickedSample, nbins = nSpecies)
         
         # record in abundance

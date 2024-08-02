@@ -22,7 +22,7 @@
 #' @param kdeRescaled 
 #' @param probSpeciesOccur 
 #' @param specimensPerTimestep 
-#' @param nSpecimensPicked 
+#' @param nSpecimens 
 #'
 #' @name
 #' @rdname
@@ -37,7 +37,7 @@ simulateGradientQuantile <- function(
             kdeRescaled,
             probSpeciesOccur,
             specimensPerTimestep,
-            nSpecimensPicked
+            nSpecimens
             ){
     
     # previously named as generateBackgroundOnlySimulationQuantile
@@ -75,7 +75,7 @@ simulateGradientQuantile <- function(
         sampleWidth = 3, 
         simTimeVar = simTimeVar,
         timestepAbundances = timestepAbundances,
-        nSpecimensPicked = nSpecimensPicked
+        nSpecimens = nSpecimens
         )
         
     # get sample DCA1 scores

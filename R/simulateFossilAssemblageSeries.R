@@ -30,7 +30,7 @@
 #' @param bioturbDepthRatio 
 #' @param bioturbIntensity 
 #' @param nEvents 
-#' @param nSpecimensPicked 
+#' @param nSpecimens 
 #' @param specimensPerTimestep 
 #' @param halfGradientOnly 
 #' @param useTransformedRelAbundance 
@@ -63,7 +63,7 @@ simulateFossilAssemblageSeries <- function(
                 bioturbDepthRatio,
                 bioturbIntensity,     
                 nEvents,
-                nSpecimensPicked,
+                nSpecimens,
                 #
                 specimensPerTimestep = 10000,
                 halfGradientOnly = "full",
@@ -161,7 +161,7 @@ simulateFossilAssemblageSeries <- function(
         sampleWidth = implicitParameters$sampleWidth, 
         simTimeVar = simTimeVar,
         timestepAbundances = timestepAbundances,
-        nSpecimensPicked = nSpecimensPicked
+        nSpecimens = nSpecimens
         )
 
     # checks for debugging    

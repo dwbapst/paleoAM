@@ -55,7 +55,7 @@ quantifyCommunityEcology <- function(
         for(i in 1:nrow(fossilSeries$abundanceTable)){
             # use getSampleDCA
             scoreDCA1_singular[i] <- getSampleDCA(
-                simPickedSample = fossilSeries$abundanceTable[i,],
+                simSample = fossilSeries$abundanceTable[i,],
                 origAbundData = origAbundData,
                 useTransformedRelAbundance = useTransformedRelAbundance,
                 projectIntoOrigDCA = projectIntoOrigDCA,
