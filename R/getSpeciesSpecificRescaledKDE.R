@@ -13,7 +13,7 @@
 
 #' @param modeledSiteAbundance The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.
 
-#' @param reportTests Should the result of tests checking the KDE results be reported to the terminal? Default is /code{FALSE}.
+# @param reportTests Should the result of tests checking the KDE results be reported to the terminal? Default is /code{FALSE}.
 
 #' @return
 
@@ -33,8 +33,8 @@
 #'     origAbundData, 
 #'     abundanceFloorRatio = 0.5, 
 #'     nBreaksGradientHist = 20, 
-#'     modeledSiteAbundance = 10000, 
-#'     reportTests = FALSE)
+#'     modeledSiteAbundance = 10000
+#'     )
 #'     
 
 #' @name
@@ -45,8 +45,7 @@ getSpeciesSpecificRescaledKDE <- function(
         origAbundData,
         abundanceFloorRatio = 0.5,
         nBreaksGradientHist = 20,
-        modeledSiteAbundance = 10000,
-        reportTests = FALSE
+        modeledSiteAbundance = 10000
         ){
     
     # Species-Specific Kernel Density Estimates on the Original Empirical DCA-1 Gradient
@@ -54,25 +53,6 @@ getSpeciesSpecificRescaledKDE <- function(
     
     if(length(gradientOrigDCA) != nrow(origAbundData)){
         stop("DCA and abundance data seem to not agree on number of samples/sites")
-        }
-    
-    if(reportTests){
-        # Sampling is not even across the DCA 1 gradient, as shown here:
-        gradientHist <- hist(
-            gradientOrigDCA, 
-            breaks = nBreaksGradientHist, 
-            plot = reportTests
-            ,main = "Number of Samples in each Binned Segment of Gradient"
-            ,xlab = "Gradient (DCA-1 Values)"
-            )
-    }else{
-        gradientHist <- hist(
-            gradientOrigDCA, 
-            breaks = nBreaksGradientHist, 
-            plot = reportTests
-            #,main = "Number of Samples in each Binned Segment of Gradient"
-            #,xlab = "Gradient (DCA-1 Values)"
-            )
         }
     
     histBreaks <- gradientHist$breaks
@@ -109,43 +89,6 @@ getSpeciesSpecificRescaledKDE <- function(
     
     origAbundData_RelScale <- origAbundData_RelScale + abundFloorModifier
     
-    if(reportTests){
-        # Some unneccessary plots 
-        #heatmap(gradientOrigDCA, as.matrix(origAbundData[,1]))
-        
-        # how does abundance vary with DCA-1 for Epistominella pacifica?
-        plot(gradientOrigDCA, 
-            origAbundData$EpistominellaPacifica,
-            xlab = "Original DCA Gradient", 
-            ylab = "Single-Site Absolute Abundance of E. pacifica"
-            )
-
-        # how does abundance vary with DCA-1 for Lagena Spp.
-        plot(gradientOrigDCA, 
-            origAbundData$LagenaSpp,
-            xlab = "Original DCA Gradient", 
-            ylab = "Single-Site Absolute Abundance of Lagena Spp."
-            )
-        
-                
-        # how does RELATIVE abundance vary with DCA-1 for Epistominella pacifica?
-        plot(gradientOrigDCA, 
-            origAbundData_RelScale[,"EpistominellaPacifica"] 
-                 / modeledSiteAbundance,
-            xlab = "Original DCA Gradient", 
-            ylab = "Single-Site Relative Abundance of E. pacifica"
-            )
-        
-        # how does RELATIVE abundance vary with DCA-1 for Epistominella pacifica?
-        plot(gradientOrigDCA, 
-            origAbundData_RelScale[,"LagenaSpp"] 
-                 / modeledSiteAbundance,
-            xlab = "Original DCA Gradient", 
-            ylab = "Single-Site Relative Abundance of Lagena Spp."
-            )
-        
-        }
-    
     # Take each gradient * abundance # for each species. 
     # Replicate gradient values for *each* specimen 
     
@@ -171,27 +114,6 @@ getSpeciesSpecificRescaledKDE <- function(
         hist(x, breaks = histBreaks, plot = FALSE
             )$counts
         )
-    
-    # more plotting....
-    if(reportTests){
-        hist(gradientRepAbund$EpistominellaPacifica, 
-            xlab = "Gradient (DCA 1 Score)", 
-            breaks = histBreaks,
-            main = paste0(
-                "Bin-Summed Abundance (out of a ", modeledSiteAbundance,
-                ") for E. pacifica\nSummed Across Samples in each Bin"
-                )
-            )
-        
-        hist(gradientRepAbund$LagenaSpp, 
-            xlab = "Gradient (DCA 1 Score)", 
-            breaks = histBreaks,
-            main = paste0(
-                "Expected Abundance (out of a ", modeledSiteAbundance,
-                ") for Lagena Spp.\nSummed Across Samples in each Bin"
-                )
-            )
-        }
     
     # These repeated gradient values don't account 
     # for the non-random sampling of the gradient itself. 
@@ -242,20 +164,6 @@ getSpeciesSpecificRescaledKDE <- function(
     # hist(gradientRepAbund$EpistominellaExigua)
     # hist(gradientRepAbund$BuliminellaTenuata)
     
-    if(reportTests){
-        hist(gradientRepSampAbund$EpistominellaPacifica, 
-             xlab = "Gradient (DCA 1 Score)", breaks = histBreaks,
-             main = paste0("Expected Per-", modeledSiteAbundance,
-                "-Specimen-Sample Abundance for E. pacifica")
-            )
-        
-        hist(gradientRepSampAbund$LagenaSpp, 
-             xlab = "Gradient (DCA 1 Score)", breaks = histBreaks,
-             main = paste0("Expected Per-", modeledSiteAbundance,
-                "-Specimen-Sample Abundance for Lagena Spp.")
-            )
-        }
-    
     # Now fit the KDE to each species' abundance curve
     kdePerTaxa <- lapply(gradientRepSampAbund, density, 
         bw = diff(gradientHist$mids)[1] )
@@ -289,8 +197,7 @@ getSpeciesSpecificRescaledKDE <- function(
     # Alternatives are definitely something to ponder for future work.
 
     rescaleFunctKDE <- function(kdeEst, 
-        modeledSiteAbundance,
-        reportTests = reportTests){
+        modeledSiteAbundance){
         
         # min is rescaled to zero 
             # This may be problematic if some species have
@@ -309,6 +216,7 @@ getSpeciesSpecificRescaledKDE <- function(
         #if(reportTests){
         #    message( paste0("kdeEst$max is ", kdeEst$max) )
         #    }
+
         kdeEst$y <- kdeEst$y * (
             kdeEst$maxSampCorrAbund - kdeEst$minSampCorrAbund
             ) 
@@ -333,45 +241,8 @@ getSpeciesSpecificRescaledKDE <- function(
     kdeRescaled <- lapply(
         kdePerTaxa, 
         rescaleFunctKDE, 
-        modeledSiteAbundance = modeledSiteAbundance,
-        reportTests = reportTests
+        modeledSiteAbundance = modeledSiteAbundance
         )
-    
-    if(reportTests){
-        #Let's plot the KDEs for all taxa
-        plot(kdeRescaled[[1]],
-             main = "Scaled KDEs of Taxon Abundance",
-             ylab = "Expected Relative Abundance",
-             xlab = "Gradient (DCA1)",
-             ylim = c(0, 0.6),
-             #log = "y",
-             xlim = c(min(gradientOrigDCA), max(gradientOrigDCA))
-            )
-        for(i in 2:length(kdeRescaled)){
-            lines(kdeRescaled[[i]], col = i)
-            }
-        
-        #Examine KDE for just *Epistominella pacifica*
-        whichEP <- which(names(kdeRescaled) == "EpistominellaPacifica")
-        plot(kdeRescaled[[whichEP]],
-             main = "Scaled KDEs for Epistominella pacifica",
-             ylab = "Expected Relative Abundance",
-             xlab = "Gradient (DCA1)",
-             lwd = 2,
-             #log = "y",
-             xlim = c(min(gradientOrigDCA), max(gradientOrigDCA))
-            )
-        
-        whichLagSpp <- which(names(kdeRescaled) == "LagenaSpp")
-        plot(kdeRescaled[[whichLagSpp]],
-             main = "Scaled KDEs for Lagena Spp",
-             ylab = "Expected Relative Abundance",
-             xlab = "Gradient (DCA1)",
-             lwd = 2,
-             #log = "y",
-             xlim = c(min(gradientOrigDCA), max(gradientOrigDCA))
-            )
-        }
     
     return(kdeRescaled)
     }
