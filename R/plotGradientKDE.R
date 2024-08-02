@@ -1,18 +1,45 @@
 # Plot Kernel Density Estimates of Species Abundance Across a Focal Gradient
 
+#' @details
+
+#' @inheritParams
+
+#' @param speciesKDEs 
+#' @param fullGradientRange 
+#' @param xlim 
+#' @param ylim 
+#' @param logY 
+
+#' @return
+
+#' @aliases
+
+#' @seealso
+
+#' @references
+
+#' @examples
+
+
+
+#' @name
+#' @rdname
+#' @export
+
+
 plotGradientKDE <- function(
         speciesKDEs,
         fullGradientRange,
         xlim = NULL,
         ylim = c(0, 1),
-        logy = FALSE
+        logY = FALSE
         ){
 
     if(is.null(xlim)){
         xlim <- fullGradientRange
         }
     
-    if(logy){
+    if(logY){
         plot(speciesKDEs[[1]],
              #main = "Scaled KDEs of Abundance for Every Species in the Dataset",
              main = "",
