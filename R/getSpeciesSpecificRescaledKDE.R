@@ -55,6 +55,14 @@ getSpeciesSpecificRescaledKDE <- function(
         stop("DCA and abundance data seem to not agree on number of samples/sites")
         }
     
+    gradientHist <- hist(
+        gradientOrigDCA, 
+        breaks = nBreaksGradientHist, 
+        plot = FALSE
+        #,main = "Number of Samples in each Binned Segment of Gradient"
+        #,xlab = "Gradient (DCA-1 Values)"
+        )
+    
     histBreaks <- gradientHist$breaks
     histSampleCounts <- gradientHist$counts
     
