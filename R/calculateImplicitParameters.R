@@ -103,7 +103,7 @@ calculateImplicitParameters <- function(
 
     if(is.null(eventSampleWidthRatio)){
         eventSampleWidthRatio <- sedRatePerTimestep * eventDuration / sampleWidth
-        }    
+        }
         
     if(is.null(sampleWidth)){
         sampleWidth <- sedRatePerTimestep * eventDuration / eventSampleWidthRatio
@@ -131,7 +131,6 @@ calculateImplicitParameters <- function(
     if(minSampleTimeStep > expStepsPerSample){
         stop("Fewer time steps expected in a sample than minSampleTimeStep -- may be too computationally intensive")
         }
-    
     
     nAbsentSecParam <- sum(c(
         is.null(eventSampleWidthRatio), 

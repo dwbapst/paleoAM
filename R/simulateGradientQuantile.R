@@ -36,7 +36,8 @@ simulateGradientQuantile <- function(
             origAbundData,
             kdeRescaled,
             probSpeciesOccur,
-            specimensPerTimestep,
+            powerRootTransform = 1,
+            specimensPerTimestep = 10000,
             nSpecimens
             ){
     
@@ -84,7 +85,8 @@ simulateGradientQuantile <- function(
         fossilSeries = fossilSeries,
         singularDCA = TRUE,
         inclusiveDCA = FALSE,
-        rawDCA = FALSE
+        rawDCA = FALSE,
+        powerRootTransform = powerRootTransform 
         )
 
     DCA1 <- ecologyOutList$scoreDCA1_singular
