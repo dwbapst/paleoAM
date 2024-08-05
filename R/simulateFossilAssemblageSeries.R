@@ -36,6 +36,7 @@
 #' @param useTransformedRelAbundance 
 #' @param projectIntoOrigDCA 
 #' @param powerRootTransform 
+
 #' @param singularDCA 
 #' @param inclusiveDCA 
 #' @param rawDCA 
@@ -69,7 +70,9 @@ simulateFossilAssemblageSeries <- function(
                 halfGradientOnly = "full",
                 useTransformedRelAbundance = TRUE,
                 projectIntoOrigDCA = TRUE,
-                powerRootTransform = 1,                 
+                powerRootTransform = 1,  
+                maxSampleTimeStep = 500,
+                minSampleTimeStep = 3,
                 singularDCA = TRUE,
                 inclusiveDCA = FALSE, # BAD IDEA
                 rawDCA = FALSE,
@@ -92,6 +95,9 @@ simulateFossilAssemblageSeries <- function(
           sampleWidth = sampleWidth,
           eventDuration = eventDuration,
           sedRatePerTimestep = sedRatePerTimestep,
+        
+          maxSampleTimeStep = maxSampleTimeStep,
+          minSampleTimeStep = minSampleTimeStep,
     
           # additional primary paramters
           samplingCompleteness = samplingCompleteness,
