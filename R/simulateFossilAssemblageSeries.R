@@ -121,7 +121,7 @@ simulateFossilAssemblageSeries <- function(
           transitionDuration = implicitParameters$transitionDuration,
           eventDuration = implicitParameters$eventDuration,
           halfGradientOnly = halfGradientOnly,
-          includeInitialSetUpPhases = includeInitialBackgroundPhase,
+          includeInitialBackgroundPhase = includeInitialBackgroundPhase,
           plot = plot
           )
     

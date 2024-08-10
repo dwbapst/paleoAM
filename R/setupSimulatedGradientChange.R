@@ -2,7 +2,25 @@
 
 #' @inheritParams
 
-#' @param
+#' @param nEvents 
+
+#' @param fullGradientRange 
+
+#' @param peakGradientValue 
+
+#' @param bgGradientValue 
+
+#' @param bgDurationRange 
+
+#' @param transitionDuration 
+
+#' @param eventDuration 
+
+#' @param halfGradientOnly 
+
+#' @param includeInitialBackgroundPhase 
+
+#' @param plot 
 
 #' @return
 
@@ -14,17 +32,7 @@
 
 #' @examples
 
-#' @param nEvents 
-#'
-#' @param fullGradientRange 
-#' @param peakGradientValue 
-#' @param bgGradientValue 
-#' @param bgDurationRange 
-#' @param transitionDuration 
-#' @param eventDuration 
-#' @param halfGradientOnly 
-#' @param includeInitialSetUpPhases 
-#' @param plot 
+
 #'
 #' @name
 #' @rdname
@@ -40,7 +48,7 @@ setupSimulatedGradientChange <- function(
                 transitionDuration,
                 eventDuration,
                 halfGradientOnly = "full",
-                includeInitialSetUpPhases = TRUE,
+                includeInitialBackgroundPhase = TRUE,
                 plot = FALSE
                 ){
     

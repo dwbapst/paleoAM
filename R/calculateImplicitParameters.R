@@ -1,6 +1,6 @@
 #' Calculate Implicit Parameters 
 
-#' @details
+#' @details 
 
 #' @inheritParams
 
