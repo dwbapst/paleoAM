@@ -1,8 +1,67 @@
+#' Simulate Time-Series of Successive Fossil Assemblages
+#'
+#' Given a set of parameters and models describing species abundance,
+#' stochastically models changes in an underlying biotic gradient and simulates
+#' ecological change and a sequence of samples representing change in recovered
+#'  fossil assemblages over that interval.
+
 #' @details
 
 #' @inheritParams
 
-#' @param
+#' @param kdeRescaled 
+
+#' @param probSpeciesOccur 
+
+#' @param origAbundData 
+
+#' @param eventChangeScale 
+
+#' @param bgGradientValue 
+
+#' @param fullGradientRange 
+
+#' @param eventSampleWidthRatio 
+
+#' @param sampleWidth 
+
+#' @param eventDuration 
+
+#' @param sedRatePerTimestep 
+
+#' @param samplingCompleteness 
+
+#' @param transitionDurationRatio 
+
+#' @param bioturbDepthRatio 
+
+#' @param bioturbIntensity 
+
+#' @param nEvents 
+
+#' @param nSpecimens 
+
+#' @param specimensPerTimestep 
+
+#' @param halfGradientOnly 
+
+#' @param useTransformedRelAbundance 
+
+#' @param projectIntoOrigDCA 
+
+#' @param powerRootTransform 
+
+#' @param singularDCA 
+
+#' @param inclusiveDCA 
+
+#' @param rawDCA 
+
+#' @param includeInitialBackgroundPhase 
+
+#' @param plot 
+ 
+#' @param thinOutput Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.
 
 #' @return
 
@@ -14,35 +73,7 @@
 
 #' @examples
 
-#' @param kdeRescaled 
-#'
-#' @param probSpeciesOccur 
-#' @param origAbundData 
-#' @param eventChangeScale 
-#' @param bgGradientValue 
-#' @param fullGradientRange 
-#' @param eventSampleWidthRatio 
-#' @param sampleWidth 
-#' @param eventDuration 
-#' @param sedRatePerTimestep 
-#' @param samplingCompleteness 
-#' @param transitionDurationRatio 
-#' @param bioturbDepthRatio 
-#' @param bioturbIntensity 
-#' @param nEvents 
-#' @param nSpecimens 
-#' @param specimensPerTimestep 
-#' @param halfGradientOnly 
-#' @param useTransformedRelAbundance 
-#' @param projectIntoOrigDCA 
-#' @param powerRootTransform 
 
-#' @param singularDCA 
-#' @param inclusiveDCA 
-#' @param rawDCA 
-#' @param includeInitialBackgroundPhase 
-#' @param plot 
-#'
 #' @name
 #' @rdname
 #' @export
@@ -78,7 +109,8 @@ simulateFossilAssemblageSeries <- function(
                 rawDCA = FALSE,
                 includeInitialBackgroundPhase = FALSE,
                 # runChecks = TRUE,
-                plot = FALSE
+                plot = FALSE,
+                thinOutput = FALSE
                 ){
   
 
@@ -254,5 +286,21 @@ simulateFossilAssemblageSeries <- function(
             )
         }
     
+    thinList <- function(input){
+        out <- list(sampleProperties = list(), implicitParameters = list())
+        out$sampleProperties$sampleSedColumnDepth_start <- input$sampleProperties$sampleSedColumnDepth_start
+        out$sampleProperties$sampleSedColumnDepth_end <- input$sampleProperties$sampleSedColumnDepth_end
+        out$sampleProperties$sampleInterval_start  <- input$sampleProperties$sampleInterval_start 
+        out$sampleProperties$sampleInterval_end <- input$sampleProperties$sampleInterval_end   
+        out$sampleProperties$sampleMidAge <- input$sampleProperties$sampleMidAge
+        out$sampleProperties$scoreDCA1_singular <- input$sampleProperties$scoreDCA1_singular
+        out$implicitParameters <- input$implicitParameters
+        return(out)
+        }
+
+    if(thinOutput){
+        outList <- thinList(outList)
+        }
+        
     return(outList)
     }

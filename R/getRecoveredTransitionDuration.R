@@ -19,8 +19,6 @@
 
 #' @return
 
-#' @aliases
-
 #' @seealso
 
 #' @references
@@ -29,8 +27,9 @@
 
 #' @name
 #' @rdname
-#' @export
+#' @aliases
 
+#' @export
 getRecoveredTransitionDuration <- function(
         simRecord, bgUpperEnvelope, 
         eventLowerEnvelope = NULL,

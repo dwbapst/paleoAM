@@ -1,3 +1,7 @@
+#' Create a Stochastic Time-Series of Gradient Change For Use in Simulating Assemblage Change
+#'
+#' Given a series of inputs, simulates a sequence 
+
 #' @details
 
 #' @inheritParams
