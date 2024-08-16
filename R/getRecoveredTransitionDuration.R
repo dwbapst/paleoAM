@@ -86,7 +86,7 @@ getRecoveredTransitionDuration <- function(
             x = simResult$sampleProperties$sampleMidAge, 
             y=simResult$sampleProperties$scoreDCA1_singular,
             xlab = "Time (time-steps)",
-            ylab = "DCA-1 Gradient"
+            ylab = "DCA-1 Gradient",
             main = "")
         abline(v=sampleAge[c(startTran, endTran)] )
         text(x = 0, y = 2, pos = 4, paste0("Tran. Dur. =",

@@ -72,7 +72,7 @@ setupSimulatedGradientChange <- function(
         runif(n, min = min, max = max)
         }
     
-    if(includeInitialSetUpPhases){
+    if(includeInitialBackgroundPhase){
     
         # The initial segment of the gradient timeline is used to calibrate later results, 
         # with both an instantaneous and a slow transition between two minimum and maximum values. 
