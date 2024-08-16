@@ -8,4 +8,4 @@ Maintainer: David W Bapst <dwbapst@gmail.com>
 Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various sedimentary histories. For use with fossil records with detailed age models and abundace distributions used for calculating faunal indices. 
 License: CC-0
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
