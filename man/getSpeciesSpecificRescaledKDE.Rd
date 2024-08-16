@@ -9,25 +9,37 @@ getSpeciesSpecificRescaledKDE(
   origAbundData,
   abundanceFloorRatio = 0.5,
   nBreaksGradientHist = 20,
-  modeledSiteAbundance = 10000,
-  reportTests = FALSE
+  modeledSiteAbundance = 10000
 )
 }
 \arguments{
-\item{gradientOrigDCA}{The environmental gradient along which abundance varies, which you are fitting a KDE to.
-origAbundData The abundance data of the data you wish to model the abundance of.
-abundanceFloorRatio The minimum that I made up out of my \emph{butt}. Default is 0.5
-nBreaksGradientHist The default is 20. Twenty what they asked? Twenty something.
-modeledSiteAbundance The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.
-reportTests Should the result of tests checking the KDE results be reported to the terminal? Default is /code{FALSE}.
-# example
-# load some data
-calculating our KDE along some gradient
-gradientOrigDCA <-}
+\item{gradientOrigDCA}{The environmental gradient along which abundance varies, which you are fitting a KDE to.}
+
+\item{origAbundData}{The abundance data of the data you wish to model the abundance of.}
+
+\item{abundanceFloorRatio}{The minimum value for the abundance in a given interval along the gradient -- a probably arbitration value that is set to 0.5 by default.}
+
+\item{nBreaksGradientHist}{The default is 20. Twenty what they asked? Twenty something}
+
+\item{modeledSiteAbundance}{The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.}
 }
 \description{
 This is a function for Fitting a KDE to a specific species in Community Ecology Data
 }
 \details{
 This function fits a KDE to the abundance data of a particular species from community data given some environmental gradient.
+}
+\examples{
+
+# load data
+data(gulfOfAlaska_ShannonEtAl)
+
+gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
+    gradientOrigDCA, 
+    origAbundData, 
+    abundanceFloorRatio = 0.5, 
+    nBreaksGradientHist = 20, 
+    modeledSiteAbundance = 10000
+    )
+    
 }
