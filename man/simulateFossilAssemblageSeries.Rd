@@ -37,25 +37,25 @@ simulateFossilAssemblageSeries(
 )
 }
 \arguments{
-\item{kdeRescaled}{}
+\item{kdeRescaled}{The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.}
 
-\item{probSpeciesOccur}{}
+\item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
 
-\item{origAbundData}{}
+\item{origAbundData}{The original matrix of abundance data, to be used to project the simulated data into the same detrended correspondence analysis (DCA) space.}
 
-\item{eventChangeScale}{}
+\item{eventChangeScale}{A value indicating the amount relative to the background value (\code{bgGradientValue}) and the maximum possible change as indicated by \code{fullGradientRange} (in other words, simulated change must be within observed gradient, so \code{eventChangeScale} is a proportional multiplier of the total possible change).}
 
 \item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
 
 \item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
 
-\item{eventSampleWidthRatio}{}
+\item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined.}
 
 \item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
 
 \item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
-\item{sedRatePerTimestep}{}
+\item{sedRatePerTimestep}{The}
 
 \item{samplingCompleteness}{}
 
@@ -63,11 +63,11 @@ simulateFossilAssemblageSeries(
 
 \item{bioturbDepthRatio}{}
 
-\item{bioturbIntensity}{}
+\item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
 
 \item{nEvents}{Number of events to occur in a simulated sequence of gradient change.}
 
-\item{nSpecimens}{The number of specimens}
+\item{nSpecimens}{The number of specimens selected in each individual sample.}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.}
 
@@ -87,9 +87,11 @@ simulateFossilAssemblageSeries(
 
 \item{inclusiveDCA}{}
 
+\item{rawDCA}{}
+
 \item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 
-\item{plot}{}
+\item{plot}{Should the simulated time-series of fossil assemblages be shown as a sequence of generating and recovered gradient values against time? Default is \code{FALSE}.}
 
 \item{thinOutput}{Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.}
 }
@@ -97,5 +99,6 @@ simulateFossilAssemblageSeries(
 Given a set of parameters and models describing species abundance,
 stochastically models changes in an underlying biotic gradient and simulates
 ecological change and a sequence of samples representing change in recovered
- fossil assemblages over that interval.
+fossil assemblages over that interval, 
+including estimating the recovered gradient via \code{quantifyCommunityEcology}.
 }

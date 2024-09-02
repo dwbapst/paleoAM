@@ -12,6 +12,23 @@ simMixedAssemblageSample(
   nSpecimens
 )
 }
+\arguments{
+\item{kdeRescaled}{The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.}
+
+\item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
+
+\item{gradientValues}{A vector of gradient values to simulate over. A separate 'true' assemblage / community will be simulated for each value in the respective vector.}
+
+\item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.}
+
+\item{nSpecimens}{The number of specimens selected in each individual sample.}
+}
+\value{
+A matrix containing the species abundances in the resulting mixed assemblage.
+}
 \description{
 This function simulate a mixed fossil assemblage by simulating a series of communities across a defined range of gradient values, lumps them into a single mixed assemblage, and then samples that assemblage as defined by the user.
+}
+\details{
+This function is mainly written for simulating what artificial mixtures of assemblages at different gradient values would look like if sampled and assumed to be a single cohesive assemblage.
 }
