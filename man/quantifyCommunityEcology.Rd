@@ -9,29 +9,21 @@ quantifyCommunityEcology(
   fossilSeries,
   useTransformedRelAbundance = TRUE,
   projectIntoOrigDCA = TRUE,
-  powerRootTransform = 1,
-  singularDCA = TRUE,
-  inclusiveDCA = FALSE,
-  rawDCA = FALSE
+  powerRootTransform = 1
 )
 }
 \arguments{
-\item{origAbundData}{The original matrix of abundance data, to be used to project the simulated data into the same detrended correspondence analysis (DCA) space.}
-
-\item{fossilSeries}{}
-
-\item{useTransformedRelAbundance}{}
-
-\item{projectIntoOrigDCA}{}
-
-\item{powerRootTransform}{}
-
-\item{singularDCA}{}
-
-\item{inclusiveDCA}{}
-
-\item{rawDCA}{}
+\item{fossilSeries}{The}
+}
+\value{
+A list containing the input data and arguments, as well as the 
+DCA score values found
 }
 \description{
-Given the output from functions such as \code{simulateFossilAssemblageSeries}, this function calculates various ecological measures that might be used as 'recovered' gradient values to compare against the original generating gradient values.
+Given the output from functions such as \code{simulateFossilAssemblageSeries}, 
+this function calculates various ecological measures that might be used as
+'recovered' gradient values to compare against the original generating gradient values.
+}
+\details{
+Quantifies
 }

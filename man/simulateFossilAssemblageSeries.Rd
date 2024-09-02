@@ -41,8 +41,6 @@ simulateFossilAssemblageSeries(
 
 \item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
 
-\item{origAbundData}{The original matrix of abundance data, to be used to project the simulated data into the same detrended correspondence analysis (DCA) space.}
-
 \item{eventChangeScale}{A value indicating the amount relative to the background value (\code{bgGradientValue}) and the maximum possible change as indicated by \code{fullGradientRange} (in other words, simulated change must be within observed gradient, so \code{eventChangeScale} is a proportional multiplier of the total possible change).}
 
 \item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
@@ -57,11 +55,11 @@ simulateFossilAssemblageSeries(
 
 \item{sedRatePerTimestep}{The}
 
-\item{samplingCompleteness}{}
+\item{samplingCompleteness}{The}
 
-\item{transitionDurationRatio}{}
+\item{transitionDurationRatio}{The}
 
-\item{bioturbDepthRatio}{}
+\item{bioturbDepthRatio}{The}
 
 \item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
 
@@ -73,21 +71,9 @@ simulateFossilAssemblageSeries(
 
 \item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
 
-\item{useTransformedRelAbundance}{}
+\item{maxSampleTimeStep}{The}
 
-\item{projectIntoOrigDCA}{}
-
-\item{powerRootTransform}{}
-
-\item{maxSampleTimeStep}{}
-
-\item{minSampleTimeStep}{}
-
-\item{singularDCA}{}
-
-\item{inclusiveDCA}{}
-
-\item{rawDCA}{}
+\item{minSampleTimeStep}{The}
 
 \item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 
@@ -95,10 +81,35 @@ simulateFossilAssemblageSeries(
 
 \item{thinOutput}{Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.}
 }
+\value{
+Returns a list, which by default has seven components: 
+\code{implicitParameters}, the full list of parameters used for generating the simulated data; 
+\code{simGradientChangeOut}, the simulated time-series of gradient change output by \code{setupSimulatedGradientChange};
+\code{maxTime}, the total duration of the entire simulated time-series from start to end;
+\code{simTimeVar}, a data frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages, used as input in \code{\link{sampleFossilSeries}};
+\code{fossilSeries}, a list containing the simulated time-series of sampled fossil assemblages from \code{\link{sampleFossilSeries}},
+\code{ecology}, the recovered ecological variables for each simulated sample, as returned by \code{quantifyCommunityEcology},
+and \code{sampleProperties}, a list containing a number of variables specific to individual .
+
+If \code{thinList = TRUE} is used, then the output list
+ contains only two components: 
+ \code{sampleProperties} and \code{implicitParameters}.
+ The \code{implicitParameters} component is the same as in the full output,
+ but the \code{sampleProperties} component only contains information on when 
+ (in both time and sedimentary depth) a given sample is located in the 
+ simulated time-series, and the variable \code{scoreDCA1_recovered}.
+}
 \description{
 Given a set of parameters and models describing species abundance,
 stochastically models changes in an underlying biotic gradient and simulates
 ecological change and a sequence of samples representing change in recovered
 fossil assemblages over that interval, 
 including estimating the recovered gradient via \code{quantifyCommunityEcology}.
+}
+\details{
+Different parameterizations may be given as input, allowing different parameters to be unspecified.
+Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
+}
+\seealso{
+\code{\link{calculateImplicitParameters}}
 }

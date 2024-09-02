@@ -17,19 +17,15 @@ simulateGradientQuantile(
 )
 }
 \arguments{
-\item{quantileProbs}{The quantiles to return on the recovered gradient values from the simulated assemblages.}
+\item{quantileProbs}{The quantile for which to return on the recovered gradient values from the simulated assemblages. (Technically multiple quantiles can be given, for which a value will be returned for each.}
 
 \item{nSamplesSim}{The number of samples to simulate.}
 
 \item{gradientValue}{The gradient value to simulate assemblages at.}
 
-\item{origAbundData}{The original matrix of abundance data, to be used to project the simulated data into the same detrended correspondence analysis (DCA) space.}
-
 \item{kdeRescaled}{The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.}
 
 \item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
-
-\item{powerRootTransform}{}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.}
 

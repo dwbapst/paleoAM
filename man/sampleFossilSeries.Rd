@@ -17,28 +17,35 @@ sampleFossilSeries(
 \arguments{
 \item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
 
-\item{bioturbZoneDepth}{}
+\item{bioturbZoneDepth}{The}
 
-\item{distBetweenSamples}{}
+\item{distBetweenSamples}{The}
 
-\item{sampleWidth}{}
+\item{sampleWidth}{The}
 
-\item{simTimeVar}{}
+\item{simTimeVar}{A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.}
 
-\item{timestepAbundances}{}
+\item{timestepAbundances}{A matrix containing abundances for species as a series of simulated assemblages, output by \code{\link{getTimestepAbundances}}.}
 
 \item{nSpecimens}{The number of specimens selected in each individual sample.}
 }
 \value{
 A list composed of four components:
-\code{simTimeVar}, a 
+\code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values.
 \code{abundanceTable}, 
 \code{sampleIntervals},
 and \code{bioturbIntervals},
 }
 \description{
-Sample Fossil Assemblage Series
+The
 }
 \details{
-Importantly, this function is where bioturbation is handled
+This function is where bioturbation processes are handled, as well as time-averaging from samples capturing several sedimentary horizons reflecting multiple original fossil assemblages.
+
+This function is generally run after running \code{\link{getTimestepAbundances}}. 
+Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
+}
+\seealso{
+This function is generally run after running
+\code{\link{getTimestepAbundances}}. Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
 }

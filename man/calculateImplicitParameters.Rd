@@ -34,16 +34,28 @@ calculateImplicitParameters(
 
 \item{sedRatePerTimestep}{The}
 
-\item{maxSampleTimeStep}{}
+\item{maxSampleTimeStep}{The}
 
-\item{minSampleTimeStep}{}
+\item{minSampleTimeStep}{The}
 
-\item{samplingCompleteness}{}
+\item{samplingCompleteness}{The}
 
-\item{transitionDurationRatio}{}
+\item{transitionDurationRatio}{The}
 
-\item{bioturbDepthRatio}{}
+\item{bioturbDepthRatio}{The}
+}
+\value{
+Returns a list giving the full set of parameters necessary for running \code{\link{simulateFossilAssemblageSeries}}.
 }
 \description{
-Calculate Implicit Parameters
+Given a set of parameters for simulating fossil assemblages and sampling them as a model time-series, 
+ using a particular while some parameterizations
+}
+\details{
+Under the models considered in \code{paleoAM}, some parameterizations may be equivalent, even though the a particular analysis might be better simulated using a particular set of parameters. Allowing various different parameterizations is a useful generalization, but requires translating those equivalent parameters from one set to another (eg specifying parameters A, C & D, but running a simulation that requires parameters A, B & C).
+
+This function mainly exists to calculate unspecified parameters for \code{\link{simulateFossilAssemblageSeries}} and also to identify conflicting parameter specifications.
+}
+\seealso{
+\code{\link{simulateFossilAssemblageSeries}}
 }
