@@ -1,31 +1,32 @@
 #' Summarize Simulation DCA
-
+#' 
+#' The
 
 #' @details
+#' The
 
-#' @inheritParams
+# @inheritParams
 
-#' @param sampleData 
+#' @param sampleData The
 
-#' @param nEvents 
+#' @param nEvents The
 
-#' @param backgroundUpperBound 
+#' @param backgroundUpperBound The
 
-#' @param eventMagnitudesAbsolute 
+#' @param eventMagnitudesAbsolute The
 
-#' @param eventLowerBound 
+#' @param eventLowerBound The
 
-#' @param eventUpperBound 
+#' @param eventUpperBound The
 
 #' @return
-
+#' The
 
 # @examples
 
 
-
-#' @name
-#' @rdname
+#' @name summarizeSimulationDCA
+#' @rdname summarizeSimulationDCA
 #' @export
 summarizeSimulationDCA <- function(
             sampleData,

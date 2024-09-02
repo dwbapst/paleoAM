@@ -1,31 +1,38 @@
+#' Get Sample Properties
+#' 
+#' The
+
 #' @details
+#' The
 
-#' @inheritParams
-
-#' @param
-
-#' @return
-
-#' @aliases
-
-#' @seealso
-
-#' @references
-
-#' @examples
+# @inheritParams
 
 #' @param simTimeVar 
-#'
+
 #' @param fossilSeries 
+
 #' @param eventStartEndTimes 
+
 #' @param initialBackgroundIntervalIncluded 
+
 #' @param backgroundStartEnd 
+
+#' @return
+#' The
+
+# @aliases
+
+# @seealso
+
+# @references
+
+# @examples
+
+
 #'
-#' @name
-#' @rdname
+#' @name getSampleProperties
+#' @rdname getSampleProperties
 #' @export
-
-
 getSampleProperties <- function(
             simTimeVar, 
             fossilSeries, 

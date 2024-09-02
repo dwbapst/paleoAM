@@ -1,49 +1,62 @@
+#' Plots a Heatmap Comparison
+#' 
+#' The 
+
 #' @details
+#' The 
 
-#' @inheritParams
+# @inheritParams
 
-#' @param
+#' @param x,y The 
+
+#' @param z The
+
+#' @param xlim,ylim,zlim The  
+
+#' @param xlog,ylog The
+
+#' @param xtick,ytick The
+
+#' @param contourLevels The 
+
+#' @param nlevels The
+
+#' @param contourLineLevels The
+
+#' @param contour.lwd The
+
+#' @param additionalFeatures The 
+
+#' @param key.axes The
+
+#' @param palette The
+
+#' @param xlab,ylab The 
+
+#' @param main The
+
+#' @param gradientKeyLabel The
+
+#' @param mtext_line The
+
+#' @param margins The
+
 
 #' @return
+#' The
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-#' @param x 
-#'
-#' @param y 
-#' @param z 
-#' @param xlim 
-#' @param ylim 
-#' @param zlim 
-#' @param xlog 
-#' @param ylog 
-#' @param xtick 
-#' @param ytick 
-#' @param contourLevels 
-#' @param nlevels 
-#' @param contourLineLevels 
-#' @param contour.lwd 
-#' @param additionalFeatures 
-#' @param key.axes 
-#' @param palette 
-#' @param xlab 
-#' @param ylab 
-#' @param main 
-#' @param gradientKeyLabel 
-#' @param mtext_line 
-#' @param margins 
-#'
-#' @name
-#' @rdname
+
+#' @name plotHeatmapComparison
+#' @rdname plotHeatmapComparison
 #' @export
-
-
 plotHeatmapComparison <- function(
     
             x, y, z,  

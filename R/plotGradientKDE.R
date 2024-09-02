@@ -1,32 +1,36 @@
-# Plot Kernel Density Estimates of Species Abundance Across a Focal Gradient
+#' Plot Kernel Density Estimates of Species Abundance Across a Focal Gradient
+#' 
+#' The
 
 #' @details
+#' The
 
-#' @inheritParams
+# @inheritParams
 
 #' @param speciesKDEs 
+
 #' @param fullGradientRange 
+
 #' @param xlim 
+
 #' @param ylim 
+
 #' @param logY 
 
 #' @return
+#' The
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-
-
-#' @name
-#' @rdname
+#' @name plotGradientKDE
+#' @rdname plotGradientKDE
 #' @export
-
-
 plotGradientKDE <- function(
         speciesKDEs,
         fullGradientRange,

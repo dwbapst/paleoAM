@@ -1,29 +1,33 @@
+#' Check Fossil Series Abundance Table
+#' 
+#' The
+
 #' @details
+#' The
 
-#' @inheritParams
+# @inheritParams
 
-#' @param
+#' @param fossilSeries The
+
+#' @param minSampleSize The
+
+#' @param maxSampleSize The
+
+#' @param maxDominance The
 
 #' @return
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-#' @param fossilSeries 
-#'
-#' @param minSampleSize 
-#' @param maxSampleSize 
-#' @param maxDominance 
-#'
-#' @name
-#' @rdname
+#' @name checkFossilSeriesAbundanceTable
+#' @rdname checkFossilSeriesAbundanceTable
 #' @export
-
 checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
             minSampleSize,

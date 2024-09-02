@@ -1,29 +1,33 @@
+#' Summarize a Simulation Set
+#' 
+#' The
+
 #' @details
+#' The
 
-#' @inheritParams
+# @inheritParams
 
-#' @param
+#' @param simSummaryTable The
+
+#' @param eventGradientChange_paramValues The
+
+#' @param eventSampleWidth_paramValues The
 
 #' @return
+#' The
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-#' @param simSummaryTable 
-#'
-#' @param eventGradientChange_paramValues 
-#' @param eventSampleWidth_paramValues 
-#'
-#' @name
-#' @rdname
+
+#' @name summarizeSimulationSet
+#' @rdname summarizeSimulationSet
 #' @export
-
-
 summarizeSimulationSet <- function(
             simSummaryTable, 
             eventGradientChange_paramValues, 
