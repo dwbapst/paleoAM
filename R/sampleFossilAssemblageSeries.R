@@ -35,8 +35,8 @@
 
 
 
-#' @name
-#' @rdname
+#' @name sampleFossilAssemblageSeries
+#' @rdname sampleFossilAssemblageSeries
 #' @export
 sampleFossilAssemblageSeries <- function(
             bioturbIntensity, 

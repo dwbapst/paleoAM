@@ -29,13 +29,19 @@
 #' data(gulfOfAlaska_ShannonEtAl)
 #' 
 #' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
-#'     gradientOrigDCA, 
-#'     origAbundData, 
+#'     gradientOrigDCA = DCA1_GOA, 
+#'     origAbundData = abundData_GOA, 
 #'     abundanceFloorRatio = 0.5, 
 #'     nBreaksGradientHist = 20, 
 #'     modeledSiteAbundance = 10000
 #'     )
 #'     
+
+
+probSpeciesOccur <- getProbOccViaPresAbs(
+    gradientOrigDCA = DCA1_GOA, 
+    origAbundData = abundData_GOA
+    )
 
 #' @name getSpeciesSpecificRescaledKDE
 #' @rdname getSpeciesSpecificRescaledKDE

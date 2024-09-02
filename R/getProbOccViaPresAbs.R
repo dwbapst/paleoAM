@@ -4,17 +4,17 @@
 
 #' @details
 
-#' @inheritParams
+#' @inheritParams getSpeciesSpecificRescaledKDE
 
-#' @param origAbundData 
-
-#' @param gradientOrigDCA 
-
-#' @param occurrenceFloor 
-
-#' @param nBreaksGradientHist 
+#' @param occurrenceFloor The minimum occurrence for every species, in every bin. 
+#' The default is zero -- increasing this value means every species has a 
+#' non-zero chance of occurring in every bin, which tends to result in wildly 
+#' more diverse assemblages than what is observed in the fossil record, so use with caution.
 
 #' @return
+#' An approximate function, created with \code{approx} that describes the 
+#' relationship between gradient and probability of occurrence for all species.
+
 
 #' @aliases
 
@@ -28,15 +28,11 @@
 #' # load data
 #' data(gulfOfAlaska_ShannonEtAl)
 #' 
-#' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
-#'     gradientOrigDCA, 
-#'     origAbundData, 
-#'     abundanceFloorRatio = 0.5, 
-#'     nBreaksGradientHist = 20, 
-#'     modeledSiteAbundance = 10000
-#'     )
-#'     
-
+#' probSpeciesOccur <- getProbOccViaPresAbs(
+#'    gradientOrigDCA = DCA1_GOA, 
+#'    origAbundData = abundData_GOA
+#'    )
+#'
 
 #' @name getProbOccViaPresAbs
 #' @rdname getProbOccViaPresAbs
@@ -45,8 +41,7 @@ getProbOccViaPresAbs <- function(
         origAbundData, 
         gradientOrigDCA, 
         occurrenceFloor = 0,
-        nBreaksGradientHist = 20, 
-        plot = FALSE
+        nBreaksGradientHist = 20
         ){
 
     # get Probability of Occurrence Along Gradient Using Presence-Absence
@@ -69,17 +64,6 @@ getProbOccViaPresAbs <- function(
         function(x) gradientOrigDCA[x > 0]                         
         )
     
-    if(plot){
-        hist(gradientRepPresence$EpistominellaPacifica, 
-             xlab = "Gradient (DCA 1 Score)", 
-            breaks = gradientHist$breaks,
-             main = "Samples where Epistominella pacifica occurs")
-        hist(gradientRepPresence$LagenaSpp, 
-             xlab = "Gradient (DCA 1 Score)", 
-            breaks = gradientHist$breaks,
-             main = "Samples where Lagena Spp occurs")
-        }
-    
     # count number of occurrence in each hist bin
     gradientCountPresence <- lapply(gradientRepPresence, function(x) 
         hist(x, breaks = gradientHist$breaks, plot = FALSE)$counts 
@@ -92,19 +76,6 @@ getProbOccViaPresAbs <- function(
     gradientPropPresence <- lapply(gradientCountPresence, function(x)
         (x + occurrenceFloor) / (gradientHist$counts + occurrenceFloor)
         )
-    
-    if(plot){
-        plot(gradientHist$mids, 
-            gradientPropPresence$EpistominellaPacifica, 
-             xlab = "Gradient (DCA 1 Score)",
-            type = "b",
-             main = "Proportion of Samples with Epistominella pacifica sampled")
-        plot(gradientHist$mids, 
-            gradientPropPresence$LagenaSpp, 
-             xlab = "Gradient (DCA 1 Score)", 
-            type = "b",
-             main = "Proportion of Samples with Lagena Spp sampled")
-        }
     
     # Define the relationship between gradient and probability of occurrence
     # as an approximate function with `approx`

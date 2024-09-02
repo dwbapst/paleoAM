@@ -4,9 +4,8 @@
 
 #' @details
 
-#' @inheritParams getTimestepAbundances
+#' @inheritParams getTimestepAbundances sampleFossilAssemblageSeries
 
-#' @param nSpecimens 
 
 #' @return
 
