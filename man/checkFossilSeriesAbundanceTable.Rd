@@ -20,6 +20,9 @@ checkFossilSeriesAbundanceTable(
 
 \item{maxDominance}{The}
 }
+\value{
+The
+}
 \description{
 The
 }
