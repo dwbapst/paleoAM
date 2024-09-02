@@ -5,26 +5,24 @@
 #' @details
 #' \code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilAssemblageSeries}.
 
-#' @inheritParams simulateFossilAssemblageSeries
+# @inheritParams simulateFossilAssemblageSeries
 
 #' @param kdeRescaled The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.
 
 #' @param probSpeciesOccur The output from \code{\link{getProbOccViaPresAbs}}
 
-#' @param gradientValues 
+#' @param gradientValues A vector of gradient values to simulate over. A separate 'true' assemblage / community will be simulated for each value in the respective vector.
 
 #' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.
 
 #' @return
 #' A matrix containing abundances for species as a series of simulated assemblages.
 
-#' @aliases
+# @seealso
 
-#' @seealso
+# @references
 
-#' @references
-
-#' @examples
+# @examples
 
 #' @name getTimestepAbundances
 #' @rdname getTimestepAbundances
