@@ -1,8 +1,12 @@
+#' Simulate a Mixed Fossil Assemblage Composed of Communities at Different Gradient Values, and Sample the Lumped Assemblage
+#' 
+#' This function simulate a mixed fossil assemblage by simulating a series of communities across a defined range of gradient values, lumps them into a single mixed assemblage, and then samples that assemblage as defined by the user.
+
 #' @details
 
-#' @inheritParams 
+#' @inheritParams getTimestepAbundances
 
-#' @param
+#' @param nSpecimens 
 
 #' @return
 
@@ -14,29 +18,15 @@
 
 #' @examples
 
-#' @param kdeRescaled 
 
-#' @param probSpeciesOccur 
-
-#' @param gradientValues 
-
-#' @param specimensPerTimestep 
-
-#' @param nSpecies 
-
-#' @param nSpecimens 
-
-#' @name
-#' @rdname
+#' @name simMixedAssemblageSample
+#' @rdname simMixedAssemblageSample
 #' @export
-
-
-simAssemblageSample <- function(
+simMixedAssemblageSample <- function(
             kdeRescaled, 
             probSpeciesOccur, 
             gradientValues, 
             specimensPerTimestep,
-            nSpecies,
             nSpecimens     
             ){
     # simulate a mixed sample, generated from lumping 'background'
@@ -49,6 +39,7 @@ simAssemblageSample <- function(
             gradientValues = gradientValues, 
             specimensPerTimestep = specimensPerTimestep
             )
+
     lumpedSample <- colSums(lumpedSample)    
         
     # un-table() the lumped community abundance data
@@ -59,7 +50,7 @@ simAssemblageSample <- function(
                replace = FALSE, size = nSpecimens)
     
     # down-sample the lumped specimens to "nSpecimens" 
-    pickedSample <- tabulate(pickedSample, nbins = nSpecies)    
+    pickedSample <- tabulate(pickedSample, nbins = length(kdeRescaled))
         
     return(pickedSample)
     }
