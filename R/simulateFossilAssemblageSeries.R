@@ -3,63 +3,33 @@
 #' Given a set of parameters and models describing species abundance,
 #' stochastically models changes in an underlying biotic gradient and simulates
 #' ecological change and a sequence of samples representing change in recovered
-#'  fossil assemblages over that interval.
+#' fossil assemblages over that interval, 
+#' including estimating the recovered gradient via \code{quantifyCommunityEcology}.
 
 #' @details
 
 
 #' @inheritParams setupSimulatedGradientChange 
 #' @inheritParams calculateImplicitParameters 
-
-#' @param kdeRescaled 
-
-#' @param probSpeciesOccur 
-
-#' @param origAbundData 
-
-#' @param eventChangeScale 
-
-#' @param eventSampleWidthRatio 
-
-#' @param sedRatePerTimestep 
-
-#' @param samplingCompleteness 
-
-#' @param transitionDurationRatio 
-
-#' @param bioturbDepthRatio 
-
-#' @param bioturbIntensity 
-
-#' @param nSpecimens The number of specimens 
+#' @inheritParams sampleFossilSeries
+#' @inheritParams getTimestepAbundances
+#' @inheritParams quantifyCommunityEcology
 
 #' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.
 
-#' @param useTransformedRelAbundance 
-
-#' @param projectIntoOrigDCA 
-
-#' @param powerRootTransform 
-
-#' @param singularDCA 
-
-#' @param inclusiveDCA 
-
-#' @param rawDCA
-
-#' @param plot 
+#' @param plot Should the simulated time-series of fossil assemblages be shown as a sequence of generating and recovered gradient values against time? Default is \code{FALSE}.
  
 #' @param thinOutput Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.
 
 #' @return
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
 
 #' @name simulateFossilAssemblageSeries
@@ -177,7 +147,7 @@ simulateFossilAssemblageSeries <- function(
     colnames(timestepAbundances) <- names(kdeRescaled)
     
     # Running the Simulation
-    fossilSeries <- sampleFossilAssemblageSeries(    
+    fossilSeries <- sampleFossilSeries(    
         bioturbIntensity = bioturbIntensity, 
         bioturbZoneDepth = implicitParameters$bioturbZoneDepth,  
         distBetweenSamples = implicitParameters$distBetweenSamples, 

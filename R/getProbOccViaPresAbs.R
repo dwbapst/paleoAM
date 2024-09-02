@@ -1,8 +1,9 @@
 #' Estimate the Per-Species Probability of Occurrence as a Function of an Environmental Gradient from Presence-Absence Data
 #' 
-#' 
+#' This function calculates how species presence (not abundance) varies as a function of an underlying environmental gradient, using only the pattern of presence-absence observed in a given data set (usually data on species abundance). 
 
 #' @details
+#' The rationale for this function was that simulating assemblages using the KDEs of species abundance alone (calculated with \code{getSpeciesSpecificRescaledKDE} tended to create very diversity-high assemblages that did not reflect reality. Accounting for species presence at all using separate models brings simulated assemblages much closer to real assemblages.
 
 #' @inheritParams getSpeciesSpecificRescaledKDE
 
@@ -15,13 +16,12 @@
 #' An approximate function, created with \code{approx} that describes the 
 #' relationship between gradient and probability of occurrence for all species.
 
-
-#' @aliases
+# @aliases
 
 #' @seealso
 #' \code{\link{getSpeciesSpecificRescaledKDE}}
 
-#' @references
+# @references
 
 #' @examples
 #' 

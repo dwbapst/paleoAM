@@ -1,11 +1,11 @@
 #' Measure the Duration of a Transition Period from Recovered Sequence of Fossil Assemblages with DCA-1 Scores
 #' 
-#'  
+#' How long did a transition proceed from background to peak 'event' v
 
 #' @details
-#' The envelope values can be calculated different ways, or even picked arbitrarily by the user. For example, \code{bgUpperEnvelope} is the upper envelope on what is considered a background value for a gradient value derived from the assemblage (for example, an ordination score). One way a user could calculate \code{bgUpperEnvelope} would be to repeatedly simulate assemblages at the background value, calculate their apparent gradient value and estimate a 0.95 or 0.975 quantile.
+#' The envelope values can be calculated different ways, or even picked arbitrarily by the user. For example, \code{bgUpperEnvelope} is the upper envelope on what is considered a background value for a gradient value derived from the assemblage (for example, an ordination score). One way a user could calculate \code{bgUpperEnvelope} would be to repeatedly simulate assemblages at the background value, calculate their apparent gradient value and estimate a 0.95 or 0.975 quantile. This can be done easily with function \code{\link{simulateGradientQuantile}}.
 
-#' @param simRecord 
+#' @param simRecord A simulated fossil record with assemblage change across multiple time-steps, with sedimentary thickness modeled.
  
 #' @param bgUpperEnvelope The upper envelope on what is considered a background value for a gradient value derived from the assemblage.
 
@@ -21,8 +21,9 @@
 #' A single value, reflecting (by default) a ratio of transition duration over the event duration. Can be modified with argument \code{returnAsAge}.
 
 #' @seealso
+#' \code{\link{simulateGradientQuantile}}
 
-#' @references
+# @references
 
 # @examples
 

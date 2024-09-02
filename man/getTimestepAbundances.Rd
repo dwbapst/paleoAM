@@ -16,7 +16,7 @@ getTimestepAbundances(
 
 \item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
 
-\item{gradientValues}{}
+\item{gradientValues}{A vector of gradient values to simulate over. A separate 'true' assemblage / community will be simulated for each value in the respective vector.}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.}
 }
@@ -27,5 +27,5 @@ A matrix containing abundances for species as a series of simulated assemblages.
 Given a set of KDEs fit to species abundance and models of species occurrance relative to an environmental gradient, and given a sequence of gradient values, and a number of specimens to sample at each time-step, obtains a matrix containing abundances for species as a series of simulated assemblages.
 }
 \details{
-\code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilAssemblageSeries}.
+\code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilSeries}.
 }

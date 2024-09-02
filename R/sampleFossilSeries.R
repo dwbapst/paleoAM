@@ -6,39 +6,47 @@
 #' Importantly, this function is where bioturbation is handled
 
 
-#' @inheritParams
+# @inheritParams
 
-#' @param bioturbIntensity 
-#' 
+#' @param bioturbIntensity The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only
+
+ 
 #' @param bioturbZoneDepth 
-#' 
+
+#' @param nSpecimens The number of specimens selected in each individual sample.
+
 #' @param distBetweenSamples 
-#' 
+ 
 #' @param sampleWidth 
-#' 
+ 
 #' @param simTimeVar 
-#' 
+ 
 #' @param timestepAbundances 
-#' 
-#' @param nSpecimens 
+ 
 
 
 #' @return
+#' A list composed of four components:
+#' \code{simTimeVar}, a 
+#' \code{abundanceTable}, 
+#' \code{sampleIntervals},
+#' and \code{bioturbIntervals},
+        
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
 
 
-#' @name sampleFossilAssemblageSeries
-#' @rdname sampleFossilAssemblageSeries
+#' @name sampleFossilSeries
+#' @rdname sampleFossilSeries
 #' @export
-sampleFossilAssemblageSeries <- function(
+sampleFossilSeries <- function(
             bioturbIntensity, 
             bioturbZoneDepth,  
             distBetweenSamples, 

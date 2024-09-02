@@ -45,7 +45,15 @@ simulateFossilAssemblageSeries(
 
 \item{eventChangeScale}{}
 
+\item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
+
+\item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
+
 \item{eventSampleWidthRatio}{}
+
+\item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
+
+\item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
 \item{sedRatePerTimestep}{}
 
@@ -57,9 +65,13 @@ simulateFossilAssemblageSeries(
 
 \item{bioturbIntensity}{}
 
+\item{nEvents}{Number of events to occur in a simulated sequence of gradient change.}
+
 \item{nSpecimens}{The number of specimens}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.}
+
+\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
 
 \item{useTransformedRelAbundance}{}
 
@@ -67,9 +79,15 @@ simulateFossilAssemblageSeries(
 
 \item{powerRootTransform}{}
 
+\item{maxSampleTimeStep}{}
+
+\item{minSampleTimeStep}{}
+
 \item{singularDCA}{}
 
 \item{inclusiveDCA}{}
+
+\item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 
 \item{plot}{}
 

@@ -12,7 +12,7 @@
 
 #' @param sampleWidth The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).
 
-#' @param sedRatePerTimestep The  
+#' @param sedRatePerTimestep The 
 
 #' @param maxSampleTimeStep 
 

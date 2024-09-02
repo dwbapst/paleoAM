@@ -1,34 +1,34 @@
+#' Repeatedly Simulate Sampled Assemblages at some Gradient Value, and Return a Quantile Based on Recovered Gradient Values
+#' 
+#' This function simulates assemblages at a single given gradient value, and returns a specified quantile on the recovered gradient values for the sake of defining an envelope around on recovered gradient values.
+
 #' @details
+#' This function is most useful with applications like \code{getRecoveredTransitionDuration} which use envelope values to define features of a recovered sequence of gradient values for comparing simulated and empirical data.
 
-#' @inheritParams
+#' @inheritParams getTimestepAbundances 
+#' @inheritParams sampleFossilSeries
+#' @inheritParams quantifyCommunityEcology
 
-#' @param
+#' @param quantileProbs The quantiles to return on the recovered gradient values from the simulated assemblages.
+
+#' @param nSamplesSim The number of samples to simulate.
+
+#' @param gradientValue The gradient value to simulate assemblages at.
 
 #' @return
+#' A value for each quantile specified in \code{quantileProbs}. May be multiple values if \code{quantileProbs} is a vector with more than one value.
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-#' @param quantileProbs 
-#'
-#' @param nSamplesSim 
-#' @param gradientValue 
-#' @param origAbundData 
-#' @param kdeRescaled 
-#' @param probSpeciesOccur 
-#' @param specimensPerTimestep 
-#' @param nSpecimens 
-#'
-#' @name
-#' @rdname
+#' @name simulateGradientQuantile
+#' @rdname simulateGradientQuantile
 #' @export
-
-
 simulateGradientQuantile <- function(
             quantileProbs = c(0.95),
             nSamplesSim,
@@ -69,7 +69,7 @@ simulateGradientQuantile <- function(
     colnames(timestepAbundances) <- names(kdeRescaled)
         
     # Running the Simulation
-    fossilSeries <- sampleFossilAssemblageSeries(    
+    fossilSeries <- sampleFossilSeries(    
         bioturbIntensity = 0, 
         bioturbZoneDepth = 0,  
         distBetweenSamples = 0, 
@@ -90,8 +90,10 @@ simulateGradientQuantile <- function(
         )
 
     DCA1 <- ecologyOutList$scoreDCA1_singular
+    
     quantileOut <- quantile(
         x = DCA1, probs = quantileProbs, na.rm = TRUE
         )
+    
     return(quantileOut)
     }

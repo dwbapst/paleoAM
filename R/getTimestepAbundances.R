@@ -3,7 +3,7 @@
 #' Given a set of KDEs fit to species abundance and models of species occurrance relative to an environmental gradient, and given a sequence of gradient values, and a number of specimens to sample at each time-step, obtains a matrix containing abundances for species as a series of simulated assemblages. 
 
 #' @details
-#' \code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilAssemblageSeries}.
+#' \code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilSeries}.
 
 # @inheritParams simulateFossilAssemblageSeries
 
@@ -130,7 +130,7 @@ getTimestepAbundances <- function(
     }
 
 
-
+# NOT EXPORTED
 simulateTimestepAbundances <- function(
             specimensPerTimestep, 
             nSpecies, 

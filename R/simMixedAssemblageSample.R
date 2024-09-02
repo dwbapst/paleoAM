@@ -3,19 +3,20 @@
 #' This function simulate a mixed fossil assemblage by simulating a series of communities across a defined range of gradient values, lumps them into a single mixed assemblage, and then samples that assemblage as defined by the user.
 
 #' @details
+#' This function is mainly written for simulating what artificial mixtures of assemblages at different gradient values would look like if sampled and assumed to be a single cohesive assemblage.
 
-#' @inheritParams getTimestepAbundances sampleFossilAssemblageSeries
+#' @inheritParams getTimestepAbundances 
 
+#' @inheritParams sampleFossilSeries
 
 #' @return
+#' A matrix containing the species abundances in the resulting mixed assemblage.
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
-
-#' @examples
+# @examples
 
 
 #' @name simMixedAssemblageSample
