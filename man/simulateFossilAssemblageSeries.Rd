@@ -45,15 +45,13 @@ simulateFossilAssemblageSeries(
 
 \item{eventChangeScale}{}
 
-\item{bgGradientValue}{}
-
-\item{fullGradientRange}{}
+\item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
 
 \item{eventSampleWidthRatio}{}
 
 \item{sampleWidth}{}
 
-\item{eventDuration}{}
+\item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
 \item{sedRatePerTimestep}{}
 
@@ -65,13 +63,13 @@ simulateFossilAssemblageSeries(
 
 \item{bioturbIntensity}{}
 
-\item{nEvents}{}
+\item{nEvents}{Number of events to occur in a simulated sequence of gradient change.}
 
 \item{nSpecimens}{}
 
 \item{specimensPerTimestep}{}
 
-\item{halfGradientOnly}{}
+\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
 
 \item{useTransformedRelAbundance}{}
 
@@ -83,9 +81,7 @@ simulateFossilAssemblageSeries(
 
 \item{inclusiveDCA}{}
 
-\item{rawDCA}{}
-
-\item{includeInitialBackgroundPhase}{}
+\item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 
 \item{plot}{}
 

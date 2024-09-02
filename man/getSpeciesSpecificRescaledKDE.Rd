@@ -19,7 +19,7 @@ getSpeciesSpecificRescaledKDE(
 
 \item{abundanceFloorRatio}{The minimum value for the abundance in a given interval along the gradient -- a probably arbitration value that is set to 0.5 by default.}
 
-\item{nBreaksGradientHist}{The default is 20. Twenty what they asked? Twenty something}
+\item{nBreaksGradientHist}{The default is 20. Twenty what they asked? Twenty something.}
 
 \item{modeledSiteAbundance}{The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.}
 }

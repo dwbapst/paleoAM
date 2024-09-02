@@ -59,7 +59,7 @@ co-located jumbo piston core, respectively located at 697 meters and 682 meters
 data(gulfOfAlaska)
 
 ####
-# (This is not to be run)
+# (This is not to be run, just showing how data was loaded)
 /dontrun{
 
 # Loading the data files used by Belanger & Bapst 2023

@@ -6,7 +6,6 @@
 \usage{
 setupSimulatedGradientChange(
   nEvents,
-  fullGradientRange,
   peakGradientValue,
   bgGradientValue,
   bgDurationRange,
@@ -18,26 +17,35 @@ setupSimulatedGradientChange(
 )
 }
 \arguments{
-\item{nEvents}{}
+\item{nEvents}{Number of events to occur in a simulated sequence of gradient change.}
 
-\item{fullGradientRange}{}
+\item{peakGradientValue}{The gradient value at the 'peak' for an event that represents an excursion on that environmental gradient.}
 
-\item{peakGradientValue}{}
+\item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
 
-\item{bgGradientValue}{}
+\item{bgDurationRange}{A vector of two values, representing the minimum and maximum duration (in time units) of a background interval between successive events.}
 
-\item{bgDurationRange}{}
+\item{transitionDuration}{How long the transition between peak and background intervals should be. The longer this interval, the more chances of an assemblage being sampled that represents transitional gradient values.}
 
-\item{transitionDuration}{}
+\item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
-\item{eventDuration}{}
+\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
 
-\item{halfGradientOnly}{}
+\item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 
-\item{includeInitialBackgroundPhase}{}
-
-\item{plot}{}
+\item{plot}{Should the simulated gradient be shown as a plot?}
+}
+\value{
+A list with five components: 
+\code{simGradient}, a data frame giving the change in gradient values over time; 
+\code{approxGradientSeriesFunction}, the simulated gradient given as an interpolated function;
+\code{eventStartEndTimes}, a vector of when each event and its preceding transition begin in time-units;
+\code{eventPhaseStartTimes}, a vector of when each new event phase (at the peak gradient value) begin in time-units;
+and \code{backgroundStartEnd}, a value indicating the time-step when the beginning background interval ends.
 }
 \description{
-Given a series of inputs, simulates a sequence
+Given a series of inputs, simulates a sequence of gradient change against time for use in testing how environmental change alters the recovered sequence of fossil assemblages.
+}
+\details{
+This function is rather complicated and was written at a time when it was envisioned that simulations would involve time series of many repeated events with varying background intervals between them, rather than simulated sequences having only one event. In practice, use of paleoAM has tended to find the latter to be more useful.
 }

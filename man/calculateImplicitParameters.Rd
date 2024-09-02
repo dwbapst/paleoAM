@@ -20,19 +20,19 @@ calculateImplicitParameters(
 )
 }
 \arguments{
-\item{eventChangeScale}{}
+\item{eventChangeScale}{A value indicating the amount relative to the background value (\code{bgGradientValue}) and the maximum possible change as indicated by \code{fullGradientRange} (in other words, simulated change must be within observed gradient, so \code{eventChangeScale} is a proportional multiplier of the total possible change).}
 
-\item{bgGradientValue}{}
+\item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
 
-\item{fullGradientRange}{}
+\item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
 
-\item{eventSampleWidthRatio}{}
+\item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined.}
 
-\item{sampleWidth}{}
+\item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
 
-\item{eventDuration}{}
+\item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
-\item{sedRatePerTimestep}{}
+\item{sedRatePerTimestep}{The}
 
 \item{maxSampleTimeStep}{}
 
