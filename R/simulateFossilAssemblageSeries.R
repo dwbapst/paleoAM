@@ -7,7 +7,8 @@
 #' including estimating the recovered gradient via \code{quantifyCommunityEcology}.
 
 #' @details
-
+#' Different parameterizations may be given as input, allowing different parameters to be unspecified.
+#' Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
 
 #' @inheritParams setupSimulatedGradientChange 
 #' @inheritParams calculateImplicitParameters 
@@ -22,10 +23,27 @@
 #' @param thinOutput Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.
 
 #' @return
+#' Returns a list, which by default has seven components: 
+#' \code{implicitParameters}, the full list of parameters used for generating the simulated data; 
+#' \code{simGradientChangeOut}, the simulated time-series of gradient change output by \code{setupSimulatedGradientChange};
+#' \code{maxTime}, the total duration of the entire simulated time-series from start to end;
+#' \code{simTimeVar}, a data frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages, used as input in \code{\link{sampleFossilSeries}};
+#' \code{fossilSeries}, a list containing the simulated time-series of sampled fossil assemblages from \code{\link{sampleFossilSeries}},
+#' \code{ecology}, the recovered ecological variables for each simulated sample, as returned by \code{quantifyCommunityEcology},
+#' and \code{sampleProperties}, a list containing a number of variables specific to individual .
+#' 
+#' If \code{thinList = TRUE} is used, then the output list
+#'  contains only two components: 
+#'  \code{sampleProperties} and \code{implicitParameters}.
+#'  The \code{implicitParameters} component is the same as in the full output,
+#'  but the \code{sampleProperties} component only contains information on when 
+#'  (in both time and sedimentary depth) a given sample is located in the 
+#'  simulated time-series, and the variable \code{scoreDCA1_recovered}. 
 
 # @aliases
 
-# @seealso
+#' @seealso
+#' \code{\link{calculateImplicitParameters}}
 
 # @references
 
@@ -213,7 +231,7 @@ simulateFossilAssemblageSeries <- function(
     
     # add DCA1 scores to sample properties
     if(singularDCA){
-        sampleProperties$scoreDCA1_singular <- ecologyOutList$scoreDCA1_singular 
+        sampleProperties$scoreDCA1_recovered <- ecologyOutList$scoreDCA1_recovered 
         }
     if(inclusiveDCA){
         sampleProperties$scoreDCA1_inclusive <- ecologyOutList$scoreDCA1_inclusive 
@@ -232,11 +250,11 @@ simulateFossilAssemblageSeries <- function(
         ecology = ecologyOutList,
         sampleProperties = sampleProperties
         )
-    
+        
     if(plot){
         plotFossilAssemblageSeriesDCA(
             simTimeVar = outList$simTimeVar, 
-            scoreDCA1 = outList$ecology$scoreDCA1_singular,
+            scoreDCA1 = outList$ecology$scoreDCA1_recovered,
             sampleAge = outList$sampleProperties$sampleMidAge
             )
         }
@@ -248,7 +266,7 @@ simulateFossilAssemblageSeries <- function(
         out$sampleProperties$sampleInterval_start  <- input$sampleProperties$sampleInterval_start 
         out$sampleProperties$sampleInterval_end <- input$sampleProperties$sampleInterval_end   
         out$sampleProperties$sampleMidAge <- input$sampleProperties$sampleMidAge
-        out$sampleProperties$scoreDCA1_singular <- input$sampleProperties$scoreDCA1_singular
+        out$sampleProperties$scoreDCA1_recovered <- input$sampleProperties$scoreDCA1_recovered
         out$implicitParameters <- input$implicitParameters
         return(out)
         }
