@@ -8,7 +8,8 @@
 #' @details
 
 
-#' @inheritParams setupSimulatedGradientChange calculateImplicitParameters 
+#' @inheritParams setupSimulatedGradientChange 
+#' @inheritParams calculateImplicitParameters 
 
 #' @param kdeRescaled 
 

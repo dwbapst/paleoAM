@@ -16,16 +16,22 @@ getRecoveredTransitionDuration(
 \arguments{
 \item{simRecord}{}
 
-\item{bgUpperEnvelope}{}
+\item{bgUpperEnvelope}{The upper envelope on what is considered a background value for a gradient value derived from the assemblage.}
 
-\item{eventLowerEnvelope}{}
+\item{eventLowerEnvelope}{The lower envelope on what is considered an event value for a gradient value derived from the assemblage.}
 
-\item{returnAsAge}{}
+\item{returnAsAge}{Should the estimated duration of the transition be returned as a duration in time-units? If \code{FALSE} (the default), the value is instead returned as a ratio relative to the true event duration.}
 
-\item{trueEventDuration}{}
+\item{trueEventDuration}{The true duration of the event. This must be provided by the user if \code{returnAsAge = TRUE} to calculate the duration of the transition interval in simulation time-units.}
 
-\item{plot}{}
+\item{plot}{Should the data be plotted with the estimated transition interval on it, for visual checking?}
+}
+\value{
+A single value, reflecting (by default) a ratio of transition duration over the event duration. Can be modified with argument \code{returnAsAge}.
 }
 \description{
 Measure the Duration of a Transition Period from Recovered Sequence of Fossil Assemblages with DCA-1 Scores
+}
+\details{
+The envelope values can be calculated different ways, or even picked arbitrarily by the user. For example, \code{bgUpperEnvelope} is the upper envelope on what is considered a background value for a gradient value derived from the assemblage (for example, an ordination score). One way a user could calculate \code{bgUpperEnvelope} would be to repeatedly simulate assemblages at the background value, calculate their apparent gradient value and estimate a 0.95 or 0.975 quantile.
 }

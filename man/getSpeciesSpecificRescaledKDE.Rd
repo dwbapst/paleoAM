@@ -23,6 +23,9 @@ getSpeciesSpecificRescaledKDE(
 
 \item{modeledSiteAbundance}{The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.}
 }
+\value{
+A list containing the KDEs describing change in abundance for each species across the specified gradient.
+}
 \description{
 This is a function for Fitting a KDE to a specific species in Community Ecology Data
 }
@@ -35,11 +38,14 @@ This function fits a KDE to the abundance data of a particular species from comm
 data(gulfOfAlaska_ShannonEtAl)
 
 gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
-    gradientOrigDCA, 
-    origAbundData, 
+    gradientOrigDCA = DCA1_GOA, 
+    origAbundData = abundData_GOA, 
     abundanceFloorRatio = 0.5, 
     nBreaksGradientHist = 20, 
     modeledSiteAbundance = 10000
     )
     
+}
+\seealso{
+\code{\link{getProbOccViaPresAbs}}
 }

@@ -37,12 +37,6 @@
 #'     )
 #'     
 
-
-probSpeciesOccur <- getProbOccViaPresAbs(
-    gradientOrigDCA = DCA1_GOA, 
-    origAbundData = abundData_GOA
-    )
-
 #' @name getSpeciesSpecificRescaledKDE
 #' @rdname getSpeciesSpecificRescaledKDE
 #' @export
