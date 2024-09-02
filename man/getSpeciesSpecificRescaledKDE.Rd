@@ -17,20 +17,24 @@ getSpeciesSpecificRescaledKDE(
 
 \item{origAbundData}{The abundance data of the data you wish to model the abundance of.}
 
-\item{abundanceFloorRatio}{The minimum value for the abundance in a given interval along the gradient -- a probably arbitration value that is set to 0.5 by default.}
+\item{abundanceFloorRatio}{The minimum value for the abundance in a given 
+interval along the gradient -- a probably arbitration value that is set to 0.5 by default.}
 
 \item{nBreaksGradientHist}{The default is 20. Twenty what they asked? Twenty something.}
 
-\item{modeledSiteAbundance}{The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.}
+\item{modeledSiteAbundance}{The number of abundances the relative abundances 
+will by multiplied by to formulate the KDE. The default is 10000.}
 }
 \value{
-A list containing the KDEs describing change in abundance for each species across the specified gradient.
+A list containing the KDEs describing change in abundance for 
+each species across the specified gradient.
 }
 \description{
 This is a function for Fitting a KDE to a specific species in Community Ecology Data
 }
 \details{
-This function fits a KDE to the abundance data of a particular species from community data given some environmental gradient.
+This function fits a KDE to the abundance data of a particular species from 
+community data given some environmental gradient.
 }
 \examples{
 
