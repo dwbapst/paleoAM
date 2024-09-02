@@ -1,35 +1,26 @@
 #' Quantify Community Ecology From a Time Series of Simulated Fossil Assemblages
 #' 
-#' Given the output from functions such as \code{simulateFossilAssemblageSeries}, this function calculates various ecological measures that might be used as 'recovered' gradient values to compare against the original generating gradient values.
+#' Given the output from functions such as \code{simulateFossilAssemblageSeries}, 
+#' this function calculates various ecological measures that might be used as
+#' 'recovered' gradient values to compare against the original generating gradient values.
 
 #' @details
+#' Quantifies 
 
-# @inheritParams
+#' @inheritParams getSampleDCA The 
 
-#' @param origAbundData The original matrix of abundance data, to be used to project the simulated data into the same detrended correspondence analysis (DCA) space.
-
-#' @param fossilSeries 
-
-#' @param useTransformedRelAbundance 
-
-#' @param projectIntoOrigDCA 
-
-#' @param powerRootTransform 
-
-#' @param singularDCA 
-
-#' @param inclusiveDCA 
-
-#' @param rawDCA 
+#' @param fossilSeries The
 
 
 #' @return
+#' A list containing the input data and arguments, as well as the 
+#' DCA score values found  
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
 # @examples
 
@@ -42,23 +33,29 @@ quantifyCommunityEcology <- function(
         fossilSeries, 
         useTransformedRelAbundance = TRUE,
         projectIntoOrigDCA = TRUE,
-        powerRootTransform = 1, 
+        powerRootTransform = 1
+    
         #inclusiveDCA = FALSE, 
         #singularDCA = TRUE, 
-        #rawDCA = FALSE
+        #rawDCA = FALSE,
+    
         ){
     
     #require(vegan)
   
     ecologyOutList <- list(
         simAbundanceTable = fossilSeries$abundanceTable,
-        origAbundanceTable = origAbundData
+        origAbundanceTable = origAbundData,
+        useTransformedRelAbundance = useTransformedRelAbundance,
+        projectIntoOrigDCA = projectIntoOrigDCA,
+        powerRootTransform = powerRootTransform
         #artificialAbundanceTable = abundanceTable,
         #braycurtisDistMat = bcdist,
         #dcaOut = dcaOut
         )    
-
-   # if(singularDCA){
+    
+    # 'singular' DCA is now the only real option
+    # if(singularDCA){
     
     scoreDCA1_recovered <- numeric()
     for(i in 1:nrow(fossilSeries$abundanceTable)){
@@ -68,9 +65,9 @@ quantifyCommunityEcology <- function(
             origAbundData = origAbundData,
             useTransformedRelAbundance = useTransformedRelAbundance,
             projectIntoOrigDCA = projectIntoOrigDCA,
-            returnDCAforOrigAndSim = FALSE,
             whichAxes = 1,
-            powerRootTransform = powerRootTransform
+            powerRootTransform = powerRootTransform,
+            returnDCAforOrigAndSim = FALSE
             )
         }
     

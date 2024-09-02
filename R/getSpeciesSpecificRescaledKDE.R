@@ -21,7 +21,7 @@
 #' @seealso
 #' \code{\link{getProbOccViaPresAbs}}
 
-#' @references
+# @references
 
 #' @examples
 #' 

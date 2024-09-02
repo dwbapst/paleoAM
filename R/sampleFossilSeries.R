@@ -1,6 +1,6 @@
 #' Sample Fossil Assemblage Series
 #'
-#'
+#' The 
 
 #' @details
 #' This function is where bioturbation processes are handled, as well as time-averaging from samples capturing several sedimentary horizons reflecting multiple original fossil assemblages.
@@ -14,13 +14,13 @@
 #' @param bioturbIntensity The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only
 
  
-#' @param bioturbZoneDepth 
+#' @param bioturbZoneDepth The 
 
 #' @param nSpecimens The number of specimens selected in each individual sample.
 
-#' @param distBetweenSamples 
+#' @param distBetweenSamples The 
  
-#' @param sampleWidth 
+#' @param sampleWidth The 
  
 #' @param simTimeVar A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.
 #' 
@@ -34,7 +34,6 @@
 #' \code{abundanceTable}, 
 #' \code{sampleIntervals},
 #' and \code{bioturbIntervals},
-        
 
 # @aliases
 
@@ -42,11 +41,9 @@
 #' This function is generally run after running
 #' \code{\link{getTimestepAbundances}}. Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
 
-
 # @references
 
 # @examples
-
 
 
 #' @name sampleFossilSeries

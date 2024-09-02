@@ -1,67 +1,92 @@
+#' Plot the Recovered DCA Valies of a Fossil Assemblage Series 
+#' 
+#' Makes a plot of the simulated generating gradient over time along with the
+#' recovered gradient values in the same plot for a given simulated time series 
+#' of fossil assemblages, particularly those from
+#' \code{\link{simulateFossilAssemblageSeries}}.
+
 #' @details
+#' The function will generally only be run on the output 
+#' from \code{\link{simulateFossilAssemblageSeries}}, although the function is 
+#' written so that the necessary elements can be provided separately.
 
-#' @inheritParams
+# @inheritParams 
 
-#' @param
+#' @param ... This function takes either the output from 
+#' \code{\link{simulateFossilAssemblageSeries}} or requires specifying 
+#' the three arguments \code{simTimeVar}, a data-frame of time-steps, 
+#' sedimentary width and gradient values for a time-series simulation); 
+#' \code{gradientRecovered}, the recovered gradient values; and
+#' \code{sampleAge}, the age of individual samples.
+ 
+#' @param colSimGenerating What color should be used for the generating ("true") gradient values?
+
+#' @param colSimRecovered What color should be used for the recovered gradient values calculated 
 
 #' @return
+#' Returns nothing at all. Just a plot. That's all!
 
-#' @aliases
+# @aliases
 
-#' @seealso
+# @seealso
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
-#' @param ... 
-#'
-#' @param colSimTrue 
-#' @param colSimCalc 
-#'
-#' @name
-#' @rdname
+
+#' @name plotFossilAssemblageSeriesDCA
+#' @rdname plotFossilAssemblageSeriesDCA
 #' @export
-
-
 plotFossilAssemblageSeriesDCA <- function(
-            ..., colSimTrue = "black", colSimCalc = "navy"
+            ..., 
+            colSimGenerating = "black", 
+            colSimRecovered = "navy"
             ){
+
     arguments <- list(...)
     #
+
     if(length(arguments) == 1){
+
         simFossilAssemblageSeriesOut <- arguments[[1]]
         plotFossilAssemblageSeriesDCA_sepVariables(
             simTimeVar = simFossilAssemblageSeriesOut$simTimeVar, 
-            scoreDCA1 = simFossilAssemblageSeriesOut$ecology$scoreDCA1_recovered,
+            gradientRecovered = simFossilAssemblageSeriesOut$ecology$scoreDCA1_recovered,
             sampleAge = simFossilAssemblageSeriesOut$sampleProperties$sampleMidAge,
-            colSimTrue = colSimTrue, 
-            colSimCalc = colSimCalc
+            colSimGenerating = colSimGenerating, 
+            colSimRecovered = colSimRecovered
             )
+
     }else{
-    if(length(arguments) == 3){
-        plotFossilAssemblageSeriesDCA_sepVariables(
-            simTimeVar = arguments$simTimeVar, 
-            scoreDCA1 = arguments$scoreDCA1, 
-            sampleAge = arguments$sampleAge,
-            colSimTrue = colSimTrue, 
-            colSimCalc = colSimCalc
-            )
-    }else{
-        stop(
-            "Wrong number of input arguments for plotting: use either output from\n simulateFossilAssemblageSeries or use the\n three elements 'simTimeVar', 'scoreDCA1', 'sampleAge'"
-            )}
+    
+        if(length(arguments) == 3){
+            
+            plotFossilAssemblageSeriesDCA_sepVariables(
+                simTimeVar = arguments$simTimeVar, 
+                gradientRecovered = arguments$gradientRecovered, 
+                sampleAge = arguments$sampleAge,
+                colSimGenerating = colSimGenerating, 
+                colSimRecovered = colSimRecovered
+                )
+            
+        }else{
+            stop(paste0(
+                "Wrong number of input arguments for plotting: use either output from\n",
+                "simulateFossilAssemblageSeries or use the\n three elements 'simTimeVar', 'gradientRecovered', 'sampleAge'"
+                ))
+            }
         }
     }
 
 plotFossilAssemblageSeriesDCA_sepVariables <- function(
-                    simTimeVar, scoreDCA1, sampleAge,
-                    colSimTrue = "black", 
-                    colSimCalc = "navy"
+                    simTimeVar, gradientRecovered, sampleAge,
+                    colSimGenerating = "black", 
+                    colSimRecovered = "navy"
                     ){
-
+    
     # calculate y limits
-    DCA1lump <- c(simTimeVar$gradientValue, scoreDCA1)
+    DCA1lump <- c(simTimeVar$gradientValue, gradientRecovered)
     DCA1_ylims <- c(min(DCA1lump),max(DCA1lump))
     DCA1_ylims[2] <- DCA1_ylims[2] + ((DCA1_ylims[2] - DCA1_ylims[1])/3)
     
@@ -74,13 +99,13 @@ plotFossilAssemblageSeriesDCA_sepVariables <- function(
          ylab = "DCA Score 1",
          lty = 1, lwd = 1,
          ylim = DCA1_ylims,
-         col = colSimTrue,
+         col = colSimGenerating,
          type = "l"
          )
     
-    points(sampleAge, scoreDCA1, 
+    points(sampleAge, gradientRecovered, 
            cex = 1, pch = 16, 
-           col = colSimCalc
+           col = colSimRecovered
            )
     
     legend(x = "top",
@@ -88,7 +113,7 @@ plotFossilAssemblageSeriesDCA_sepVariables <- function(
            lty = c(1,3), 
            lwd = c(1,3), 
            ncol = 2,
-           col = c(colSimTrue, colSimCalc), 
+           col = c(colSimGenerating, colSimRecovered), 
            bg = "white"
            )
     

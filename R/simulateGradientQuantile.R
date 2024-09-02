@@ -9,7 +9,7 @@
 #' @inheritParams sampleFossilSeries
 #' @inheritParams quantifyCommunityEcology
 
-#' @param quantileProbs The quantiles to return on the recovered gradient values from the simulated assemblages.
+#' @param quantileProbs The quantile for which to return on the recovered gradient values from the simulated assemblages. (Technically multiple quantiles can be given, for which a value will be returned for each.
 
 #' @param nSamplesSim The number of samples to simulate.
 
