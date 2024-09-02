@@ -7,7 +7,7 @@
 #' @details
 #' Quantifies 
 
-#' @inheritParams getSampleDCA The 
+#' @inheritParams getSampleDCA
 
 #' @param fossilSeries The
 
