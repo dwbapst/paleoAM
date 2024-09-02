@@ -5,7 +5,7 @@
 
 #' @details 
 #' This data set contains the relative abundances 
-#' (propotion of specimens identified)
+#' (proportion of specimens identified)
 #' for 43 species of planktonic graptolites, 
 #' across 34 samples taken from two outcrops: 
 #' (a) a section at Vininni Creek in Nevada, USA, and 

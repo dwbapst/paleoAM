@@ -9,7 +9,7 @@
  
 #' @param abundanceFloorRatio The minimum value for the abundance in a given interval along the gradient -- a probably arbitration value that is set to 0.5 by default.
  
-#' @param nBreaksGradientHist The default is 20. Twenty what they asked? Twenty something
+#' @param nBreaksGradientHist The default is 20. Twenty what they asked? Twenty something.
 
 #' @param modeledSiteAbundance The number of abundances the relative abundances will by multiplied by to formulate the KDE. The default is 10000.
 

@@ -7,7 +7,7 @@
 
 #' @details
 
-#' @inheritParams
+#' @inheritParams setupSimulatedGradientChange
 
 #' @param kdeRescaled 
 
@@ -17,15 +17,9 @@
 
 #' @param eventChangeScale 
 
-#' @param bgGradientValue 
-
-#' @param fullGradientRange 
-
 #' @param eventSampleWidthRatio 
 
 #' @param sampleWidth 
-
-#' @param eventDuration 
 
 #' @param sedRatePerTimestep 
 
@@ -37,13 +31,9 @@
 
 #' @param bioturbIntensity 
 
-#' @param nEvents 
-
 #' @param nSpecimens 
 
 #' @param specimensPerTimestep 
-
-#' @param halfGradientOnly 
 
 #' @param useTransformedRelAbundance 
 
@@ -55,9 +45,7 @@
 
 #' @param inclusiveDCA 
 
-#' @param rawDCA 
-
-#' @param includeInitialBackgroundPhase 
+#' @param rawDCA
 
 #' @param plot 
  
@@ -146,7 +134,6 @@ simulateFossilAssemblageSeries <- function(
     # Set Up the Pattern of Simulated Gradient Change Over Time
     simGradientChangeOut <- setupSimulatedGradientChange(
           nEvents = nEvents,
-          fullGradientRange = fullGradientRange,
           peakGradientValue = implicitParameters$peakGradientValue, 
           bgGradientValue = bgGradientValue,
           bgDurationRange = implicitParameters$bgDurationRange,

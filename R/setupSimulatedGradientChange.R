@@ -1,51 +1,45 @@
 #' Create a Stochastic Time-Series of Gradient Change For Use in Simulating Assemblage Change
 #'
-#' Given a series of inputs, simulates a sequence 
+#' Given a series of inputs, simulates a sequence of gradient change against time for use in testing how environmental change alters the recovered sequence of fossil assemblages.
 
-#' @details
+#' @details 
+#' This function is rather complicated and was written at a time when it was envisioned that simulations would involve time series of many repeated events with varying background intervals between them, rather than simulated sequences having only one event. In practice, use of paleoAM has tended to find the latter to be more useful.
 
-#' @inheritParams
+#' @param nEvents Number of events to occur in a simulated sequence of gradient change.
 
-#' @param nEvents 
+#' @param peakGradientValue The gradient value at the 'peak' for an event that represents an excursion on that environmental gradient.
 
-#' @param fullGradientRange 
+#' @param bgGradientValue The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.
 
-#' @param peakGradientValue 
+#' @param bgDurationRange A vector of two values, representing the minimum and maximum duration (in time units) of a background interval between successive events.
 
-#' @param bgGradientValue 
+#' @param transitionDuration How long the transition between peak and background intervals should be. The longer this interval, the more chances of an assemblage being sampled that represents transitional gradient values.
 
-#' @param bgDurationRange 
+#' @param eventDuration The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.
 
-#' @param transitionDuration 
+#' @param halfGradientOnly Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.
 
-#' @param eventDuration 
+#' @param includeInitialBackgroundPhase A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.
 
-#' @param halfGradientOnly 
+#' @param plot Should the simulated gradient be shown as a plot?
 
-#' @param includeInitialBackgroundPhase 
+#' @return 
+#' A list with five components: 
+#' \code{simGradient}, a data frame giving the change in gradient values over time; 
+#' \code{approxGradientSeriesFunction}, the simulated gradient given as an interpolated function;
+#' \code{eventStartEndTimes}, a vector of when each event and its preceding transition begin in time-units;
+#' \code{eventPhaseStartTimes}, a vector of when each new event phase (at the peak gradient value) begin in time-units;
+#' and \code{backgroundStartEnd}, a value indicating the time-step when the beginning background interval ends.
+#' 
 
-#' @param plot 
-
-#' @return
-
-#' @aliases
-
-#' @seealso
-
-#' @references
-
-#' @examples
+# @examples
 
 
-#'
-#' @name
-#' @rdname
+#' @name setupSimulatedGradientChange
+#' @rdname setupSimulatedGradientChange
 #' @export
-
-
 setupSimulatedGradientChange <- function(
                 nEvents,
-                fullGradientRange,
                 peakGradientValue, 
                 bgGradientValue,
                 bgDurationRange,
@@ -61,7 +55,7 @@ setupSimulatedGradientChange <- function(
     # This will effectively be a time-series of gradient values, 
     # with irregular intervals between dates.
     
-    if(halfGradientOnly != "full"){
+    if(halfGradientOnly == FALSE){
         if(nEvents != 1){
             stop("halfGradientOnly options can only be used if simulating a single event")
             }
@@ -107,9 +101,9 @@ setupSimulatedGradientChange <- function(
         # get gradient values at inflection points
         # peak, peak, background, background, peak, peak, background, background
         simGradientValue <- c(
-            fullGradientRange[2], fullGradientRange[2], 
-            fullGradientRange[1], fullGradientRange[1],
-            fullGradientRange[2], fullGradientRange[2], 
+            peakGradientValue, peakGradientValue,
+            bgGradientValue, bgGradientValue,
+            peakGradientValue, peakGradientValue,
             bgGradientValue, bgGradientValue,
             bgGradientValue, bgGradientValue
             )
@@ -131,7 +125,7 @@ setupSimulatedGradientChange <- function(
         newGradientTime <- lastTime + bgDuration()
         lastTime <- newGradientTime
         
-        if(halfGradientOnly == "full"){
+        if(halfGradientOnly == FALSE){
             newGradientTime <- c(newGradientTime,
                 lastTime + transitionDuration,
                 lastTime + transitionDuration + eventDuration,
@@ -149,7 +143,8 @@ setupSimulatedGradientChange <- function(
             }else{
                 if(halfGradientOnly == "riseOnly"){
                     
-                    newGradientTime <- rev(c(newGradientTime,
+                    newGradientTime <- rev(c(
+                        newGradientTime,
                         lastTime + transitionDuration,
                         lastTime + transitionDuration + eventDuration
                         ))
@@ -181,10 +176,10 @@ setupSimulatedGradientChange <- function(
     # 07-26-21
     # invert time scale so timesteps increases with depth
         # like in a real sedimentary core, you nut job
-    eventStartEndTimes <- max(simGradientTime) - eventStartEndTimes
+    eventStartEndTimes   <- max(simGradientTime) - eventStartEndTimes
     eventPhaseStartTimes <- max(simGradientTime) - eventPhaseStartTimes
-    backgroundStartEnd <- max(simGradientTime) - backgroundStartEnd
-    simGradientTime <- max(simGradientTime) - simGradientTime
+    backgroundStartEnd   <- max(simGradientTime) - backgroundStartEnd
+    simGradientTime      <- max(simGradientTime) - simGradientTime
     
     # build approximation function for gradient values
     approxGradientSeriesFunction <- function(time){
