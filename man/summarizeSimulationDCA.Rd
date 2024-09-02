@@ -14,18 +14,24 @@ summarizeSimulationDCA(
 )
 }
 \arguments{
-\item{sampleData}{}
+\item{sampleData}{The}
 
-\item{nEvents}{}
+\item{nEvents}{The}
 
-\item{backgroundUpperBound}{}
+\item{backgroundUpperBound}{The}
 
-\item{eventMagnitudesAbsolute}{}
+\item{eventMagnitudesAbsolute}{The}
 
-\item{eventLowerBound}{}
+\item{eventLowerBound}{The}
 
-\item{eventUpperBound}{}
+\item{eventUpperBound}{The}
+}
+\value{
+The
 }
 \description{
-Summarize Simulation DCA
+The
+}
+\details{
+The
 }
