@@ -1,31 +1,32 @@
+#' Summarize Simulation DCA
+
+
 #' @details
 
 #' @inheritParams
 
-#' @param
+#' @param sampleData 
+
+#' @param nEvents 
+
+#' @param backgroundUpperBound 
+
+#' @param eventMagnitudesAbsolute 
+
+#' @param eventLowerBound 
+
+#' @param eventUpperBound 
 
 #' @return
 
-#' @aliases
 
-#' @seealso
+# @examples
 
-#' @references
 
-#' @examples
 
-#' @param sampleData 
-#'
-#' @param nEvents 
-#' @param backgroundUpperBound 
-#' @param eventMagnitudesAbsolute 
-#' @param eventLowerBound 
-#' @param eventUpperBound 
-#'
 #' @name
 #' @rdname
 #' @export
-
 summarizeSimulationDCA <- function(
             sampleData,
             nEvents,
@@ -46,7 +47,7 @@ summarizeSimulationDCA <- function(
 
     # get a list that records all obs DCA values within the interval for each event
     eventDCAvalues <- lapply(uniqueEvents, function(x)
-                        sampleData$scoreDCA1_singular[
+                        sampleData$scoreDCA1_recovered[
                             sampleData$eventID == x & !is.na(sampleData$eventID)
                             ]
                         )

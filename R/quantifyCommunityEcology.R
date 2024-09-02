@@ -43,9 +43,9 @@ quantifyCommunityEcology <- function(
         useTransformedRelAbundance = TRUE,
         projectIntoOrigDCA = TRUE,
         powerRootTransform = 1, 
-        singularDCA = TRUE, 
-        inclusiveDCA = FALSE, 
-        rawDCA = FALSE
+        #inclusiveDCA = FALSE, 
+        #singularDCA = TRUE, 
+        #rawDCA = FALSE
         ){
     
     #require(vegan)
@@ -58,24 +58,27 @@ quantifyCommunityEcology <- function(
         #dcaOut = dcaOut
         )    
 
-    if(singularDCA){
-        scoreDCA1_singular <- numeric()
-        for(i in 1:nrow(fossilSeries$abundanceTable)){
-            # use getSampleDCA
-            scoreDCA1_singular[i] <- getSampleDCA(
-                simSample = fossilSeries$abundanceTable[i,],
-                origAbundData = origAbundData,
-                useTransformedRelAbundance = useTransformedRelAbundance,
-                projectIntoOrigDCA = projectIntoOrigDCA,
-                returnDCAforOrigAndSim = FALSE,
-                whichAxes = 1,
-                powerRootTransform = powerRootTransform
-                )
-            }
-        
-        ecologyOutList$scoreDCA1_singular <- scoreDCA1_singular
+   # if(singularDCA){
+    
+    scoreDCA1_recovered <- numeric()
+    for(i in 1:nrow(fossilSeries$abundanceTable)){
+        # use getSampleDCA
+        scoreDCA1_recovered[i] <- getSampleDCA(
+            simSample = fossilSeries$abundanceTable[i,],
+            origAbundData = origAbundData,
+            useTransformedRelAbundance = useTransformedRelAbundance,
+            projectIntoOrigDCA = projectIntoOrigDCA,
+            returnDCAforOrigAndSim = FALSE,
+            whichAxes = 1,
+            powerRootTransform = powerRootTransform
+            )
         }
     
+    ecologyOutList$scoreDCA1_recovered <- scoreDCA1_recovered
+        
+    # }
+    
+    ######################
     # deprecated ways of getting the DCA value for     
     
     #if(rawDCA){

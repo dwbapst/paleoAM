@@ -33,7 +33,7 @@ plotFossilAssemblageSeriesDCA <- function(
         simFossilAssemblageSeriesOut <- arguments[[1]]
         plotFossilAssemblageSeriesDCA_sepVariables(
             simTimeVar = simFossilAssemblageSeriesOut$simTimeVar, 
-            scoreDCA1 = simFossilAssemblageSeriesOut$ecology$scoreDCA1_singular,
+            scoreDCA1 = simFossilAssemblageSeriesOut$ecology$scoreDCA1_recovered,
             sampleAge = simFossilAssemblageSeriesOut$sampleProperties$sampleMidAge,
             colSimTrue = colSimTrue, 
             colSimCalc = colSimCalc

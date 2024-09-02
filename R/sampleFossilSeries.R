@@ -19,15 +19,15 @@
  
 #' @param sampleWidth 
  
-#' @param simTimeVar 
- 
+#' @param simTimeVar A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.
+#' 
 #' @param timestepAbundances 
  
 
 
 #' @return
 #' A list composed of four components:
-#' \code{simTimeVar}, a 
+#' \code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values.
 #' \code{abundanceTable}, 
 #' \code{sampleIntervals},
 #' and \code{bioturbIntervals},

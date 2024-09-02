@@ -1,6 +1,13 @@
 #' Calculate Implicit Parameters 
+#' 
+#' Given a set of parameters for simulating fossil assemblages and sampling them as a model time-series, 
+
+#'  using a particular while some parameterizations
 
 #' @details 
+#' Under the models considered in \code{paleoAM}, some parameterizations may be equivalent, even though the a particular analysis might be better simulated using a particular set of parameters. Allowing various different parameterizations is a useful generalization, but requires translating those equivalent parameters from one set to another (eg specifying parameters A, C & D, but running a simulation that requires parameters A, B & C).
+#' 
+#' This function mainly exists to calculate unspecified parameters for \code{\link{simulateFossilAssemblageSeries}} and also to identify conflicting parameter specifications.
 
 #' @inheritParams setupSimulatedGradientChange
 
@@ -14,25 +21,27 @@
 
 #' @param sedRatePerTimestep The 
 
-#' @param maxSampleTimeStep 
+#' @param maxSampleTimeStep The
 
-#' @param minSampleTimeStep 
+#' @param minSampleTimeStep The
 
-#' @param samplingCompleteness 
+#' @param samplingCompleteness The
 
-#' @param transitionDurationRatio 
+#' @param transitionDurationRatio The
 
-#' @param bioturbDepthRatio 
+#' @param bioturbDepthRatio The
 
 #' @return
+#' Returns a list giving the full set of parameters necessary for running \code{\link{simulateFossilAssemblageSeries}}.
 
-#' @aliases
+# @aliases
 
 #' @seealso
+#' \code{\link{simulateFossilAssemblageSeries}}
 
-#' @references
+# @references
 
-#' @examples
+# @examples
 
 
 #' @name calculateImplicitParameters

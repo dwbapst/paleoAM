@@ -89,7 +89,7 @@ simulateGradientQuantile <- function(
         powerRootTransform = powerRootTransform 
         )
 
-    DCA1 <- ecologyOutList$scoreDCA1_singular
+    DCA1 <- ecologyOutList$scoreDCA1_recovered
     
     quantileOut <- quantile(
         x = DCA1, probs = quantileProbs, na.rm = TRUE

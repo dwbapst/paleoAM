@@ -41,24 +41,24 @@ getRecoveredTransitionDuration <- function(
         ){
     # find when the record deviates from background
             
-    if(all(simRecord$sampleProperties$scoreDCA1_singular < bgUpperEnvelope)){
+    if(all(simRecord$sampleProperties$scoreDCA1_recovered < bgUpperEnvelope)){
         stop("No value exceeds bgUpperEnvelope")
         }
-    if(all(simRecord$sampleProperties$scoreDCA1_singular > bgUpperEnvelope)){
+    if(all(simRecord$sampleProperties$scoreDCA1_recovered > bgUpperEnvelope)){
         stop("No value is below bgUpperEnvelope")
         }        
         
-    startTran <- which(simRecord$sampleProperties$scoreDCA1_singular > bgUpperEnvelope)[1]
+    startTran <- which(simRecord$sampleProperties$scoreDCA1_recovered > bgUpperEnvelope)[1]
     
     if(is.null(eventLowerEnvelope)){
-        endTran <- which(simRecord$sampleProperties$scoreDCA1_singular ==
-                max(simRecord$sampleProperties$scoreDCA1_singular))[1]
+        endTran <- which(simRecord$sampleProperties$scoreDCA1_recovered ==
+                max(simRecord$sampleProperties$scoreDCA1_recovered))[1]
     }else{
-        if(all(simRecord$sampleProperties$scoreDCA1_singular < eventLowerEnvelope)){
+        if(all(simRecord$sampleProperties$scoreDCA1_recovered < eventLowerEnvelope)){
             stop("No value exceeds eventLowerEnvelope")
             }
         
-        endTran <- which(simRecord$sampleProperties$scoreDCA1_singular >
+        endTran <- which(simRecord$sampleProperties$scoreDCA1_recovered >
                 eventLowerEnvelope)[1]
         }
     
@@ -86,7 +86,7 @@ getRecoveredTransitionDuration <- function(
     if(plot){
         plot(type = "b", 
             x = simResult$sampleProperties$sampleMidAge, 
-            y=simResult$sampleProperties$scoreDCA1_singular,
+            y=simResult$sampleProperties$scoreDCA1_recovered,
             xlab = "Time (time-steps)",
             ylab = "DCA-1 Gradient",
             main = "")
@@ -98,4 +98,3 @@ getRecoveredTransitionDuration <- function(
     
     return(tranDurationOut)
     }
-
