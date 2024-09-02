@@ -4,6 +4,10 @@
 
 #' @details
 #' \code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilSeries}.
+#' 
+#' Thus, this function is generally run before running \code{\link{sampleFossilSeries}}, 
+#' however most users will likely never run either function, 
+#' instead running \code{\link{simulateFossilAssemblageSeries}}. 
 
 # @inheritParams simulateFossilAssemblageSeries
 
@@ -18,7 +22,9 @@
 #' @return
 #' A matrix containing abundances for species as a series of simulated assemblages.
 
-# @seealso
+#' @seealso
+#' This function is generally run before running \code{\link{sampleFossilSeries}}. 
+#' Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
 
 # @references
 

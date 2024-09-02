@@ -3,7 +3,10 @@
 #'
 
 #' @details
-#' Importantly, this function is where bioturbation is handled
+#' This function is where bioturbation processes are handled, as well as time-averaging from samples capturing several sedimentary horizons reflecting multiple original fossil assemblages.
+#' 
+#' This function is generally run after running \code{\link{getTimestepAbundances}}. 
+#' Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
 
 
 # @inheritParams
@@ -21,7 +24,7 @@
  
 #' @param simTimeVar A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.
 #' 
-#' @param timestepAbundances 
+#' @param timestepAbundances A matrix containing abundances for species as a series of simulated assemblages, output by \code{\link{getTimestepAbundances}}.
  
 
 
@@ -35,7 +38,10 @@
 
 # @aliases
 
-# @seealso
+#' @seealso
+#' This function is generally run after running
+#' \code{\link{getTimestepAbundances}}. Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
+
 
 # @references
 
