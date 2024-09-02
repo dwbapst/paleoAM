@@ -1,29 +1,46 @@
+#' Estimate the Per-Species Probability of Occurrence as a Function of an Environmental Gradient from Presence-Absence Data
+#' 
+#' 
+
 #' @details
 
 #' @inheritParams
 
-#' @param
+#' @param origAbundData 
+
+#' @param gradientOrigDCA 
+
+#' @param occurrenceFloor 
+
+#' @param nBreaksGradientHist 
 
 #' @return
 
 #' @aliases
 
 #' @seealso
+#' \code{\link{getSpeciesSpecificRescaledKDE}}
 
 #' @references
 
 #' @examples
+#' 
+#' # load data
+#' data(gulfOfAlaska_ShannonEtAl)
+#' 
+#' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
+#'     gradientOrigDCA, 
+#'     origAbundData, 
+#'     abundanceFloorRatio = 0.5, 
+#'     nBreaksGradientHist = 20, 
+#'     modeledSiteAbundance = 10000
+#'     )
+#'     
 
-#' @param origAbundData 
-#'
-#' @param gradientOrigDCA 
-#' @param occurrenceFloor 
-#' @param nBreaksGradientHist 
-#'
-#' @name
-#' @rdname
+
+#' @name getProbOccViaPresAbs
+#' @rdname getProbOccViaPresAbs
 #' @export
-
 getProbOccViaPresAbs <- function(
         origAbundData, 
         gradientOrigDCA, 

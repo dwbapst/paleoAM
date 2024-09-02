@@ -1,17 +1,25 @@
-# sampleFossilAssemblageSeries
-
-# importantly, this function is where bioturbation is handled
+#' Sample Fossil Assemblage Series
+#'
+#'
 
 #' @details
+#' Importantly, this function is where bioturbation is handled
+
 
 #' @inheritParams
 
 #' @param bioturbIntensity 
+#' 
 #' @param bioturbZoneDepth 
+#' 
 #' @param distBetweenSamples 
+#' 
 #' @param sampleWidth 
+#' 
 #' @param simTimeVar 
+#' 
 #' @param timestepAbundances 
+#' 
 #' @param nSpecimens 
 
 

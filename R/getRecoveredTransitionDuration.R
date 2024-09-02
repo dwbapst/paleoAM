@@ -25,10 +25,9 @@
 
 #' @examples
 
-#' @name
-#' @rdname
-#' @aliases
-
+#' @name getRecoveredTransitionDuration
+# @rdname
+# @aliases
 #' @export
 getRecoveredTransitionDuration <- function(
         simRecord, bgUpperEnvelope, 

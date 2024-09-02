@@ -7,7 +7,8 @@
 
 #' @details
 
-#' @inheritParams setupSimulatedGradientChange
+
+#' @inheritParams setupSimulatedGradientChange calculateImplicitParameters 
 
 #' @param kdeRescaled 
 
@@ -19,8 +20,6 @@
 
 #' @param eventSampleWidthRatio 
 
-#' @param sampleWidth 
-
 #' @param sedRatePerTimestep 
 
 #' @param samplingCompleteness 
@@ -31,9 +30,9 @@
 
 #' @param bioturbIntensity 
 
-#' @param nSpecimens 
+#' @param nSpecimens The number of specimens 
 
-#' @param specimensPerTimestep 
+#' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.
 
 #' @param useTransformedRelAbundance 
 
@@ -62,11 +61,9 @@
 #' @examples
 
 
-#' @name
-#' @rdname
+#' @name simulateFossilAssemblageSeries
+#' @rdname simulateFossilAssemblageSeries
 #' @export
-
-
 simulateFossilAssemblageSeries <- function(
                 kdeRescaled,
                 probSpeciesOccur,

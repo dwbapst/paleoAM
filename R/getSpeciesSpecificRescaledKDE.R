@@ -16,10 +16,10 @@
 # @param reportTests Should the result of tests checking the KDE results be reported to the terminal? Default is /code{FALSE}.
 
 #' @return
-
-#' @aliases
+#' A list containing the KDEs describing change in abundance for each species across the specified gradient.
 
 #' @seealso
+#' \code{\link{getProbOccViaPresAbs}}
 
 #' @references
 
@@ -37,8 +37,8 @@
 #'     )
 #'     
 
-#' @name
-#' @rdname
+#' @name getSpeciesSpecificRescaledKDE
+#' @rdname getSpeciesSpecificRescaledKDE
 #' @export
 getSpeciesSpecificRescaledKDE <- function(
         gradientOrigDCA, 

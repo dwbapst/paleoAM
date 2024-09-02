@@ -1,10 +1,22 @@
+#' Simulate Fossil Assemblages with Abundances at each Time-Step
+#'
+#' Given a set of KDEs fit to species abundance and models of species occurrance relative to an environmental gradient, and given a sequence of gradient values, and a number of specimens to sample at each time-step, obtains a matrix containing abundances for species as a series of simulated assemblages. 
+
 #' @details
+#' \code{getTimestepAbundances} represents simulating the original biotic community that was present at some given point in time, which is not the same thing as a fossil assemblage that might be collected from sediments today as finite samples. That is covered by feeding the output from this function to \code{sampleFossilAssemblageSeries}.
 
-#' @inheritParams
+#' @inheritParams simulateFossilAssemblageSeries
 
-#' @param
+#' @param kdeRescaled The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.
+
+#' @param probSpeciesOccur The output from \code{\link{getProbOccViaPresAbs}}
+
+#' @param gradientValues 
+
+#' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.
 
 #' @return
+#' A matrix containing abundances for species as a series of simulated assemblages.
 
 #' @aliases
 
@@ -14,17 +26,9 @@
 
 #' @examples
 
-#' @param kdeRescaled 
-#'
-#' @param probSpeciesOccur 
-#' @param gradientValues 
-#' @param specimensPerTimestep 
-#'
-#' @name
-#' @rdname
+#' @name getTimestepAbundances
+#' @rdname getTimestepAbundances
 #' @export
-
-
 getTimestepAbundances <- function(
               kdeRescaled, 
               probSpeciesOccur, 

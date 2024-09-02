@@ -35,8 +35,8 @@
 #' @examples
 
 
-#' @name
-#' @rdname
+#' @name calculateImplicitParameters
+#' @rdname calculateImplicitParameters
 #' @export
 calculateImplicitParameters <- function(
         # gradient scale parameters
