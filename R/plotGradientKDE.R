@@ -7,15 +7,15 @@
 
 # @inheritParams
 
-#' @param speciesKDEs 
+#' @param speciesKDEs The
 
-#' @param fullGradientRange 
+#' @param fullGradientRange The
 
-#' @param xlim 
+#' @param xlim The
 
-#' @param ylim 
+#' @param ylim The
 
-#' @param logY 
+#' @param logY The
 
 #' @return
 #' The

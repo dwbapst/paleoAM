@@ -49,21 +49,23 @@
 #' 
 #' ####
 #' # (This is not to be run, just showing how data was loaded)
-#' /dontrun{
+#' \dontrun{
 #'  
 #' # Sheets et al. community abundance data
 #' graptCommData <- read.csv(
-#'     "grapt_abundances_Sheets_et_al_Vinini&Blackstone_from_CEM_01-09-22.csv"
+#'     "grapt_abundances_Sheets_et_al_Vinini&Blackstone_01-09-22.csv"
 #'     , row.names = 1, header = TRUE
 #'     )
 #' 
 #' # sample specific info
 #' graptSampleInfo <- read.csv(
 #'     "grapt_siteData_SheetsEtAl.csv"
-#'     , row.names = 1, header = TRUE, stringsAsFactors = TRUE
+#'     , row.names = 1, header = TRUE, 
+#'     stringsAsFactors = TRUE
 #'     )  
 #' 
-#' save(graptCommData, graptSampleInfo, file = "data/hirnantian.Rdata")
+#' save(graptCommData, graptSampleInfo, 
+#'     file = "data/hirnantian.Rdata")
 #' 
 #' }
 #' 
