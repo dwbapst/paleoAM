@@ -6,7 +6,7 @@
 \alias{fullDataTable_GOA}
 \alias{DCA1_GOA}
 \alias{abundData_GOA}
-\title{Benthic Foram Abundances from the Gulf of Alaska Reported by Sharon et al. 2021}
+\title{Benthic Foram Abundances from the Gulf of Alaska Reported by Sharon et al 2021}
 \format{
 This dataset is composed of three objects: 
 
@@ -58,9 +58,9 @@ co-located jumbo piston core, respectively located at 697 meters and 682 meters
 \examples{
 data(gulfOfAlaska)
 
-####
+############################################################
 # (This is not to be run, just showing how data was loaded)
-/dontrun{
+\dontrun{
 
 # Loading the data files used by Belanger & Bapst 2023
     # taken from Sharon et al. supplemental
@@ -71,7 +71,8 @@ fullDataTable_GOA <- read.table(
 DCA1_GOA <- fullDataTable_GOA$DCA1
 abundData_GOA <- fullDataTable_GOA[,-(1:5)]
 
-save(fullDataTable_GOA, DCA1_GOA, abundData_GOA, file = "data/gulfOfAlaska.Rdata")
+save(fullDataTable_GOA, DCA1_GOA, abundData_GOA, 
+    file = "data/gulfOfAlaska.Rdata")
 
 }
 

@@ -13,15 +13,15 @@ plotGradientKDE(
 )
 }
 \arguments{
-\item{speciesKDEs}{}
+\item{speciesKDEs}{The}
 
-\item{fullGradientRange}{}
+\item{fullGradientRange}{The}
 
-\item{xlim}{}
+\item{xlim}{The}
 
-\item{ylim}{}
+\item{ylim}{The}
 
-\item{logY}{}
+\item{logY}{The}
 }
 \value{
 The
