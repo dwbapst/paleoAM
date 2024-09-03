@@ -1,8 +1,8 @@
 Package: paleoAM
 Type: Package
 Title: Creation of models for simulating faunal indices from the fossil record. 
-Version: 0.9
-Date: 2023-12-13
+Version: 0.95
+Date: 2024-09-01
 Author: David W Bapst, Christina L Belanger
 Maintainer: David W Bapst <dwbapst@gmail.com>
 Depends:
