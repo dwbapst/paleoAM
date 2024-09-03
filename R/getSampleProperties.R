@@ -7,15 +7,15 @@
 
 # @inheritParams
 
-#' @param simTimeVar 
+#' @param simTimeVar The
 
-#' @param fossilSeries 
+#' @param fossilSeries The
 
-#' @param eventStartEndTimes 
+#' @param eventStartEndTimes The
 
-#' @param initialBackgroundIntervalIncluded 
+#' @param initialBackgroundIntervalIncluded The
 
-#' @param backgroundStartEnd 
+#' @param backgroundStartEnd The
 
 #' @return
 #' The

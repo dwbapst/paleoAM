@@ -1,0 +1,11 @@
+^\.travis\.yml$
+^\.git$
+^\.github$
+^\.lintr$
+^revdep$
+
+^cran-comments\.md$
+
+^CRAN-RELEASE$
+^\.github$
+^CRAN-SUBMISSION$
