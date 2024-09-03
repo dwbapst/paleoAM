@@ -76,7 +76,7 @@ getSampleDCA <- function(
                 }
 
             # project the new data in the DCA
-            newSampleDCA <- vegan:::predict.decorana(
+            newSampleDCA <- vegan::predict.decorana(
                 object = dcaOut,
                 newdata = newSample,
                 rank = 1, type = "sites"

@@ -28,9 +28,6 @@ simulateFossilAssemblageSeries(
   powerRootTransform = 1,
   maxSampleTimeStep = 500,
   minSampleTimeStep = 3,
-  singularDCA = TRUE,
-  inclusiveDCA = FALSE,
-  rawDCA = FALSE,
   includeInitialBackgroundPhase = FALSE,
   plot = FALSE,
   thinOutput = FALSE

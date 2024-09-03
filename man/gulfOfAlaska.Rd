@@ -50,7 +50,7 @@ Loads the foraminifera abundances collected and published by Sharon et al. (2021
 \details{
 This data set contains the absolute abundances (number of specimens identified)
 for 48 species of benthic foraminifera, across 355 samples, taken from Sharon 
-et al (2021). These samples were collected from the less than 63 μm size fractions
+et al (2021). These samples were collected from the less than 63 micrometer size-fractions
 taken from Integrated Ocean Drilling Program Expedition 341 Site U141 and the 
 co-located jumbo piston core, respectively located at 697 meters and 682 meters
  water depth in the Gulf of Alaska (Jaeger et al., 2014).

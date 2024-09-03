@@ -26,7 +26,7 @@
 #' @examples
 #' 
 #' # load data
-#' data(gulfOfAlaska_ShannonEtAl)
+#' data(gulfOfAlaska)
 #' 
 #' probSpeciesOccur <- getProbOccViaPresAbs(
 #'    gradientOrigDCA = DCA1_GOA, 

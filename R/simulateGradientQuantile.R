@@ -83,9 +83,6 @@ simulateGradientQuantile <- function(
     ecologyOutList <- quantifyCommunityEcology(
         origAbundData = origAbundData,
         fossilSeries = fossilSeries,
-        singularDCA = TRUE,
-        inclusiveDCA = FALSE,
-        rawDCA = FALSE,
         powerRootTransform = powerRootTransform 
         )
 

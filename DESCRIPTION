@@ -1,11 +1,16 @@
-Package: newPackage
+Package: paleoAM
 Type: Package
 Title: Creation of models for simulating faunal indices from the fossil record. 
 Version: 0.9
 Date: 2023-12-13
-Author: David W Bapst
+Author: David W Bapst, Christina L Belanger
 Maintainer: David W Bapst <dwbapst@gmail.com>
-Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various sedimentary histories. For use with fossil records with detailed age models and abundace distributions used for calculating faunal indices. 
-License: CC-0
+Depends:
+	R (>= 4.1.0)
+Imports:
+	vegan
+Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various sedimentary histories. For use with fossil records with detailed age models and abundance distributions used for calculating faunal indices. 
+License: CC0
 Encoding: UTF-8
+ByteCompile: TRUE
 RoxygenNote: 7.3.2

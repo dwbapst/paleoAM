@@ -78,9 +78,6 @@ simulateFossilAssemblageSeries <- function(
                 powerRootTransform = 1,  
                 maxSampleTimeStep = 500,
                 minSampleTimeStep = 3,
-                singularDCA = TRUE,
-                inclusiveDCA = FALSE, # BAD IDEA
-                rawDCA = FALSE,
                 includeInitialBackgroundPhase = FALSE,
                 # runChecks = TRUE,
                 plot = FALSE,
@@ -223,10 +220,7 @@ simulateFossilAssemblageSeries <- function(
         fossilSeries = fossilSeries,
         useTransformedRelAbundance = useTransformedRelAbundance,
         projectIntoOrigDCA = projectIntoOrigDCA,
-        powerRootTransform = powerRootTransform, 
-        singularDCA = singularDCA,
-        inclusiveDCA = inclusiveDCA,
-        rawDCA = rawDCA
+        powerRootTransform = powerRootTransform
         )
     
     # add DCA1 scores to sample properties

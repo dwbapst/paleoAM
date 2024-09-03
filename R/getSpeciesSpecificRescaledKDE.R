@@ -31,7 +31,7 @@
 #' @examples
 #' 
 #' # load data
-#' data(gulfOfAlaska_ShannonEtAl)
+#' data(gulfOfAlaska)
 #' 
 #' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
 #'     gradientOrigDCA = DCA1_GOA, 
