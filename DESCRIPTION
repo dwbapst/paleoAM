@@ -1,6 +1,6 @@
 Package: paleoAM
 Type: Package
-Title: Simulating Assemblage Models of Abundance For The Fossil Record
+Title: Simulating Assemblage Models of Abundance For the Fossil Record
 Version: 0.95
 Date: 2024-09-01
 Author: David W Bapst, Christina L Belanger
@@ -9,8 +9,10 @@ Depends:
 	R (>= 4.1.0)
 Imports:
 	vegan
-Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various sedimentary histories. For use with fossil records with detailed age models and abundance distributions used for calculating environmental gradients from ordinations or other biotic indices. 
 License: CC0
 Encoding: UTF-8
 ByteCompile: TRUE
+Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various 
+     sedimentary histories. For use with fossil records with detailed age models and abundance distributions used for calculating environmental
+     gradients from ordinations or other biotic indices. 
 RoxygenNote: 7.3.2

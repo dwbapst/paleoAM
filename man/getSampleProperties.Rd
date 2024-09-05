@@ -13,15 +13,15 @@ getSampleProperties(
 )
 }
 \arguments{
-\item{simTimeVar}{}
+\item{simTimeVar}{The}
 
-\item{fossilSeries}{}
+\item{fossilSeries}{The}
 
-\item{eventStartEndTimes}{}
+\item{eventStartEndTimes}{The}
 
-\item{initialBackgroundIntervalIncluded}{}
+\item{initialBackgroundIntervalIncluded}{The}
 
-\item{backgroundStartEnd}{}
+\item{backgroundStartEnd}{The}
 }
 \value{
 The
