@@ -25,7 +25,7 @@
 #' values for the horizontal (x) axis and vertical (y) axis, respectively. 
 #' The default for \code{xlim} is \code{NULL} and only needs to be defined 
 #' if different axis limits than \code{fullGradientRange} is desired. 
-#' The default for \code{ylim} is \code(c(0,1)} which likely leaves considerable
+#' The default for \code{ylim} is \code{c(0,1)} which likely leaves considerable
 #'  empty white space above the KDEs, which can be reduced by adjusting this argument.
 
 #' @param logY Should the vertical axis (the relative height of rescaled KDEs) 

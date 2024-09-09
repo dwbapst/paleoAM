@@ -13,7 +13,8 @@ getSpeciesSpecificRescaledKDE(
 )
 }
 \arguments{
-\item{gradientOrigDCA}{The environmental gradient along which abundance varies, which you are fitting a KDE to.}
+\item{gradientOrigDCA}{The environmental gradient along which abundance 
+varies, which you are fitting a KDE to.}
 
 \item{origAbundData}{The abundance data of the data you wish to model the abundance of.}
 
@@ -30,18 +31,24 @@ A list containing the KDEs describing change in abundance for
 each species across the specified gradient.
 }
 \description{
-This is a function for Fitting a KDE to a specific species in Community Ecology Data
+This function fits a KDE to the abundance data of a particular species from 
+community data given some ecological gradient variable.
 }
 \details{
-This function fits a KDE to the abundance data of a particular species from 
-community data given some environmental gradient.
+In many ways, this is an attempt to measure empirical representations of
+the abundance response curves relative to environmental gradients,
+as portrayed in figure within Patzkowsky & Holland (2012).
+
+The ecological gradient variable is often an environmental gradient, 
+such as depth, oxygenation, altitude, precipitation, 
+but this is not necessarily so.
 }
 \examples{
 
 # load data
 data(gulfOfAlaska)
 
-gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
+alaskaKDEs <- getSpeciesSpecificRescaledKDE(
     gradientOrigDCA = DCA1_GOA, 
     origAbundData = abundData_GOA, 
     abundanceFloorRatio = 0.5, 
@@ -49,7 +56,17 @@ gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
     modeledSiteAbundance = 10000
     )
     
+plotGradientKDE(
+    speciesKDEs = alaskaKDEs,
+    fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA))
+    )
+
+}
+\references{
+Patzkowsky, M.E. and Holland, S.M., 2012. \emph{Stratigraphic Paleobiology: 
+Understanding the Distribution of Fossil Taxa in Time and Space.}
+University of Chicago Press. 259 pages.
 }
 \seealso{
-\code{\link{getProbOccViaPresAbs}}
+\code{\link{getProbOccViaPresAbs}}, \code{\link{plotGradientKDE}}
 }

@@ -13,22 +13,45 @@ plotGradientKDE(
 )
 }
 \arguments{
-\item{speciesKDEs}{The}
+\item{speciesKDEs}{A list of rescaled-KDE data, where each element is a 
+different species, such as that output by \code{\link{getSpeciesSpecificRescaledKDE}}.}
 
-\item{fullGradientRange}{The}
+\item{fullGradientRange}{The minimum and maximum value of the ecological 
+gradient variable at which ecological assemblage data was observed. 
+If \code{xlim} isn't given, this defines the horizontal axis limits for resulting plot.}
 
-\item{xlim}{The}
+\item{xlim, ylim}{Vectors of two elements, defining the minimum and maximum 
+values for the horizontal (x) axis and vertical (y) axis, respectively. 
+The default for \code{xlim} is \code{NULL} and only needs to be defined 
+if different axis limits than \code{fullGradientRange} is desired. 
+The default for \code{ylim} is \code{c(0,1)} which likely leaves considerable
+ empty white space above the KDEs, which can be reduced by adjusting this argument.}
 
-\item{ylim}{The}
-
-\item{logY}{The}
+\item{logY}{Should the vertical axis (the relative height of rescaled KDEs) 
+be portrayed with logarithmic scaling?}
 }
 \value{
-The
+Nothing is returned, just a plot is made.
 }
 \description{
-The
+This function plots each rescaled KDE fit to each specific-specific 
+rise-and-fall in abundance across some ecological gradient variable.
 }
 \details{
-The
+In many ways, this is an attempt to create empirical versions of the the
+hypothetical figures portraying abundance response curves 
+relative to an environmental gradient in Patzkowsky & Holland (2012).
+
+The ecological gradient variable is often an environmental characteristic, 
+such as depth, oxygenation, altitude, precipitation, 
+but this is not necessarily so.
+}
+\references{
+Patzkowsky, M.E. and Holland, S.M., 2012. \emph{Stratigraphic Paleobiology: 
+Understanding the Distribution of Fossil Taxa in Time and Space.}
+University of Chicago Press. 259 pages.
+}
+\seealso{
+This function mainly exists to look at the output from 
+\code{\link{getSpeciesSpecificRescaledKDE}} for a fossil assemblage.
 }

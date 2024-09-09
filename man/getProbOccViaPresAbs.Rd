@@ -14,7 +14,8 @@ getProbOccViaPresAbs(
 \arguments{
 \item{origAbundData}{The abundance data of the data you wish to model the abundance of.}
 
-\item{gradientOrigDCA}{The environmental gradient along which abundance varies, which you are fitting a KDE to.}
+\item{gradientOrigDCA}{The environmental gradient along which abundance 
+varies, which you are fitting a KDE to.}
 
 \item{occurrenceFloor}{The minimum occurrence for every species, in every bin. 
 The default is zero -- increasing this value means every species has a 
