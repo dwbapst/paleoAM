@@ -20,7 +20,6 @@ plotHeatmapComparison(
   contourLineLevels = NULL,
   contour.lwd = 2,
   additionalFeatures = NULL,
-  key.axes = NULL,
   palette = "plasma",
   xlab = "x",
   ylab = "y",
@@ -31,46 +30,45 @@ plotHeatmapComparison(
 )
 }
 \arguments{
-\item{x, y}{The}
+\item{x, y}{The horizontal (\code{x}) and vertical (\code{y}) variables that determine the two-dimensional space within which the third variable (\code{z}) is plotted as a surface.}
 
-\item{z}{The}
+\item{z}{The values of the third variable (\code{z}) that will be used to define the plotted surface for contours, given as a matrix with the same number of rows as the length of \code{x}, and the same number of columns as the length of \code{y}.}
 
-\item{xlim, ylim, zlim}{The}
+\item{xlim, ylim, zlim}{These are two-element vectors giving the minimum and maximum limits for the horizontal variable (\code{x}), vertical variable (\code{y}), and the variable defining the surface plotted (\code{z}) within the two dimensional space defined by \code{x} and \code{y}.}
 
-\item{xlog, ylog}{The}
+\item{xlog, ylog}{Should the \code{x} or \code{y} axes be displayed with log-scaling?}
 
-\item{xtick, ytick}{The}
+\item{xtick, ytick}{Vectors that give the positions of the tick-marks for \code{x} and \code{y} axes.}
 
-\item{contourLevels}{The}
+\item{contourLevels}{A vector of values at which to put the breaks between the color-filled contours for \code{z}, Also determines the
+different levels show on the color-gradient key shown to the side of the contour plot.}
 
-\item{nlevels}{The}
+\item{nlevels}{The number of different color levels to use, if \code{contourLevels} is not defined.}
 
-\item{contourLineLevels}{The}
+\item{contourLineLevels}{A vector of values at which to put the distinct contour lines for \code{z}. This must be defined for contour lines to be plotted.}
 
-\item{contour.lwd}{The}
+\item{contour.lwd}{The thickness of plotted contour lines.}
 
-\item{additionalFeatures}{The}
+\item{additionalFeatures}{Additional features to add to the contour space, such as}
 
-\item{key.axes}{The}
+\item{palette}{The color palette to use for \code{filled.contour}. By default, the palette \code{"plasma"} is used.}
 
-\item{palette}{The}
+\item{xlab, ylab}{The labels for the \code{x} and \code{y} axes.}
 
-\item{xlab, ylab}{The}
+\item{main}{The plot's main title.}
 
-\item{main}{The}
+\item{gradientKeyLabel}{The optional label text for the color gradient key for \code{z}, shown to the right of the main contour plot. This label will be shown to the right of the key.}
 
-\item{gradientKeyLabel}{The}
+\item{mtext_line}{The distant in the margin away from the key at which the \code{gradientKeyLabel} is displayed. The default value is 3.}
 
-\item{mtext_line}{The}
-
-\item{margins}{The}
+\item{margins}{The size of the margins for the result plot. The default configuration gives some extra room on the left-hand size.}
 }
 \value{
-The
+This function returns nothing at all as output. It just makes a plot.
 }
 \description{
-The
+This function is a complex wrapper of the functions \code{contour} and \code{filled.contour} which allows a user to combine colored contours for the surface of a third variables plotted across a two-dimensional space, with contour lines of the third varuiable's surface also plotted in that same two-dimensional space. This is often a common plotting need for this package, and thus is included here.
 }
 \details{
-The
+The function \code{filled.contour} doesn't easy allow for sequential modifications, like adding additional contour lines to an existing contour plot, and so this function simplifies having to write the second \code{contour} plot as an argument for \code{plot.axes} in \code{filled.contour}.
 }

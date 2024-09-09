@@ -11,5 +11,5 @@
 ^CRAN-SUBMISSION$
 
 # ignore scrap
-/.scrap/
+/.scrap
 

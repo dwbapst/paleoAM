@@ -55,21 +55,21 @@ getSampleProperties <- function(
         # CB: "Time doesn't run backwards, it runs 'down depth'."
     
     # age mid points
-    #sampleMidAge <- approx(
+    #sampleMidAge <- stats::approx(
     #    x = simTimeVar$sedColumnDepth, 
     #    y = simTimeVar$timestep, 
     #    xout = fossilSeries$sampleMidDepth
     #    )$y
     
     # age as an interval
-    sampleInterval_start <- approx(
+    sampleInterval_start <- stats::approx(
         x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$timestep, 
         xout = fossilSeries$sampleIntervals[,1]
         )$y
     
     # and the other interval
-    sampleInterval_end <- approx(
+    sampleInterval_end <- stats::approx(
         x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$timestep, 
         xout = fossilSeries$sampleIntervals[,2]
@@ -90,7 +90,7 @@ getSampleProperties <- function(
     
     # also approx the generating gradient values
       # for each sample
-    sampleGradientValues <- approx(
+    sampleGradientValues <- stats::approx(
         x = simTimeVar$sedColumnDepth, 
         y = simTimeVar$gradientValue, 
         xout = apply(sampleIntervalAges, 1, mean)

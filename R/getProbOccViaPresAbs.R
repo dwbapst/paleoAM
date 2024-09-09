@@ -53,7 +53,7 @@ getProbOccViaPresAbs <- function(
     # dim(origPresenceData) == dim(origAbundData)
     
     # get histBreaks and histSampleCounts
-    gradientHist <- hist(
+    gradientHist <- graphics::hist(
         gradientOrigDCA, 
         breaks = nBreaksGradientHist, 
         plot = FALSE)
@@ -66,7 +66,7 @@ getProbOccViaPresAbs <- function(
     
     # count number of occurrence in each hist bin
     gradientCountPresence <- lapply(gradientRepPresence, function(x) 
-        hist(x, breaks = gradientHist$breaks, plot = FALSE)$counts 
+        graphics::hist(x, breaks = gradientHist$breaks, plot = FALSE)$counts 
         )
     
     # Need to correct for uneven sampling across gradient
@@ -81,7 +81,7 @@ getProbOccViaPresAbs <- function(
     # as an approximate function with `approx`
     probSpeciesOccur <- function(gradientValue){
         approxProbs <- lapply(gradientPropPresence, function(x)
-            approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
+            stats::approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
             )  
         }
 

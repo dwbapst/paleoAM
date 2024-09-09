@@ -36,7 +36,8 @@ checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
             minSampleSize,
             maxSampleSize,
-            maxDominance
+            maxDominance,
+            speciesNames
             ){
     
     abundanceTable <- fossilSeries$abundanceTable

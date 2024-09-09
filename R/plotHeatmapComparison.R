@@ -1,49 +1,50 @@
 #' Plots a Heatmap Comparison
 #' 
-#' The 
+#' This function is a complex wrapper of the functions \code{contour} and \code{filled.contour} which allows a user to combine colored contours for the surface of a third variables plotted across a two-dimensional space, with contour lines of the third varuiable's surface also plotted in that same two-dimensional space. This is often a common plotting need for this package, and thus is included here.
 
 #' @details
-#' The 
+#' The function \code{filled.contour} doesn't easy allow for sequential modifications, like adding additional contour lines to an existing contour plot, and so this function simplifies having to write the second \code{contour} plot as an argument for \code{plot.axes} in \code{filled.contour}.
 
 # @inheritParams
 
-#' @param x,y The 
+#' @param x,y The horizontal (\code{x}) and vertical (\code{y}) variables that determine the two-dimensional space within which the third variable (\code{z}) is plotted as a surface.
 
-#' @param z The
+#' @param z The values of the third variable (\code{z}) that will be used to define the plotted surface for contours, given as a matrix with the same number of rows as the length of \code{x}, and the same number of columns as the length of \code{y}.
 
-#' @param xlim,ylim,zlim The  
+#' @param xlim,ylim,zlim These are two-element vectors giving the minimum and maximum limits for the horizontal variable (\code{x}), vertical variable (\code{y}), and the variable defining the surface plotted (\code{z}) within the two dimensional space defined by \code{x} and \code{y}.
 
-#' @param xlog,ylog The
+#' @param xlog,ylog Should the \code{x} or \code{y} axes be displayed with log-scaling?
 
-#' @param xtick,ytick The
+#' @param xtick,ytick Vectors that give the positions of the tick-marks for \code{x} and \code{y} axes.
 
-#' @param contourLevels The 
+#' @param contourLevels A vector of values at which to put the breaks between the color-filled contours for \code{z}, Also determines the
+#' different levels show on the color-gradient key shown to the side of the contour plot.
 
-#' @param nlevels The
+#' @param nlevels The number of different color levels to use, if \code{contourLevels} is not defined.
 
-#' @param contourLineLevels The
+#' @param contourLineLevels A vector of values at which to put the distinct contour lines for \code{z}. This must be defined for contour lines to be plotted.
 
-#' @param contour.lwd The
+#' @param contour.lwd The thickness of plotted contour lines.
 
-#' @param additionalFeatures The 
+#' @param additionalFeatures Additional features to add to the contour space, such as 
 
-#' @param key.axes The
+# @param key.axes ???
 
-#' @param palette The
+#' @param palette The color palette to use for \code{filled.contour}. By default, the palette \code{"plasma"} is used.
 
-#' @param xlab,ylab The 
+#' @param xlab,ylab The labels for the \code{x} and \code{y} axes.
 
-#' @param main The
+#' @param main The plot's main title.
 
-#' @param gradientKeyLabel The
+#' @param gradientKeyLabel The optional label text for the color gradient key for \code{z}, shown to the right of the main contour plot. This label will be shown to the right of the key.
 
-#' @param mtext_line The
+#' @param mtext_line The distant in the margin away from the key at which the \code{gradientKeyLabel} is displayed. The default value is 3.
 
-#' @param margins The
+#' @param margins The size of the margins for the result plot. The default configuration gives some extra room on the left-hand size.
 
 
 #' @return
-#' The
+#' This function returns nothing at all as output. It just makes a plot.
 
 # @aliases
 
@@ -52,7 +53,6 @@
 # @references
 
 # @examples
-
 
 #' @name plotHeatmapComparison
 #' @rdname plotHeatmapComparison
@@ -82,7 +82,7 @@ plotHeatmapComparison <- function(
             contour.lwd = 2,
     
             additionalFeatures = NULL,
-            key.axes = NULL,
+            #key.axes = NULL,
         
             palette = "plasma",
     
@@ -96,10 +96,10 @@ plotHeatmapComparison <- function(
             ){
 
     ########################
-    par(mar = margins)
+    graphics::par(mar = margins)
 
     if(is.null(contourLevels)){
-        contourLevels <- pretty(zlim, nlevels)
+        contourLevels <- base::pretty(zlim, nlevels)
         }
     
     xtickAt <- xtick
@@ -116,7 +116,7 @@ plotHeatmapComparison <- function(
         ylim <- log(ylim, 10)
         }
         
-    filled.contour(
+    graphics::filled.contour(
         x = x,
         y = y,
         z = z,
@@ -134,12 +134,12 @@ plotHeatmapComparison <- function(
         nlevels = nlevels,
         
         color.palette = function(n) 
-            hcl.colors(n, palette = palette), 
+            grDevices::hcl.colors(n, palette = palette), 
         
         plot.axes = { 
             
             if(!is.null(contourLineLevels)){
-                contour(
+                graphics::contour(
                     x = x,
                     y = y,
                     z = z,
@@ -158,8 +158,8 @@ plotHeatmapComparison <- function(
                     )
                 };
             
-            axis(1, at=xtickAt, label=xtick); 
-            axis(2, at=ytickAt, label=ytick);
+            graphics::axis(1, at=xtickAt, label=xtick); 
+            graphics::axis(2, at=ytickAt, label=ytick);
             
             if(!is.null(additionalFeatures)){
                 additionalFeatures
@@ -173,7 +173,7 @@ plotHeatmapComparison <- function(
 
                 )
 
-    mtext(
+    graphics::mtext(
         side = 4, cex = 1, 
         text = gradientKeyLabel,
         line = mtext_line

@@ -190,7 +190,8 @@ simulateFossilAssemblageSeries <- function(
     #        fossilSeries = fossilSeries, 
     #        minPickedSampleSize = minPickedSampleSize, 
     #        maxPickedSampleSize = maxPickedSampleSize,
-    #        maxDominance = maxDominance
+    #        maxDominance = maxDominance,
+    #        speciesNames = speciesNames
     #        )
     #    }
 

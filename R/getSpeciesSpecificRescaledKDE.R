@@ -1,10 +1,20 @@
 #' This is a function for Fitting a KDE to a specific species in Community Ecology Data
+#' 
+#' This function fits a KDE to the abundance data of a particular species from 
+#' community data given some ecological gradient variable.
 
 #' @details
-#' This function fits a KDE to the abundance data of a particular species from 
-#' community data given some environmental gradient.
+#' In many ways, this is an attempt to measure empirical representations of
+#' the abundance response curves relative to environmental gradients,
+#' as portrayed in figure within Patzkowsky & Holland (2012).
+#' 
+#' The ecological gradient variable is often an environmental gradient, 
+#' such as depth, oxygenation, altitude, precipitation, 
+#' but this is not necessarily so. 
+#' 
 
-#' @param gradientOrigDCA The environmental gradient along which abundance varies, which you are fitting a KDE to.
+#' @param gradientOrigDCA The environmental gradient along which abundance 
+#' varies, which you are fitting a KDE to.
  
 #' @param origAbundData The abundance data of the data you wish to model the abundance of.
  
@@ -24,16 +34,19 @@
 #' each species across the specified gradient.
 
 #' @seealso
-#' \code{\link{getProbOccViaPresAbs}}
+#' \code{\link{getProbOccViaPresAbs}}, \code{\link{plotGradientKDE}}
 
-# @references
+#' @references
+#' Patzkowsky, M.E. and Holland, S.M., 2012. \emph{Stratigraphic Paleobiology: 
+#' Understanding the Distribution of Fossil Taxa in Time and Space.}
+#' University of Chicago Press. 259 pages.
 
 #' @examples
 #' 
 #' # load data
 #' data(gulfOfAlaska)
 #' 
-#' gradientOrigDCA <- getSpeciesSpecificRescaledKDE(
+#' alaskaKDEs <- getSpeciesSpecificRescaledKDE(
 #'     gradientOrigDCA = DCA1_GOA, 
 #'     origAbundData = abundData_GOA, 
 #'     abundanceFloorRatio = 0.5, 
@@ -41,6 +54,11 @@
 #'     modeledSiteAbundance = 10000
 #'     )
 #'     
+#' plotGradientKDE(
+#'     speciesKDEs = alaskaKDEs,
+#'     fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA))
+#'     )
+#' 
 
 #' @name getSpeciesSpecificRescaledKDE
 #' @rdname getSpeciesSpecificRescaledKDE
@@ -60,7 +78,7 @@ getSpeciesSpecificRescaledKDE <- function(
         stop("DCA and abundance data seem to not agree on number of samples/sites")
         }
     
-    gradientHist <- hist(
+    gradientHist <- graphics::hist(
         gradientOrigDCA, 
         breaks = nBreaksGradientHist, 
         plot = FALSE
@@ -124,7 +142,7 @@ getSpeciesSpecificRescaledKDE <- function(
     
     # count abundance in each bin from the hist breaks
     abundanceHistBreaks <- lapply(gradientRepAbund, function(x) 
-        hist(x, breaks = histBreaks, plot = FALSE
+        graphics::hist(x, breaks = histBreaks, plot = FALSE
             )$counts
         )
     
@@ -147,7 +165,7 @@ getSpeciesSpecificRescaledKDE <- function(
         )
     # count sites each species occurs at in each bin
     gradientPresenceHistBreaks <- lapply(gradientRepPresence, function(x) 
-        hist(x, 
+        graphics::hist(x, 
             breaks = histBreaks, 
             plot = FALSE
             )$counts + 1
@@ -178,7 +196,7 @@ getSpeciesSpecificRescaledKDE <- function(
     # hist(gradientRepAbund$BuliminellaTenuata)
     
     # Now fit the KDE to each species' abundance curve
-    kdePerTaxa <- lapply(gradientRepSampAbund, density, 
+    kdePerTaxa <- lapply(gradientRepSampAbund, stats::density, 
         bw = diff(gradientHist$mids)[1] )
 
     # Get maximum and min abundance for each species 
