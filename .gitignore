@@ -19,7 +19,8 @@
 /*.Rcheck/
 
 # ignore scrap
-/.scrap/
+#/.scrap/
+#nah include it
 
 # RStudio files
 .Rproj.user/

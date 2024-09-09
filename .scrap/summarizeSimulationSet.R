@@ -224,9 +224,8 @@ makeSimSetTable <- function(
     return(tableOut)
     }
 
-
 # add to the simSummaryTable
-addToSimSumTable <- function(simSummaryTable, simSummaryOut){
+addToSimSumTable <- function(simSummaryTable, simSummaryOut, i){
 
     # assign output to values in simSummaryTable
     simSummaryTable$backgroundUpperBound[i] <- simSummaryOut$backgroundUpperBound
@@ -243,8 +242,9 @@ addToSimSumTable <- function(simSummaryTable, simSummaryOut){
     }
 
 
+
 # add data to simSetList
-addToSimSetList <- function(simSetList, simSummaryOut){
+addToSimSetList <- function(simSetList, simSummaryOut, i){
 
     # save list of DCA values from each event to grand-list for whole set
     simSetList$simSetDCAvalues[[i]] <- simSummaryOut$eventDCAvaluesList
@@ -261,3 +261,5 @@ addToSimSetList <- function(simSetList, simSummaryOut){
     
     return(simSetList)
     }
+
+
