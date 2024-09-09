@@ -19,3 +19,8 @@ export(simulateFossilAssemblageSeries)
 export(simulateGradientQuantile)
 export(summarizeSimulationDCA)
 export(summarizeSimulationSet)
+
+  importFrom("grDevices", "hcl.colors")
+  importFrom("graphics", "abline", "axis", "contour", "filled.contour",
+             "hist", "legend", "lines", "mtext", "par", "points", "text")
+  importFrom("stats", "approx", "density", "median", "quantile", "runif")
