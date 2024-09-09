@@ -18,6 +18,9 @@
 # Output files from R CMD check
 /*.Rcheck/
 
+# ignore scrap
+/.scrap/
+
 # RStudio files
 .Rproj.user/
 

@@ -9,3 +9,7 @@
 ^CRAN-RELEASE$
 ^\.github$
 ^CRAN-SUBMISSION$
+
+# ignore scrap
+/.scrap/
+
