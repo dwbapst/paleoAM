@@ -1,22 +1,25 @@
-#' Check Fossil Series Abundance Table
-#' 
-#' The
+# I suspect this function doesn't really need to be exported
 
-#' @details
-#' The
+
+# Check Fossil Series Abundance Table
+# 
+# The
+
+# @details
+# The
 
 # @inheritParams
 
-#' @param fossilSeries The
+# @param fossilSeries The
 
-#' @param minSampleSize The
+# @param minSampleSize The
 
-#' @param maxSampleSize The
+# @param maxSampleSize The
 
-#' @param maxDominance The
+# @param maxDominance The
 
-#' @return
-#' The
+# @return
+# The
 
 # @aliases
 
@@ -26,9 +29,9 @@
 
 # @examples
 
-#' @name checkFossilSeriesAbundanceTable
-#' @rdname checkFossilSeriesAbundanceTable
-#' @export
+# @name checkFossilSeriesAbundanceTable
+# @rdname checkFossilSeriesAbundanceTable
+# @export
 checkFossilSeriesAbundanceTable <- function(
             fossilSeries,
             minSampleSize,
