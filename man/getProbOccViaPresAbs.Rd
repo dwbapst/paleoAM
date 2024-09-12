@@ -39,7 +39,7 @@ The rationale for this function was that simulating assemblages using the KDEs o
 # load data
 data(gulfOfAlaska)
 
-probSpeciesOccur <- getProbOccViaPresAbs(
+alaskaProbOccur <- getProbOccViaPresAbs(
    gradientOrigDCA = DCA1_GOA, 
    origAbundData = abundData_GOA
    )

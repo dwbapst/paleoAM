@@ -11,10 +11,10 @@ simulateFossilAssemblageSeries(
   eventChangeScale,
   bgGradientValue,
   fullGradientRange,
-  eventSampleWidthRatio,
-  sampleWidth,
-  eventDuration,
-  sedRatePerTimestep,
+  eventSampleWidthRatio = NULL,
+  sampleWidt = NULL,
+  eventDuration = NULL,
+  sedRatePerTimestep = NULL,
   samplingCompleteness,
   transitionDurationRatio,
   bioturbDepthRatio,
@@ -48,8 +48,6 @@ project the simulated data into the same detrended correspondence analysis (DCA)
 \item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
 
 \item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined.}
-
-\item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
 
 \item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
@@ -115,6 +113,46 @@ including estimating the recovered gradient via \code{quantifyCommunityEcology}.
 \details{
 Different parameterizations may be given as input, allowing different parameters to be unspecified.
 Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
+}
+\examples{
+# an example with alaskan data
+
+# load data
+data(gulfOfAlaska)
+
+alaskaKDEs <- getSpeciesSpecificRescaledKDE(
+    gradientOrigDCA = DCA1_GOA, 
+    origAbundData = abundData_GOA, 
+    abundanceFloorRatio = 0.5, 
+    nBreaksGradientHist = 20, 
+    modeledSiteAbundance = 10000
+    )
+    
+alaskaProbOccur <- getProbOccViaPresAbs(
+   gradientOrigDCA = DCA1_GOA, 
+   origAbundData = abundData_GOA
+   )
+
+ fossilSeriesOut <- simulateFossilAssemblageSeries(
+               kdeRescaled = alaskaKDEs,
+               probSpeciesOccur = alaskaProbOccur,
+               origAbundData = abundData_GOA,
+               eventChangeScale = 0.5,
+               bgGradientValue = 0,
+               fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
+               eventSampleWidthRatio = 10,
+               sampleWidth = 2,
+               eventDuration = 10,
+               samplingCompleteness = 1/2,
+               transitionDurationRatio = 1/5,
+               bioturbDepthRatio = 0,
+               bioturbIntensity = 0,     
+               nEvents = 1,
+               nSpecimens = 100,
+               plot = TRUE
+               )
+
+
 }
 \seealso{
 \code{\link{calculateImplicitParameters}}
