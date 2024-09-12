@@ -47,8 +47,45 @@
 
 # @references
 
-# @examples
-
+#' @examples
+#' # an example with alaskan data
+#' 
+#' # load data
+#' data(gulfOfAlaska)
+#' 
+#' alaskaKDEs <- getSpeciesSpecificRescaledKDE(
+#'     gradientOrigDCA = DCA1_GOA, 
+#'     origAbundData = abundData_GOA, 
+#'     abundanceFloorRatio = 0.5, 
+#'     nBreaksGradientHist = 20, 
+#'     modeledSiteAbundance = 10000
+#'     )
+#'     
+#' alaskaProbOccur <- getProbOccViaPresAbs(
+#'    gradientOrigDCA = DCA1_GOA, 
+#'    origAbundData = abundData_GOA
+#'    )
+#'
+#'  fossilSeriesOut <- simulateFossilAssemblageSeries(
+#'                kdeRescaled = alaskaKDEs,
+#'                probSpeciesOccur = alaskaProbOccur,
+#'                origAbundData = abundData_GOA,
+#'                eventChangeScale = 0.5,
+#'                bgGradientValue = 0,
+#'                fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
+#'                eventSampleWidthRatio = 10,
+#'                sampleWidth = 2,
+#'                eventDuration = 10,
+#'                samplingCompleteness = 1/2,
+#'                transitionDurationRatio = 1/5,
+#'                bioturbDepthRatio = 0,
+#'                bioturbIntensity = 0,     
+#'                nEvents = 1,
+#'                nSpecimens = 100,
+#'                plot = TRUE
+#'                )
+#' 
+#' 
 
 #' @name simulateFossilAssemblageSeries
 #' @rdname simulateFossilAssemblageSeries
@@ -60,10 +97,10 @@ simulateFossilAssemblageSeries <- function(
                 eventChangeScale,
                 bgGradientValue,
                 fullGradientRange,
-                eventSampleWidthRatio,
-                sampleWidth,
-                eventDuration,
-                sedRatePerTimestep,
+                eventSampleWidthRatio = NULL,
+                sampleWidt = NULL,
+                eventDuration = NULL,
+                sedRatePerTimestep = NULL,
                 samplingCompleteness,
                 transitionDurationRatio,
                 bioturbDepthRatio,
@@ -225,15 +262,9 @@ simulateFossilAssemblageSeries <- function(
         )
     
     # add DCA1 scores to sample properties
-    if(singularDCA){
-        sampleProperties$scoreDCA1_recovered <- ecologyOutList$scoreDCA1_recovered 
-        }
-    if(inclusiveDCA){
-        sampleProperties$scoreDCA1_inclusive <- ecologyOutList$scoreDCA1_inclusive 
-        }
-    if(rawDCA){
-        sampleProperties$scoreDCA1_raw <- ecologyOutList$scoreDCA1_raw 
-        }
+        # we now only do singular / projection method for DCA
+    
+    sampleProperties$scoreDCA1_recovered <- ecologyOutList$scoreDCA1_recovered 
         
     ##########################################################################
     outList <- list(
