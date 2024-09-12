@@ -54,11 +54,11 @@ calculateImplicitParameters <- function(
         fullGradientRange,
   
         # event to sample scale ratio
-        eventSampleWidthRatio,
+        eventSampleWidthRatio = NULL,
         # initial secondary parameters
-        sampleWidth,
-        eventDuration,
-        sedRatePerTimestep,
+        sampleWidth = NULL,
+        eventDuration = NULL,
+        sedRatePerTimestep = NULL,
         # number of time-step assemblages
             # to simulate per sample
         maxSampleTimeStep = 500,

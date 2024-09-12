@@ -103,12 +103,12 @@ plotFossilAssemblageSeriesDCA_sepVariables <- function(
          type = "l"
          )
     
-    points(sampleAge, gradientRecovered, 
+    graphics::points(sampleAge, gradientRecovered, 
            cex = 1, pch = 16, 
            col = colSimRecovered
            )
     
-    legend(x = "top",
+    graphics::legend(x = "top",
            legend = c("Original", "Measured"),
            lty = c(1,3), 
            lwd = c(1,3), 

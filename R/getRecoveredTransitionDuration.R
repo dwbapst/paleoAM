@@ -85,13 +85,15 @@ getRecoveredTransitionDuration <- function(
 
     if(plot){
         plot(type = "b", 
-            x = simResult$sampleProperties$sampleMidAge, 
-            y=simResult$sampleProperties$scoreDCA1_recovered,
+            x = simRecord$sampleProperties$sampleMidAge, 
+            y=simRecord$sampleProperties$scoreDCA1_recovered,
             xlab = "Time (time-steps)",
             ylab = "DCA-1 Gradient",
             main = "")
-        abline(v=sampleAge[c(startTran, endTran)] )
-        text(x = 0, y = 2, pos = 4, paste0("Tran. Dur. =",
+        graphics::abline(v=simRecord$sampleProperties$sampleMidAge[
+            c(startTran, endTran)] 
+            )
+        graphics::text(x = 0, y = 2, pos = 4, paste0("Tran. Dur. =",
             round(tranDurationOut, 2))
             )
         }    

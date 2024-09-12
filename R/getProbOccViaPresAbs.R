@@ -28,7 +28,7 @@
 #' # load data
 #' data(gulfOfAlaska)
 #' 
-#' probSpeciesOccur <- getProbOccViaPresAbs(
+#' alaskaProbOccur <- getProbOccViaPresAbs(
 #'    gradientOrigDCA = DCA1_GOA, 
 #'    origAbundData = abundData_GOA
 #'    )

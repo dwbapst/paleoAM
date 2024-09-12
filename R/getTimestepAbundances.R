@@ -55,7 +55,7 @@ getTimestepAbundances <- function(
     # Use approx function for estimating KDEs from gradient values
     # function for getting exp abundance from rescaled KDEs
     expAbundFromKDE_List <- lapply(kdeRescaled, function(kdeEst)
-        approx(x = kdeEst$x, y = kdeEst$y, xout = unqGradient)$y               
+        stats::approx(x = kdeEst$x, y = kdeEst$y, xout = unqGradient)$y               
         )
     
     # test
@@ -110,7 +110,7 @@ getTimestepAbundances <- function(
     
     # now stochastically determine if species are present or not
     # first generate a large matrix of numbers pulled from a uniform distribution
-    uniformDistNumbers <- runif(n = nSpecies * nTimeSteps, 
+    uniformDistNumbers <- stats::runif(n = nSpecies * nTimeSteps, 
          min = 0, max = 1)
     uniformDistNumbers <- matrix(uniformDistNumbers, 
          nTimeSteps, nSpecies)

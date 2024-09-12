@@ -63,7 +63,7 @@ setupSimulatedGradientChange <- function(
     
     # Background intervals are of uneven duration and thus will be obtained using runif
     bgDuration <- function(n=1, min = bgDurationRange[1], max = bgDurationRange[2]){
-        runif(n, min = min, max = max)
+        stats::runif(n, min = min, max = max)
         }
     
     if(includeInitialBackgroundPhase){
@@ -183,7 +183,7 @@ setupSimulatedGradientChange <- function(
     
     # build approximation function for gradient values
     approxGradientSeriesFunction <- function(time){
-        approx(x = simGradientTime, 
+        stats::approx(x = simGradientTime, 
                y = simGradientValue, 
                xout = time)$y
         }

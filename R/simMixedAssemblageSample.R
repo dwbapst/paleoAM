@@ -41,9 +41,11 @@ simMixedAssemblageSample <- function(
             )
 
     lumpedSample <- colSums(lumpedSample)    
-        
+    
+    # number of species = length(kdeRescaled)
+    
     # un-table() the lumped community abundance data
-    lumpedSample <- rep(1:nSpecies, lumpedSample)
+    lumpedSample <- rep(1:length(kdeRescaled), lumpedSample)
     
     # down-sample the lumped specimens to "nSpecimens" 
     pickedSample <- sample(x = lumpedSample, 
