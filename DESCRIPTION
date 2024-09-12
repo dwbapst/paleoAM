@@ -8,11 +8,15 @@ Maintainer: David W Bapst <dwbapst@gmail.com>
 Depends:
 	R (>= 4.1.0)
 Imports:
+	graphics,
+	stats,
 	vegan
 License: CC0
 Encoding: UTF-8
 ByteCompile: TRUE
-Description: Tools for modeling abundance distributions over environmental gradients, and tools for simulating those communities over various 
-     sedimentary histories. For use with fossil records with detailed age models and abundance distributions used for calculating environmental
-     gradients from ordinations or other biotic indices. 
+Description: Tools for modeling abundance distributions over environmental
+     gradients, and tools for simulating those communities over various 
+     sedimentary histories. For use with fossil records with detailed age
+     models and abundance distributions used for calculating environmental
+     gradients from ordinations or other indices based on fossil assemblages. 
 RoxygenNote: 7.3.2
