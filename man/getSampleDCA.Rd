@@ -40,3 +40,6 @@ For a single simulated assemblage sample, projects its location in DCA space def
 Detrended correspondence analysis (DCA) is a common method 
 for ordinating ecological data. It isn't the only such method.
 }
+\seealso{
+This function is ultimately just a wrapper for using \code{decorana} in package \code{vegan}.
+}

@@ -17,7 +17,7 @@
 
 #' @param eventDuration The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.
 
-#' @param halfGradientOnly Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.
+#' @param halfGradientOnly Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1. The default is \code{FALSE} which signals to not simulated a half-gradient.
 
 #' @param includeInitialBackgroundPhase A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.
 
@@ -45,7 +45,7 @@ setupSimulatedGradientChange <- function(
                 bgDurationRange,
                 transitionDuration,
                 eventDuration,
-                halfGradientOnly = "full",
+                halfGradientOnly = FALSE,
                 includeInitialBackgroundPhase = TRUE,
                 plot = FALSE
                 ){
@@ -132,6 +132,11 @@ setupSimulatedGradientChange <- function(
                 lastTime + transitionDuration + eventDuration + transitionDuration,
                 lastTime + transitionDuration + eventDuration + transitionDuration + bgDuration()
                 )
+            # check
+            if(any(is.na(newGradientTime[2:3]))){
+                stop("NAs in newGradientTime in setupSimulatedGradientChange")
+                }
+            # 
             eventStartEndTimes[i,] <- newGradientTime[2:3]
             simGradientTime <- c(simGradientTime, newGradientTime)
             #
@@ -148,7 +153,12 @@ setupSimulatedGradientChange <- function(
                         lastTime + transitionDuration,
                         lastTime + transitionDuration + eventDuration
                         ))
-                
+                    
+                    # check
+                    if(any(is.na(newGradientTime[2:3]))){
+                        stop("NAs in newGradientTime in setupSimulatedGradientChange")
+                        }
+                    # 
                     eventStartEndTimes[i,] <- newGradientTime[2:3]
                     simGradientTime <- c(newGradientTime, simGradientTime)
                     #
@@ -172,7 +182,21 @@ setupSimulatedGradientChange <- function(
              length(simGradientValue),")"
              ))
         }
-    
+
+    # checks
+    if(any(is.na(eventStartEndTimes))){
+        stop("NAs in eventStartEndTimes created by setupSimulatedGradientChange")
+        }
+    if(any(is.na(eventPhaseStartTimes))){
+        stop("NAs in eventPhaseStartTimes created by setupSimulatedGradientChange")
+        }    
+    if(any(is.na(backgroundStartEnd))){
+        stop("NAs in backgroundStartEnd created by setupSimulatedGradientChange")
+        }
+    if(any(is.na(simGradientTime))){
+        stop("NAs in simGradientTime created by setupSimulatedGradientChange")
+        }       
+
     # 07-26-21
     # invert time scale so timesteps increases with depth
         # like in a real sedimentary core, you nut job

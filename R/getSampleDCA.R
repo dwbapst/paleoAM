@@ -26,7 +26,8 @@
 
 # @aliases
 
-# @seealso
+#' @seealso
+#' This function is ultimately just a wrapper for using \code{decorana} in package \code{vegan}.
 
 # @references
 

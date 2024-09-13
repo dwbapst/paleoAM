@@ -22,7 +22,7 @@ simulateFossilAssemblageSeries(
   nEvents,
   nSpecimens,
   specimensPerTimestep = 10000,
-  halfGradientOnly = "full",
+  halfGradientOnly = FALSE,
   useTransformedRelAbundance = TRUE,
   projectIntoOrigDCA = TRUE,
   powerRootTransform = 1,
@@ -47,7 +47,7 @@ project the simulated data into the same detrended correspondence analysis (DCA)
 
 \item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
 
-\item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined.}
+\item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined. This value is referred to as \emph{Resolution Potential} in Belanger & Bapst (2023).}
 
 \item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
 
@@ -69,7 +69,7 @@ project the simulated data into the same detrended correspondence analysis (DCA)
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.}
 
-\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
+\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1. The default is \code{FALSE} which signals to not simulated a half-gradient.}
 
 \item{useTransformedRelAbundance}{Should the DCA be analyzed}
 
@@ -117,7 +117,7 @@ Different parameterizations may be given as input, allowing different parameters
 Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
 }
 \examples{
-# an example with alaskan data
+# an example with Gulf of Alaska data
 
 # load data
 data(gulfOfAlaska)
@@ -135,26 +135,43 @@ alaskaProbOccur <- getProbOccViaPresAbs(
    origAbundData = abundData_GOA
    )
 
- fossilSeriesOut <- simulateFossilAssemblageSeries(
-               kdeRescaled = alaskaKDEs,
-               probSpeciesOccur = alaskaProbOccur,
-               origAbundData = abundData_GOA,
-               eventChangeScale = 0.5,
-               bgGradientValue = 0,
-               fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
-               eventSampleWidthRatio = 2,
-               sampleWidth = 2,
-               eventDuration = 10,
-               samplingCompleteness = 1,
-               transitionDurationRatio = 1/5,
-               bioturbDepthRatio = 0,
-               bioturbIntensity = 0,     
-               nEvents = 1,
-               nSpecimens = 100,
-               plot = TRUE
-               )
+# Run the simulation of fossil assemblages
+    # simulateFossilAssemblageSeries has lots of arguments...
+    # below they are broken up into groups, seperate by #
+    # matches scenarios from fig 13 of Belanger & Bapst
+    
+fossilSeriesOut <- simulateFossilAssemblageSeries(
+      # inputs
+      kdeRescaled = alaskaKDEs,
+      probSpeciesOccur = alaskaProbOccur,
+      origAbundData = abundData_GOA,
+      fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
+      #
+      eventChangeScale = 0.1,
+      bgGradientValue = 0,
+      transitionDurationRatio = 1/5,
+      # 
+      # don't need to define eventSampleWidthRatio
+      sampleWidth = 3,
+      eventDuration = 100, 
+      sedRatePerTimestep = 0.1,
+      #
+      samplingCompleteness = 1/3,
+      bioturbDepthRatio = 0,
+      bioturbIntensity = 0,
+      #     
+      nEvents = 1,
+      nSpecimens = 10,
+      plot = TRUE
+      )
 
 
+}
+\references{
+Belanger, Christina L., and David W. Bapst. 
+"Simulating our ability to accurately detect abrupt 
+changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
+https://doi.org/10.1073/pnas.1602102113
 }
 \seealso{
 \code{\link{calculateImplicitParameters}}

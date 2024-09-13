@@ -45,10 +45,14 @@
 #' @seealso
 #' \code{\link{calculateImplicitParameters}}
 
-# @references
+#' @references
+#' Belanger, Christina L., and David W. Bapst. 
+#' "Simulating our ability to accurately detect abrupt 
+#' changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
+#' https://doi.org/10.1073/pnas.1602102113
 
 #' @examples
-#' # an example with alaskan data
+#' # an example with Gulf of Alaska data
 #' 
 #' # load data
 #' data(gulfOfAlaska)
@@ -66,24 +70,35 @@
 #'    origAbundData = abundData_GOA
 #'    )
 #'
-#'  fossilSeriesOut <- simulateFossilAssemblageSeries(
-#'                kdeRescaled = alaskaKDEs,
-#'                probSpeciesOccur = alaskaProbOccur,
-#'                origAbundData = abundData_GOA,
-#'                eventChangeScale = 0.5,
-#'                bgGradientValue = 0,
-#'                fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
-#'                eventSampleWidthRatio = 2,
-#'                sampleWidth = 2,
-#'                eventDuration = 10,
-#'                samplingCompleteness = 1,
-#'                transitionDurationRatio = 1/5,
-#'                bioturbDepthRatio = 0,
-#'                bioturbIntensity = 0,     
-#'                nEvents = 1,
-#'                nSpecimens = 100,
-#'                plot = TRUE
-#'                )
+#' # Run the simulation of fossil assemblages
+#'     # simulateFossilAssemblageSeries has lots of arguments...
+#'     # below they are broken up into groups, seperate by #
+#'     # matches scenarios from fig 13 of Belanger & Bapst
+#'     
+#' fossilSeriesOut <- simulateFossilAssemblageSeries(
+#'       # inputs
+#'       kdeRescaled = alaskaKDEs,
+#'       probSpeciesOccur = alaskaProbOccur,
+#'       origAbundData = abundData_GOA,
+#'       fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
+#'       #
+#'       eventChangeScale = 0.1,
+#'       bgGradientValue = 0,
+#'       transitionDurationRatio = 1/5,
+#'       # 
+#'       # don't need to define eventSampleWidthRatio
+#'       sampleWidth = 3,
+#'       eventDuration = 100, 
+#'       sedRatePerTimestep = 0.1,
+#'       #
+#'       samplingCompleteness = 1/3,
+#'       bioturbDepthRatio = 0,
+#'       bioturbIntensity = 0,
+#'       #     
+#'       nEvents = 1,
+#'       nSpecimens = 10,
+#'       plot = TRUE
+#'       )
 #' 
 #' 
 
@@ -109,7 +124,7 @@ simulateFossilAssemblageSeries <- function(
                 nSpecimens,
                 #
                 specimensPerTimestep = 10000,
-                halfGradientOnly = "full",
+                halfGradientOnly = FALSE,
                 useTransformedRelAbundance = TRUE,
                 projectIntoOrigDCA = TRUE,
                 powerRootTransform = 1,  

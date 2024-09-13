@@ -15,7 +15,7 @@
 
 #' @param fullGradientRange A vector of two values giving the minumum and maximum gradient values observed in the empirical data.
 
-#' @param eventSampleWidthRatio How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined.
+#' @param eventSampleWidthRatio How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined. This value is referred to as \emph{Resolution Potential} in Belanger & Bapst (2023).
 
 #' @param sampleWidth The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).
 
@@ -39,7 +39,11 @@
 #' @seealso
 #' \code{\link{simulateFossilAssemblageSeries}}
 
-# @references
+#' @references
+#' Belanger, Christina L., and David W. Bapst. 
+#' "Simulating our ability to accurately detect abrupt 
+#' changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
+#' https://doi.org/10.1073/pnas.1602102113
 
 # @examples
 

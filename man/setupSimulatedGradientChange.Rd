@@ -11,7 +11,7 @@ setupSimulatedGradientChange(
   bgDurationRange,
   transitionDuration,
   eventDuration,
-  halfGradientOnly = "full",
+  halfGradientOnly = FALSE,
   includeInitialBackgroundPhase = TRUE,
   plot = FALSE
 )
@@ -29,7 +29,7 @@ setupSimulatedGradientChange(
 
 \item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
 
-\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1.}
+\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1. The default is \code{FALSE} which signals to not simulated a half-gradient.}
 
 \item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
 

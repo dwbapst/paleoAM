@@ -41,6 +41,10 @@ getSampleProperties <- function(
             backgroundStartEnd
             ){
     
+    if(any(is.na(eventStartEndTimes))){
+        stop("NAs in eventStartEndTimes")
+        }
+    
     ###################################################
     # Now, we will get sample age and approximate the true gradient value 
       # for each sample, so we can compare the 'truth' against 
@@ -152,9 +156,10 @@ ageMatchFun <- function(age, eventStartEndTimes){
         if(!any(age[1] > eventStartEndTimes[,2])){
             stop("ageMatchFun couldn't find any events that ended after age[1]")
             }
-        if(!any(age[2] < eventStartEndTimes[,1])){
+        if(!any(eventStartEndTimes[,1] > age[2])){
             stop("ageMatchFun couldn't find any events that started before age[2]")
             }
+    
         # which events does it overlap with
         ageMatch <- (
             age[1] > eventStartEndTimes[,2]  &  
@@ -179,4 +184,4 @@ ageMatchFun <- function(age, eventStartEndTimes){
             }
         
         return(ageMatch)
-        }
+}
