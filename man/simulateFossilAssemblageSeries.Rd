@@ -118,7 +118,7 @@ Missing paramters are then calculated from the specified ones using \code{\link{
 }
 \examples{
 # an example with Gulf of Alaska data
-
+\donttest{
 # load data
 data(gulfOfAlaska)
 
@@ -147,8 +147,8 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
       origAbundData = abundData_GOA,
       fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
       #
-      eventChangeScale = 0.1,
-      bgGradientValue = 0,
+      eventChangeScale = 0.5,
+      bgGradientValue = -1,
       transitionDurationRatio = 1/5,
       # 
       # don't need to define eventSampleWidthRatio
@@ -156,7 +156,7 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
       eventDuration = 100, 
       sedRatePerTimestep = 0.1,
       #
-      samplingCompleteness = 1/3,
+      samplingCompleteness = 1,
       bioturbDepthRatio = 0,
       bioturbIntensity = 0,
       #     
@@ -164,7 +164,7 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
       nSpecimens = 10,
       plot = TRUE
       )
-
+}
 
 }
 \references{

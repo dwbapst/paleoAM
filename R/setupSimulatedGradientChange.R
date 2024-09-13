@@ -190,9 +190,9 @@ setupSimulatedGradientChange <- function(
     if(any(is.na(eventPhaseStartTimes))){
         stop("NAs in eventPhaseStartTimes created by setupSimulatedGradientChange")
         }    
-    if(any(is.na(backgroundStartEnd))){
-        stop("NAs in backgroundStartEnd created by setupSimulatedGradientChange")
-        }
+    #if(any(is.na(backgroundStartEnd))){
+    #    stop("NAs in backgroundStartEnd created by setupSimulatedGradientChange")
+    #    }
     if(any(is.na(simGradientTime))){
         stop("NAs in simGradientTime created by setupSimulatedGradientChange")
         }       

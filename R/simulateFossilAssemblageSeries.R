@@ -53,7 +53,7 @@
 
 #' @examples
 #' # an example with Gulf of Alaska data
-#' 
+#' \donttest{
 #' # load data
 #' data(gulfOfAlaska)
 #' 
@@ -82,8 +82,8 @@
 #'       origAbundData = abundData_GOA,
 #'       fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
 #'       #
-#'       eventChangeScale = 0.1,
-#'       bgGradientValue = 0,
+#'       eventChangeScale = 0.5,
+#'       bgGradientValue = -1,
 #'       transitionDurationRatio = 1/5,
 #'       # 
 #'       # don't need to define eventSampleWidthRatio
@@ -91,7 +91,7 @@
 #'       eventDuration = 100, 
 #'       sedRatePerTimestep = 0.1,
 #'       #
-#'       samplingCompleteness = 1/3,
+#'       samplingCompleteness = 1,
 #'       bioturbDepthRatio = 0,
 #'       bioturbIntensity = 0,
 #'       #     
@@ -99,7 +99,7 @@
 #'       nSpecimens = 10,
 #'       plot = TRUE
 #'       )
-#' 
+#' }
 #' 
 
 #' @name simulateFossilAssemblageSeries
@@ -295,7 +295,7 @@ simulateFossilAssemblageSeries <- function(
     if(plot){
         plotFossilAssemblageSeriesDCA(
             simTimeVar = outList$simTimeVar, 
-            scoreDCA1 = outList$ecology$scoreDCA1_recovered,
+            gradientRecovered = outList$ecology$scoreDCA1_recovered,
             sampleAge = outList$sampleProperties$sampleMidAge
             )
         }

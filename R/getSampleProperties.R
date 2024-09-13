@@ -153,12 +153,12 @@ getSampleProperties <- function(
 
 ageMatchFun <- function(age, eventStartEndTimes){
         # check if there is overlap
-        if(!any(age[1] > eventStartEndTimes[,2])){
-            stop("ageMatchFun couldn't find any events that ended after age[1]")
-            }
-        if(!any(eventStartEndTimes[,1] > age[2])){
-            stop("ageMatchFun couldn't find any events that started before age[2]")
-            }
+        #if(!any(age[1] > eventStartEndTimes[,2])){
+        #    stop("ageMatchFun couldn't find any events that ended after age[1]")
+        #    }
+        #if(!any(eventStartEndTimes[,1] > age[2])){
+        #    stop("ageMatchFun couldn't find any events that started before age[2]")
+        #    }
     
         # which events does it overlap with
         ageMatch <- (
