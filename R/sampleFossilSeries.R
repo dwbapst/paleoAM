@@ -1,39 +1,44 @@
 #' Sample Fossil Assemblage Series
 #'
-#' The 
+#' Given a time-series of 'true' fossil assemblages simulated in precise time,
+#' this function then chunks that 'true' ecological signal into sedimentary
+#' packages, which contain specimens from assemblages spanning the time interval
+#' during which that sediment accumulated. Further more, the inclusion of 
+#' specimens from even more distant assemblages is used to model bioturbation.
 
 #' @details
-#' This function is where bioturbation processes are handled, as well as time-averaging from samples capturing several sedimentary horizons reflecting multiple original fossil assemblages.
+#' This function is where bioturbation processes are handled, 
+#' as well as time-averaging from samples capturing several 
+#' sedimentary horizons reflecting multiple original fossil assemblages.
 #' 
 #' This function is generally run after running \code{\link{getTimestepAbundances}}. 
-#' Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
+#' Most users will likely never run either function, instead running
+#' \code{\link{simulateFossilAssemblageSeries}}.
 
 
-# @inheritParams
+#' @inheritParams calculateImplicitParameters
 
-#' @param bioturbIntensity The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only
-
+#' @param bioturbIntensity The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only 
  
-#' @param bioturbZoneDepth The 
+#' @param bioturbZoneDepth The sediment depth to which bioturbation occurs. For example, Bioturbation depth varies considerably in the modern ocean, but is often around 10 centimeters -- with the top ten centimeters of sediment (and the organic remains in those ten centimeters of sediment) being regularly moved up and down by organism activity. For the purposes of this model, a bioturbation zone depth of 10 centimeters means that sampling a centimeter of sediment at location X, the apparent fossil assemblage that would be recovered is just as likely to include specimens that were deposited five centimeters away as those deposited at location X.
 
 #' @param nSpecimens The number of specimens selected in each individual sample.
 
-#' @param distBetweenSamples The 
- 
-#' @param sampleWidth The 
+#' @param distBetweenSamples The sedimentary thickness between successive 
+#' samples, in the same units as \code{sampleWidth}.
  
 #' @param simTimeVar A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.
-#' 
+
 #' @param timestepAbundances A matrix containing abundances for species as a series of simulated assemblages, output by \code{\link{getTimestepAbundances}}.
  
 
 
 #' @return
 #' A list composed of four components:
-#' \code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values.
-#' \code{abundanceTable}, 
-#' \code{sampleIntervals},
-#' and \code{bioturbIntervals},
+#' \code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values;
+#' \code{abundanceTable}, a table of the abundances of species in each sample;
+#' \code{sampleIntervals}, a table specifying when in time each sample 'begins' and 'ends' in time (based on the sedimentation rate),
+#' and \code{bioturbIntervals}, a table specifying which intervals are 'included' in a sample 
 
 # @aliases
 
@@ -69,7 +74,9 @@ sampleFossilSeries <- function(
     # make a matrix
     sampleIntervals <- matrix(c(distBetweenSamples, distBetweenSamples + sampleWidth), 1, 2)
     # run a while loop
-    while(max(sampleIntervals[,1]) < (max(simTimeVar$sedColumnDepth) - sampleWidth - distBetweenSamples)){
+    while(max(sampleIntervals[,1]) < (
+            max(simTimeVar$sedColumnDepth) - sampleWidth - distBetweenSamples
+            )){
         newSampleInterval <- sampleIntervals[nrow(sampleIntervals),2] + distBetweenSamples
         newSampleInterval <- c(newSampleInterval, newSampleInterval + sampleWidth)
         sampleIntervals <- rbind(sampleIntervals, newSampleInterval)
@@ -97,10 +104,14 @@ sampleFossilSeries <- function(
         bioturbIntervals <- sampleMidDepth + bioturbZoneDepth/2
         bioturbIntervals <- cbind(bioturbIntervals, sampleMidDepth - bioturbZoneDepth/2)
         #
-        bioturbIntervals[bioturbIntervals[,1] < min(simTimeVar$sedColumnDepth), 1] <- min(simTimeVar$sedColumnDepth)
-        bioturbIntervals[bioturbIntervals[,2] < min(simTimeVar$sedColumnDepth), 2] <- min(simTimeVar$sedColumnDepth)
-        bioturbIntervals[bioturbIntervals[,1] > max(simTimeVar$sedColumnDepth), 1] <- max(simTimeVar$sedColumnDepth)
-        bioturbIntervals[bioturbIntervals[,2] > max(simTimeVar$sedColumnDepth), 2 ] <- max(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,1] < min(simTimeVar$sedColumnDepth), 1
+            ] <- min(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,2] < min(simTimeVar$sedColumnDepth), 2
+            ] <- min(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,1] > max(simTimeVar$sedColumnDepth), 1
+            ] <- max(simTimeVar$sedColumnDepth)
+        bioturbIntervals[bioturbIntervals[,2] > max(simTimeVar$sedColumnDepth), 2 
+            ] <- max(simTimeVar$sedColumnDepth)
         
     }else{
 
@@ -136,9 +147,13 @@ sampleFossilSeries <- function(
             selectedTimesteps <- timesteps_After & timesteps_Before
             selectedTimesteps <- which(selectedTimesteps)
 
-            # 'sample timesteps' are those 'selected timesteps' that are the timesteps in the 'actual' sample
-            timesteps_After  <- (simTimeVar$sedColumnDepth[selectedTimesteps] <= sampleIntervals[i,1])
-            timesteps_Before <- (sampleIntervals[i,2] <= simTimeVar$sedColumnDepth[selectedTimesteps])
+            # 'sample timesteps' are those 'selected timesteps' 
+                # that are the timesteps in the 'actual' sample
+            timesteps_After  <- (
+                simTimeVar$sedColumnDepth[selectedTimesteps] <= sampleIntervals[i,1])
+            timesteps_Before <- (
+                sampleIntervals[i,2] <= simTimeVar$sedColumnDepth[selectedTimesteps])
+            
             sampleTimesteps  <- timesteps_After & timesteps_Before
             sampleTimesteps  <- which(sampleTimesteps)
             

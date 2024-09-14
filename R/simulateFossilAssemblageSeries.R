@@ -81,22 +81,29 @@
 #'       probSpeciesOccur = alaskaProbOccur,
 #'       origAbundData = abundData_GOA,
 #'       fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
-#'       #
+#'       
+#'       # let's make it relatively mild event 
+#'         # with a long transition 
 #'       eventChangeScale = 0.5,
 #'       bgGradientValue = -1,
-#'       transitionDurationRatio = 1/5,
-#'       # 
-#'       # don't need to define eventSampleWidthRatio
+#'       transitionDurationRatio = 1,
+#'        
+#'       # don't need to define eventSampleWidthRatio 
+#'         # - only need to define three of eventSampleWidthRatio, 
+#'         # sampleWidth, eventDuration, sedRatePerTimestep
 #'       sampleWidth = 3,
 #'       eventDuration = 100, 
 #'       sedRatePerTimestep = 0.1,
-#'       #
-#'       samplingCompleteness = 1,
+#'       
+#'       # sample every third sample-width worth of core
+#'       samplingCompleteness = 1/3,
+#'       # no bioturbation 
 #'       bioturbDepthRatio = 0,
 #'       bioturbIntensity = 0,
-#'       #     
+#'            
 #'       nEvents = 1,
-#'       nSpecimens = 10,
+#'       nSpecimens = 100,
+#'       # let's plot it
 #'       plot = TRUE
 #'       )
 #' }
