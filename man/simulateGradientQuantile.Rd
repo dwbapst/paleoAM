@@ -23,14 +23,9 @@ simulateGradientQuantile(
 
 \item{gradientValue}{The gradient value to simulate assemblages at.}
 
-\item{origAbundData}{The original matrix of abundance data, to be used to
-project the simulated data into the same detrended correspondence analysis (DCA) space.}
-
 \item{kdeRescaled}{The list of modeled KDEs for species abundance, output from \code{\link{getSpeciesSpecificRescaledKDE}}.}
 
 \item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
-
-\item{powerRootTransform}{The power-root transform to be used on the abundance data before applying the DCA. By default this is 1, which means the data is not transformed at all. Note that the power-root transform is only performed if \code{useTransformedRelAbundance = TRUE}.}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage.}
 

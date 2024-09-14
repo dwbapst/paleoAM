@@ -17,11 +17,17 @@ sampleFossilSeries(
 \arguments{
 \item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
 
-\item{bioturbZoneDepth}{The}
+\item{bioturbZoneDepth}{The sediment depth to which bioturbation occurs. For example, Bioturbation depth varies considerably in the modern ocean, but is often around 10 centimeters -- with the top ten centimeters of sediment (and the organic remains in those ten centimeters of sediment) being regularly moved up and down by organism activity. For the purposes of this model, a bioturbation zone depth of 10 centimeters means that sampling a centimeter of sediment at location X, the apparent fossil assemblage that would be recovered is just as likely to include specimens that were deposited five centimeters away as those deposited at location X.}
 
-\item{distBetweenSamples}{The}
+\item{distBetweenSamples}{The sedimentary thickness between successive 
+samples, in the same units as \code{sampleWidth}.}
 
-\item{sampleWidth}{The}
+\item{sampleWidth}{The 'width' of a sample relative to core depth 
+or outcrop height, usually given in linear units (usually centimeters). 
+For taking sediment samples from a core, this is straightforward 
+(how thick is each sediment sample taken?) but for outcrops this 
+may be more difficult to determine 
+(what is the thickness of a horizon in a shale unit?).}
 
 \item{simTimeVar}{A data-frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages.}
 
@@ -31,19 +37,26 @@ sampleFossilSeries(
 }
 \value{
 A list composed of four components:
-\code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values.
-\code{abundanceTable}, 
-\code{sampleIntervals},
-and \code{bioturbIntervals},
+\code{simTimeVar}, the input data-frame specifying time-steps, sedimentary depth and environmental gradient values;
+\code{abundanceTable}, a table of the abundances of species in each sample;
+\code{sampleIntervals}, a table specifying when in time each sample 'begins' and 'ends' in time (based on the sedimentation rate),
+and \code{bioturbIntervals}, a table specifying which intervals are 'included' in a sample
 }
 \description{
-The
+Given a time-series of 'true' fossil assemblages simulated in precise time,
+this function then chunks that 'true' ecological signal into sedimentary
+packages, which contain specimens from assemblages spanning the time interval
+during which that sediment accumulated. Further more, the inclusion of 
+specimens from even more distant assemblages is used to model bioturbation.
 }
 \details{
-This function is where bioturbation processes are handled, as well as time-averaging from samples capturing several sedimentary horizons reflecting multiple original fossil assemblages.
+This function is where bioturbation processes are handled, 
+as well as time-averaging from samples capturing several 
+sedimentary horizons reflecting multiple original fossil assemblages.
 
 This function is generally run after running \code{\link{getTimestepAbundances}}. 
-Most users will likely never run either function, instead running \code{\link{simulateFossilAssemblageSeries}}.
+Most users will likely never run either function, instead running
+\code{\link{simulateFossilAssemblageSeries}}.
 }
 \seealso{
 This function is generally run after running

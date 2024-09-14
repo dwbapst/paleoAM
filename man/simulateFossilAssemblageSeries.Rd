@@ -38,50 +38,103 @@ simulateFossilAssemblageSeries(
 
 \item{probSpeciesOccur}{The output from \code{\link{getProbOccViaPresAbs}}}
 
-\item{origAbundData}{The original matrix of abundance data, to be used to
-project the simulated data into the same detrended correspondence analysis (DCA) space.}
+\item{eventChangeScale}{A value indicating the amount relative to 
+the background value (\code{bgGradientValue}) and the maximum 
+possible change as indicated by \code{fullGradientRange} 
+(in other words, simulated change must be within observed gradient, 
+so \code{eventChangeScale} is a proportional multiplier of 
+the total possible change).}
 
-\item{eventChangeScale}{A value indicating the amount relative to the background value (\code{bgGradientValue}) and the maximum possible change as indicated by \code{fullGradientRange} (in other words, simulated change must be within observed gradient, so \code{eventChangeScale} is a proportional multiplier of the total possible change).}
+\item{bgGradientValue}{The gradient value expected during 
+background intervals during which no notable excursion is 
+occurring on that environmental gradient.}
 
-\item{bgGradientValue}{The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.}
+\item{fullGradientRange}{A vector of two values giving the minimum 
+and maximum gradient values observed in the empirical data.}
 
-\item{fullGradientRange}{A vector of two values giving the minumum and maximum gradient values observed in the empirical data.}
+\item{eventSampleWidthRatio}{How long should an event be relative 
+to the amount of time (or sediment) captured within a sedimentary sample? 
+This parameter is used for simulating event duration, 
+sample width and sedimentation rate where any two of these three 
+are defined and the third is not defined. 
+This value is referred to as \emph{Resolution Potential} 
+in Belanger & Bapst (2023).}
 
-\item{eventSampleWidthRatio}{How long should an event be relative to the amount of time (or sediment) captured within a sedimentary sample? This parameter is used for simulating event duration, sample width and sedimentation rate where any two of these three are defined and the third is not defined. This value is referred to as \emph{Resolution Potential} in Belanger & Bapst (2023).}
+\item{sampleWidth}{The 'width' of a sample relative to core depth 
+or outcrop height, usually given in linear units (usually centimeters). 
+For taking sediment samples from a core, this is straightforward 
+(how thick is each sediment sample taken?) but for outcrops this 
+may be more difficult to determine 
+(what is the thickness of a horizon in a shale unit?).}
 
-\item{sampleWidth}{The 'width' of a sample relative to core depth or outcrop height, usually given in linear units (usually centimeters). For taking sediment samples from a core, this is straightforward (how thick is each sediment sample taken?) but for outcrops this may be more difficult to determine (what is the thickness of a horizon in a shale unit?).}
+\item{eventDuration}{The duration (in time-units) of a 
+simulated event during which the environmental gradient 
+is at an excursion 'peak' level.}
 
-\item{eventDuration}{The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.}
+\item{sedRatePerTimestep}{The rate of sedimentation, given as a 
+ratio of sediment thickness (given in linear dimensions, 
+in the same units as \code{sampleWidth}), over time 
+(given in the same time units as \code{eventDuration}.}
 
-\item{sedRatePerTimestep}{The}
+\item{samplingCompleteness}{The relative completeness of stratigraphic 
+sampling. For example, if two-centimeter wide samples of sediment are 
+taken from a sediment core, every ten centimeters, then the 
+\code{samplingCompleteness} is two over 10, or that
+\code{samplingCompleteness = 1/5}. A simulation with a sampling 
+completeness of 1 would be comparable to exhaustively sampling a 
+core that recorded no gaps in sedimentation over its history. 
+Rocky outcrops are more complicated, as fossil-bearing horizons 
+may be relatively thin compared to the thickness of the section, 
+such that outcrop-based fossil records should be simulated as 
+having \emph{very low} \code{samplingCompleteness}.}
 
-\item{samplingCompleteness}{The}
+\item{transitionDurationRatio}{The ratio of how long the transition 
+between peak and background intervals should be, relative to the 
+length of the peak 'event' duration (\code{eventDuration}). 
+The longer this transition interval, the more chances of 
+an assemblage being sampled that represents transitional gradient values.}
 
-\item{transitionDurationRatio}{The}
-
-\item{bioturbDepthRatio}{The}
+\item{bioturbDepthRatio}{The ratio of the sediment depth to which 
+bioturbation occurs, made relative to the width of a 
+sediment sample (\code{sampleWidth}). 
+A \code{sampleWidth} of 3 cm and a \code{biotubDepthRatio} 
+of 5 implies a bioturbation depth of 15 cm (\code{3 * 5}).  
+Bioturbation depth varies considerably in the modern ocean, but is 
+often the depth of active bioturbation is about 10 cm, such that the 
+top ten centimeters of sediment 
+(and the organic remains in those ten centimeters of sediment) 
+are being regularly moved up and down by organism activity. 
+For the purposes of this model, a bioturbation zone depth of 
+10 centimeters means that sampling a centimeter of sediment 
+at location X, the apparent fossil assemblage that would be 
+recovered is just as likely to include specimens that were 
+deposited five centimeters away as those deposited at location X.}
 
 \item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
 
-\item{nEvents}{Number of events to occur in a simulated sequence of gradient change.}
+\item{nEvents}{Number of events to occur in a simulated sequence 
+of gradient change.}
 
 \item{nSpecimens}{The number of specimens selected in each individual sample.}
 
 \item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.}
 
-\item{halfGradientOnly}{Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1. The default is \code{FALSE} which signals to not simulated a half-gradient.}
+\item{halfGradientOnly}{Whether to simulate only half of 
+a background-event sequence, either beginning or terminating 
+the simulation at the peak value. 
+Only a single event can be simulated, so \code{nEvents} must be 1. 
+The default is \code{FALSE} which signals to not simulated a half-gradient.}
 
-\item{useTransformedRelAbundance}{Should the DCA be analyzed}
+\item{maxSampleTimeStep}{The maximum number of individual time-steps 
+used for simulating a sample.}
 
-\item{projectIntoOrigDCA}{Should the new simulated data be projected in the DCA generated by analyzing the original data? This is \code{TRUE} by default, which is what most users will likely use, as it is the preferable way to consider how the new simulated data relates to the original data.}
+\item{minSampleTimeStep}{The minimum number of individual time-steps 
+used for simulating a sample.}
 
-\item{powerRootTransform}{The power-root transform to be used on the abundance data before applying the DCA. By default this is 1, which means the data is not transformed at all. Note that the power-root transform is only performed if \code{useTransformedRelAbundance = TRUE}.}
-
-\item{maxSampleTimeStep}{The}
-
-\item{minSampleTimeStep}{The}
-
-\item{includeInitialBackgroundPhase}{A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.}
+\item{includeInitialBackgroundPhase}{A logical indicating whether 
+to include a lengthy background phase, for use in calibrating a simulation. 
+This function is mainly for diagnostic purposes 
+and may be removed in future updates.}
 
 \item{plot}{Should the simulated time-series of fossil assemblages be shown as a sequence of generating and recovered gradient values against time? Default is \code{FALSE}.}
 
@@ -146,22 +199,29 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
       probSpeciesOccur = alaskaProbOccur,
       origAbundData = abundData_GOA,
       fullGradientRange = c(min(DCA1_GOA), max(DCA1_GOA)),
-      #
+      
+      # let's make it relatively mild event 
+        # with a long transition 
       eventChangeScale = 0.5,
       bgGradientValue = -1,
-      transitionDurationRatio = 1/5,
-      # 
-      # don't need to define eventSampleWidthRatio
+      transitionDurationRatio = 1,
+       
+      # don't need to define eventSampleWidthRatio 
+        # - only need to define three of eventSampleWidthRatio, 
+        # sampleWidth, eventDuration, sedRatePerTimestep
       sampleWidth = 3,
       eventDuration = 100, 
       sedRatePerTimestep = 0.1,
-      #
-      samplingCompleteness = 1,
+      
+      # sample every third sample-width worth of core
+      samplingCompleteness = 1/3,
+      # no bioturbation 
       bioturbDepthRatio = 0,
       bioturbIntensity = 0,
-      #     
+           
       nEvents = 1,
-      nSpecimens = 10,
+      nSpecimens = 100,
+      # let's plot it
       plot = TRUE
       )
 }
