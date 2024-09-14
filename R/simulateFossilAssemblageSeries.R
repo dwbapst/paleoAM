@@ -14,7 +14,7 @@
 #' @inheritParams calculateImplicitParameters 
 #' @inheritParams sampleFossilSeries
 #' @inheritParams getTimestepAbundances
-#' @inheritParams quantifyCommunityEcology
+# @inheritParams quantifyCommunityEcology
 
 #' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.
 
