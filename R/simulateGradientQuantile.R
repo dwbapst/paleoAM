@@ -7,6 +7,7 @@
 
 #' @inheritParams getTimestepAbundances 
 #' @inheritParams sampleFossilSeries
+#' @inheritParams simulateFossilAssemblageSeries
 # @inheritParams quantifyCommunityEcology
 
 #' @param quantileProbs The quantile for which to return on the recovered gradient values from the simulated assemblages. (Technically multiple quantiles can be given, for which a value will be returned for each.

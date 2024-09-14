@@ -4,7 +4,8 @@
 #' stochastically models changes in an underlying biotic gradient and simulates
 #' ecological change and a sequence of samples representing change in recovered
 #' fossil assemblages over that interval, 
-#' including estimating the recovered gradient via \code{quantifyCommunityEcology}.
+#' including estimating the recovered gradient. 
+#  via \code{quantifyCommunityEcology}.
 
 #' @details
 #' Different parameterizations may be given as input, allowing different parameters to be unspecified.
@@ -14,6 +15,7 @@
 #' @inheritParams calculateImplicitParameters 
 #' @inheritParams sampleFossilSeries
 #' @inheritParams getTimestepAbundances
+#' @inheritParams getSampleDCA 
 # @inheritParams quantifyCommunityEcology
 
 #' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.
@@ -29,7 +31,8 @@
 #' \code{maxTime}, the total duration of the entire simulated time-series from start to end;
 #' \code{simTimeVar}, a data frame specifying time-steps, sedimentary depth and environmental gradient values for simulating a time-series of sampled fossil assemblages, used as input in \code{\link{sampleFossilSeries}};
 #' \code{fossilSeries}, a list containing the simulated time-series of sampled fossil assemblages from \code{\link{sampleFossilSeries}},
-#' \code{ecology}, the recovered ecological variables for each simulated sample, as returned by \code{quantifyCommunityEcology},
+#' \code{ecology}, the recovered ecological variables for each simulated sample, 
+#'      as returned by internal function \code{quantifyCommunityEcology},
 #' and \code{sampleProperties}, a list containing a number of variables specific to individual .
 #' 
 #' If \code{thinList = TRUE} is used, then the output list

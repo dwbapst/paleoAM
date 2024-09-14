@@ -1,20 +1,20 @@
-#' Quantify Community Ecology From a Time Series of Simulated Fossil Assemblages
-#' 
-#' Given the output from functions such as \code{simulateFossilAssemblageSeries}, 
-#' this function calculates various ecological measures that might be used as
-#' 'recovered' gradient values to compare against the original generating gradient values.
+# Quantify Community Ecology From a Time Series of Simulated Fossil Assemblages
+# 
+# Given the output from functions such as \code{simulateFossilAssemblageSeries}, 
+# this function calculates various ecological measures that might be used as
+# 'recovered' gradient values to compare against the original generating gradient values.
 
-#' @details
-#' Quantifies 
+# @details
+# Quantifies 
 
-#' @inheritParams getSampleDCA
+# @inheritParams getSampleDCA
 
-#' @param fossilSeries The
+# @param fossilSeries The
 
 
-#' @return
-#' A list containing the input data and arguments, as well as the 
-#' DCA score values found  
+# @return
+# A list containing the input data and arguments, as well as the 
+# DCA score values found  
 
 # @aliases
 
@@ -25,9 +25,9 @@
 # @examples
 
 
-#' @name quantifyCommunityEcology
-#' @rdname quantifyCommunityEcology
-#' @export
+# @name quantifyCommunityEcology
+# @rdname quantifyCommunityEcology
+# @export
 quantifyCommunityEcology <- function(
         origAbundData, 
         fossilSeries, 
