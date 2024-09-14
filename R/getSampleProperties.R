@@ -17,8 +17,8 @@
 
 # @param backgroundStartEnd The
 
-#' @return
-#' The
+# @return
+# The
 
 # @aliases
 
