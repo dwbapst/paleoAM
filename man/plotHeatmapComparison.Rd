@@ -67,7 +67,7 @@ different levels show on the color-gradient key shown to the side of the contour
 This function returns nothing at all as output. It just makes a plot.
 }
 \description{
-This function is a complex wrapper of the functions \code{contour} and \code{filled.contour} which allows a user to combine colored contours for the surface of a third variables plotted across a two-dimensional space, with contour lines of the third varuiable's surface also plotted in that same two-dimensional space. This is often a common plotting need for this package, and thus is included here.
+This function is a complex wrapper of the functions \code{contour} and \code{filled.contour} which allows a user to combine colored contours for the surface of a third variables plotted across a two-dimensional space, with contour lines of the third variable's surface also plotted in that same two-dimensional space. This is often a common plotting need for this package, and thus is included here.
 }
 \details{
 The function \code{filled.contour} doesn't easy allow for sequential modifications, like adding additional contour lines to an existing contour plot, and so this function simplifies having to write the second \code{contour} plot as an argument for \code{plot.axes} in \code{filled.contour}.

@@ -37,10 +37,9 @@
 #' Petr Štorch, Kristi L. Carlucci, and Andrew D. Hawkins. 
 #' "Graptolite community responses to global climate change and 
 #' the Late Ordovician mass extinction." Proceedings of the National 
-#' Academy of Sciences 113, no. 30 (2016): 8380-8385. 
-#' https://doi.org/10.1073/pnas.1602102113
+#' Academy of Sciences 113, no. 30 (2016): 8380-8385.
 
-#' @seealso gulfOfAlaska
+#' @seealso \code{\link{gulfOfAlaska}}
 
 #' @keywords datasets
 

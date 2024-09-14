@@ -2,7 +2,7 @@
 % Please edit documentation in R/getSampleDCA.R
 \name{getSampleDCA}
 \alias{getSampleDCA}
-\title{Get the Detrended Correspondance Analysis (DCA) Score Value for A Single Sample}
+\title{Get the Detrended correspondence Analysis (DCA) Score Value for A Single Sample}
 \usage{
 getSampleDCA(
   simSample,
@@ -38,7 +38,8 @@ For a single simulated assemblage sample, projects its location in DCA space def
 }
 \details{
 Detrended correspondence analysis (DCA) is a common method 
-for ordinating ecological data. It isn't the only such method.
+for producing an ordination of ecological data. 
+It isn't the only such method.
 }
 \seealso{
 This function is ultimately just a wrapper for using \code{decorana} in package \code{vegan}.

@@ -112,7 +112,7 @@ may be equivalent, even though the a particular analysis might
 be better simulated using a particular set of parameters. 
 Allowing various different parameterizations is a useful 
 generalization, but requires translating those equivalent parameters 
-from one set to another (eg specifying parameters A, C & D, 
+from one set to another (e.g. specifying parameters A, C & D, 
 but running a simulation that requires parameters A, B & C).
 
 This function mainly exists to calculate unspecified parameters 
@@ -120,10 +120,10 @@ for \code{\link{simulateFossilAssemblageSeries}} and also to
 identify conflicting parameter specifications.
 }
 \references{
-Belanger, Christina L., and David W. Bapst. 
+Belanger, Christina L., and David W. Bapst. 2023.
 "Simulating our ability to accurately detect abrupt 
-changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
-https://doi.org/10.1073/pnas.1602102113
+changes in assemblage-based paleoenvironmental proxies." 
+Palaeontologia Electronica 26 (2), 1-32
 }
 \seealso{
 \code{\link{simulateFossilAssemblageSeries}}

@@ -8,7 +8,7 @@
 \alias{abundData_GOA}
 \title{Benthic Foram Abundances from the Gulf of Alaska Reported by Sharon et al 2021}
 \format{
-This dataset is composed of three objects: 
+This data set is composed of three objects: 
 
 \describe{
 \item{fullDataTable_GOA}{The full data table containing sample IDs, DCA-1
@@ -20,10 +20,10 @@ scores and species abundances.}
  species for each sample.}}
 }
 \source{
-Belanger, Christina L., and David W. Bapst. 
+Belanger, Christina L., and David W. Bapst. 2023.
 "Simulating our ability to accurately detect abrupt 
-changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
-https://doi.org/10.1073/pnas.1602102113
+changes in assemblage-based paleoenvironmental proxies." 
+Palaeontologia Electronica 26 (2), 1-32
 
 Jaeger, J.M., Gulick, S.P.S., LeVay, L.J., Asahi, H., Bahlburg, H., 
 Belanger, C.L., Berbel, G.B.B., Childress, L.B., Cowan, E.A., Drab, L., 
@@ -33,15 +33,14 @@ Müller, J., Nakamura, A., Ojima, T., Ridgway, K.D., Rodrigues Ribeiro, F.,
 Romero, O.E., Slagle, A.L., Stoner, J.S., St-Onge, G., Suto, I., 
 Walczak, M.H., and Worthington, L.L., 2014. Expedition 341 summary. 
 In Jaeger, J.M., Gulick, S.P.S., LeVay, L.J., and the 
-Expedition 341 Scientists, Proc. IODP, 341: College Station, TX 
-(Integrated Ocean Drilling Program). doi:10.2204/iodp.proc.341.101.2014
+Expedition 341 Scientists, Proceedings of IODP, 341: College Station, TX 
+(Integrated Ocean Drilling Program). 
 
 Sharon, Christina Belanger, Jianghui Du, and Alan Mix. 
 "Reconstructing paleo‐oxygenation for the last 54,000 years in the 
 Gulf of Alaska using cross‐validated benthic foraminiferal and 
 geochemical records." Paleoceanography and Paleoclimatology 
 36, no. 2 (2021): e2020PA003986.
-https://doi.org/10.1029/2020PA003986
 }
 \description{
 Loads the foraminifera abundances collected and published by Sharon et al. (2021),
@@ -53,7 +52,7 @@ for 48 species of benthic foraminifera, across 355 samples, taken from Sharon
 et al (2021). These samples were collected from the less than 63 micrometer size-fractions
 taken from Integrated Ocean Drilling Program Expedition 341 Site U141 and the 
 co-located jumbo piston core, respectively located at 697 meters and 682 meters
- water depth in the Gulf of Alaska (Jaeger et al., 2014).
+water depth in the Gulf of Alaska (Jaeger et al., 2014).
 }
 \examples{
 data(gulfOfAlaska)
@@ -78,6 +77,6 @@ save(fullDataTable_GOA, DCA1_GOA, abundData_GOA,
 
 }
 \seealso{
-hirnantian
+\code{\link{hirnantian}}
 }
 \keyword{datasets}

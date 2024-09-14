@@ -15,7 +15,7 @@ sampleFossilSeries(
 )
 }
 \arguments{
-\item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
+\item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value between 0 and 1. When intensity is 1, a given sample will consist only}
 
 \item{bioturbZoneDepth}{The sediment depth to which bioturbation occurs. For example, Bioturbation depth varies considerably in the modern ocean, but is often around 10 centimeters -- with the top ten centimeters of sediment (and the organic remains in those ten centimeters of sediment) being regularly moved up and down by organism activity. For the purposes of this model, a bioturbation zone depth of 10 centimeters means that sampling a centimeter of sediment at location X, the apparent fossil assemblage that would be recovered is just as likely to include specimens that were deposited five centimeters away as those deposited at location X.}
 

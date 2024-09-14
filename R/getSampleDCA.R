@@ -1,10 +1,11 @@
-#' Get the Detrended Correspondance Analysis (DCA) Score Value for A Single Sample
+#' Get the Detrended correspondence Analysis (DCA) Score Value for A Single Sample
 #' 
 #' For a single simulated assemblage sample, projects its location in DCA space defined by the original abundance data.
 
 #' @details
 #' Detrended correspondence analysis (DCA) is a common method 
-#' for ordinating ecological data. It isn't the only such method.
+#' for producing an ordination of ecological data. 
+#' It isn't the only such method.
 
 #' @param simSample The assemblage data for a single sample (presumably from a simulation).
 

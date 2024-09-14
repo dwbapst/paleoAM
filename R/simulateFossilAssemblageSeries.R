@@ -8,8 +8,10 @@
 #  via \code{quantifyCommunityEcology}.
 
 #' @details
-#' Different parameterizations may be given as input, allowing different parameters to be unspecified.
-#' Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
+#' Different parameterizations may be given as input, 
+#' allowing different parameters to be unspecified.
+#' Missing parameters are then calculated from the specified 
+#' ones using \code{\link{calculateImplicitParameters}}.
 
 #' @inheritParams setupSimulatedGradientChange 
 #' @inheritParams calculateImplicitParameters 
@@ -18,11 +20,17 @@
 #' @inheritParams getSampleDCA 
 # @inheritParams quantifyCommunityEcology
 
-#' @param specimensPerTimestep The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.
+#' @param specimensPerTimestep The number of specimens returned in a 
+#' given time-step by \code{getTimestepAbundances}, usually set to an 
+#' unrealistically high number to represent the 
+#' true 'unsampled' fossil assemblage. Default is 10000.
 
-#' @param plot Should the simulated time-series of fossil assemblages be shown as a sequence of generating and recovered gradient values against time? Default is \code{FALSE}.
+#' @param plot Should the simulated time-series of fossil assemblages 
+#' be shown as a sequence of generating and recovered gradient values 
+#' against time? Default is \code{FALSE}.
  
-#' @param thinOutput Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.
+#' @param thinOutput Should the output be thinned to just the 
+#' sample properties and intrinsic variables? Default is FALSE.
 
 #' @return
 #' Returns a list, which by default has seven components: 
@@ -49,10 +57,10 @@
 #' \code{\link{calculateImplicitParameters}}
 
 #' @references
-#' Belanger, Christina L., and David W. Bapst. 
+#' Belanger, Christina L., and David W. Bapst. 2023.
 #' "Simulating our ability to accurately detect abrupt 
-#' changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
-#' https://doi.org/10.1073/pnas.1602102113
+#' changes in assemblage-based paleoenvironmental proxies." 
+#' Palaeontologia Electronica 26 (2), 1-32
 
 #' @examples
 #' # an example with Gulf of Alaska data

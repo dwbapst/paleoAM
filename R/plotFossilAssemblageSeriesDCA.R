@@ -1,4 +1,4 @@
-#' Plot the Recovered DCA Valies of a Fossil Assemblage Series 
+#' Plot the Recovered DCA Values of a Fossil Assemblage Series 
 #' 
 #' Makes a plot of the simulated generating gradient over time along with the
 #' recovered gradient values in the same plot for a given simulated time series 
@@ -19,9 +19,11 @@
 #' \code{gradientRecovered}, the recovered gradient values; and
 #' \code{sampleAge}, the age of individual samples.
  
-#' @param colSimGenerating What color should be used for the generating ("true") gradient values?
+#' @param colSimGenerating What color should be used for the generating 
+#' ("true") gradient values?
 
-#' @param colSimRecovered What color should be used for the recovered gradient values calculated 
+#' @param colSimRecovered What color should be used for the recovered 
+#' gradient values calculated from the simulated data?
 
 #' @return
 #' Returns nothing at all. Just a plot. That's all!

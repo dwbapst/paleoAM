@@ -21,8 +21,7 @@ Sheets, H. David, Charles E. Mitchell, Michael J. Melchin, Jason Loxton,
 Petr Štorch, Kristi L. Carlucci, and Andrew D. Hawkins. 
 "Graptolite community responses to global climate change and 
 the Late Ordovician mass extinction." Proceedings of the National 
-Academy of Sciences 113, no. 30 (2016): 8380-8385. 
-https://doi.org/10.1073/pnas.1602102113
+Academy of Sciences 113, no. 30 (2016): 8380-8385.
 }
 \description{
 This is a data set of relative abundances for planktonic graptolite species 
@@ -66,6 +65,6 @@ save(graptCommData, graptSampleInfo,
 
 }
 \seealso{
-gulfOfAlaska
+\code{\link{gulfOfAlaska}}
 }
 \keyword{datasets}

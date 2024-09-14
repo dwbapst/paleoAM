@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotFossilAssemblageSeriesDCA.R
 \name{plotFossilAssemblageSeriesDCA}
 \alias{plotFossilAssemblageSeriesDCA}
-\title{Plot the Recovered DCA Valies of a Fossil Assemblage Series}
+\title{Plot the Recovered DCA Values of a Fossil Assemblage Series}
 \usage{
 plotFossilAssemblageSeriesDCA(
   ...,
@@ -18,9 +18,11 @@ sedimentary width and gradient values for a time-series simulation);
 \code{gradientRecovered}, the recovered gradient values; and
 \code{sampleAge}, the age of individual samples.}
 
-\item{colSimGenerating}{What color should be used for the generating ("true") gradient values?}
+\item{colSimGenerating}{What color should be used for the generating 
+("true") gradient values?}
 
-\item{colSimRecovered}{What color should be used for the recovered gradient values calculated}
+\item{colSimRecovered}{What color should be used for the recovered 
+gradient values calculated from the simulated data?}
 }
 \value{
 Returns nothing at all. Just a plot. That's all!

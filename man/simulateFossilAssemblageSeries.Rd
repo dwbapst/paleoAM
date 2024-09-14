@@ -113,14 +113,17 @@ at location X, the apparent fossil assemblage that would be
 recovered is just as likely to include specimens that were 
 deposited five centimeters away as those deposited at location X.}
 
-\item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value fbetween 0 and 1. When intensity is 1, a given sample will consist only}
+\item{bioturbIntensity}{The degree of mixing within the bioturbation zone, as a value between 0 and 1. When intensity is 1, a given sample will consist only}
 
 \item{nEvents}{Number of events to occur in a simulated sequence 
 of gradient change.}
 
 \item{nSpecimens}{The number of specimens selected in each individual sample.}
 
-\item{specimensPerTimestep}{The number of specimens returned in a given time-step by \code{getTimestepAbundances}, usually set to an unrealistically high number to represent the true 'unsampled' fossil assemblage. Default is 10000.}
+\item{specimensPerTimestep}{The number of specimens returned in a 
+given time-step by \code{getTimestepAbundances}, usually set to an 
+unrealistically high number to represent the 
+true 'unsampled' fossil assemblage. Default is 10000.}
 
 \item{halfGradientOnly}{Whether to simulate only half of 
 a background-event sequence, either beginning or terminating 
@@ -145,9 +148,12 @@ to include a lengthy background phase, for use in calibrating a simulation.
 This function is mainly for diagnostic purposes 
 and may be removed in future updates.}
 
-\item{plot}{Should the simulated time-series of fossil assemblages be shown as a sequence of generating and recovered gradient values against time? Default is \code{FALSE}.}
+\item{plot}{Should the simulated time-series of fossil assemblages 
+be shown as a sequence of generating and recovered gradient values 
+against time? Default is \code{FALSE}.}
 
-\item{thinOutput}{Should the output be thinned to just the sample properties and intrinsic variables? Default is FALSE.}
+\item{thinOutput}{Should the output be thinned to just the 
+sample properties and intrinsic variables? Default is FALSE.}
 }
 \value{
 Returns a list, which by default has seven components: 
@@ -176,8 +182,10 @@ fossil assemblages over that interval,
 including estimating the recovered gradient.
 }
 \details{
-Different parameterizations may be given as input, allowing different parameters to be unspecified.
-Missing paramters are then calculated from the specified ones using \code{\link{calculateImplicitParameters}}.
+Different parameterizations may be given as input, 
+allowing different parameters to be unspecified.
+Missing parameters are then calculated from the specified 
+ones using \code{\link{calculateImplicitParameters}}.
 }
 \examples{
 # an example with Gulf of Alaska data
@@ -238,10 +246,10 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
 
 }
 \references{
-Belanger, Christina L., and David W. Bapst. 
+Belanger, Christina L., and David W. Bapst. 2023.
 "Simulating our ability to accurately detect abrupt 
-changes in assemblage-based paleoenvironmental proxies." (2023): 1-32.
-https://doi.org/10.1073/pnas.1602102113
+changes in assemblage-based paleoenvironmental proxies." 
+Palaeontologia Electronica 26 (2), 1-32
 }
 \seealso{
 \code{\link{calculateImplicitParameters}}
