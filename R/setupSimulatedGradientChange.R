@@ -1,25 +1,49 @@
 #' Create a Stochastic Time-Series of Gradient Change For Use in Simulating Assemblage Change
 #'
-#' Given a series of inputs, simulates a sequence of gradient change against time for use in testing how environmental change alters the recovered sequence of fossil assemblages.
+#' Given a series of inputs, simulates a sequence of gradient change 
+#' against time for use in testing how environmental change alters 
+#' the recovered sequence of fossil assemblages.
 
 #' @details 
-#' This function is rather complicated and was written at a time when it was envisioned that simulations would involve time series of many repeated events with varying background intervals between them, rather than simulated sequences having only one event. In practice, use of paleoAM has tended to find the latter to be more useful.
+#' This function is rather complicated and was written at a time 
+#' when it was envisioned that simulations would involve time series 
+#' of many repeated events with varying background intervals 
+#' between them, rather than simulated sequences having only one event. 
+#' In practice, use of paleoAM has tended to find the latter to be more useful.
 
-#' @param nEvents Number of events to occur in a simulated sequence of gradient change.
+#' @param nEvents Number of events to occur in a simulated sequence 
+#' of gradient change.
 
-#' @param peakGradientValue The gradient value at the 'peak' for an event that represents an excursion on that environmental gradient.
+#' @param peakGradientValue The gradient value at the 'peak' for 
+#' an event that represents an excursion on that environmental gradient.
 
-#' @param bgGradientValue The gradient value expected during background intervals during which no notable excursion is occurring on that environmental gradient.
+#' @param bgGradientValue The gradient value expected during 
+#' background intervals during which no notable excursion is 
+#' occurring on that environmental gradient.
 
-#' @param bgDurationRange A vector of two values, representing the minimum and maximum duration (in time units) of a background interval between successive events.
+#' @param bgDurationRange A vector of two values, representing the 
+#' minimum and maximum duration (in time units) of a 
+#' background interval between successive events.
 
-#' @param transitionDuration How long the transition between peak and background intervals should be. The longer this interval, the more chances of an assemblage being sampled that represents transitional gradient values.
+#' @param transitionDuration How long the transition between peak and 
+#' background intervals should be. The longer this interval, 
+#' the more chances of an assemblage being sampled that 
+#' represents transitional gradient values.
 
-#' @param eventDuration The duration (in time-units) of a simulated event during which the environmental gradient is at an excursion 'peak' level.
+#' @param eventDuration The duration (in time-units) of a 
+#' simulated event during which the environmental gradient 
+#' is at an excursion 'peak' level.
 
-#' @param halfGradientOnly Whether to simulate only half of a background-event sequence, either beginning or terminating the simulation at the peak value. Only a single event can be simulated, so \code{nEvents} must be 1. The default is \code{FALSE} which signals to not simulated a half-gradient.
+#' @param halfGradientOnly Whether to simulate only half of 
+#' a background-event sequence, either beginning or terminating 
+#' the simulation at the peak value. 
+#' Only a single event can be simulated, so \code{nEvents} must be 1. 
+#' The default is \code{FALSE} which signals to not simulated a half-gradient.
 
-#' @param includeInitialBackgroundPhase A logical indicating whether to include a lengthy background phase, for use in calibrating a simulation. This function is mainly for diagnostic purposes and may be removed in future updates.
+#' @param includeInitialBackgroundPhase A logical indicating whether 
+#' to include a lengthy background phase, for use in calibrating a simulation. 
+#' This function is mainly for diagnostic purposes 
+#' and may be removed in future updates.
 
 #' @param plot Should the simulated gradient be shown as a plot?
 
