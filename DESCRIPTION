@@ -1,8 +1,8 @@
 Package: paleoAM
 Type: Package
 Title: Simulating Assemblage Models of Abundance for the Fossil Record
-Version: 0.96
-Date: 2024-09-11
+Version: 0.97
+Date: 2024-09-14
 Author: David W Bapst, Christina L Belanger
 Maintainer: David W Bapst <dwbapst@gmail.com>
 Depends:
