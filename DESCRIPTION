@@ -3,7 +3,15 @@ Type: Package
 Title: Simulating Assemblage Models of Abundance for the Fossil Record
 Version: 0.97
 Date: 2024-09-14
-Author: David W Bapst, Christina L Belanger
+Author: David W Bapst [aut, cre], Christina L Belanger [aut]
+Authors@R: c(person(given = c("David", "W"),
+                  family = "Bapst",
+                  role = c("aut", "cre"),
+                  email = "dwbapst@gmail.com"),
+             person(given = c("Christina", "L"),
+                  family = "Belanger",
+                  role = c("aut"))
+                  )
 Maintainer: David W Bapst <dwbapst@gmail.com>
 Depends:
 	R (>= 4.1.0)
@@ -14,6 +22,7 @@ Imports:
 Suggests:
     spelling, testthat	
 License: CC0
+Language: en-US
 Encoding: UTF-8
 ByteCompile: TRUE
 Description: Tools for modeling abundance distributions over environmental
