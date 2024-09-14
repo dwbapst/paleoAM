@@ -11,6 +11,8 @@ Imports:
 	graphics,
 	stats,
 	vegan
+Suggests:
+    spelling, testthat	
 License: CC0
 Encoding: UTF-8
 ByteCompile: TRUE

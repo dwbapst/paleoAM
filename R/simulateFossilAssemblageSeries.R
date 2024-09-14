@@ -72,7 +72,7 @@
 #'    gradientOrigDCA = DCA1_GOA, 
 #'    origAbundData = abundData_GOA
 #'    )
-#'
+#' 
 #' # Run the simulation of fossil assemblages
 #'     # simulateFossilAssemblageSeries has lots of arguments...
 #'     # below they are broken up into groups, seperate by #
