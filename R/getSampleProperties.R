@@ -1,21 +1,21 @@
-#' Get Sample Properties
-#' 
-#' The
+# Get Sample Properties
+# 
+# The
 
-#' @details
-#' The
+# @details
+# The
 
 # @inheritParams
 
-#' @param simTimeVar The
+# @param simTimeVar The
 
-#' @param fossilSeries The
+# @param fossilSeries The
 
-#' @param eventStartEndTimes The
+# @param eventStartEndTimes The
 
-#' @param initialBackgroundIntervalIncluded The
+# @param initialBackgroundIntervalIncluded The
 
-#' @param backgroundStartEnd The
+# @param backgroundStartEnd The
 
 #' @return
 #' The
@@ -29,10 +29,10 @@
 # @examples
 
 
-#'
-#' @name getSampleProperties
-#' @rdname getSampleProperties
-#' @export
+#
+# @name getSampleProperties
+# @rdname getSampleProperties
+# @export
 getSampleProperties <- function(
             simTimeVar, 
             fossilSeries, 
@@ -149,8 +149,6 @@ getSampleProperties <- function(
     return(output)
     }
 
-
-
 ageMatchFun <- function(age, eventStartEndTimes){
         # check if there is overlap
         #if(!any(age[1] > eventStartEndTimes[,2])){
@@ -184,4 +182,4 @@ ageMatchFun <- function(age, eventStartEndTimes){
             }
         
         return(ageMatch)
-}
+    }
