@@ -117,11 +117,13 @@ getTimestepAbundances <- function(
     
     # sample from a uniform distribution (0 -> 1)
         # as a way of getting stochastic presence/absence
-    speciesPresent_List <- lapply(1:nTimeSteps, function(i){
+    speciesPresent_List <- lapply(1:nTimeSteps, 
+        function(i){
             probs <- speciesPresent_List[[i]]
             uniformDraw <- uniformDistNumbers[i,]
             uniformDraw <= probs
-            })
+            }
+        )
 
     # now simulate actual specimen abundances for each time step    
     timestepAbundances <- simulateTimestepAbundances(
@@ -161,16 +163,19 @@ simulateTimestepAbundances <- function(
         expRelativeAbundances <- expAbundFromKDE/sum(expAbundFromKDE)
         
         # sample "specimensPerTimestep" fossil specimens for each timestep
-        # We treat each timestep as having a fixed non-stochastic number of individuals 
+        # We treat each timestep as having a 
+            # fixed non-stochastic number of individuals 
         # sampled from that community (specimensPerTimestep) 
         
         species <- (1:nSpecies)[expRelativeAbundances > 0]
         species <- as.integer(species)
         expRelativeAbundances <- expRelativeAbundances[expRelativeAbundances > 0]
-            
-        fossilSamples <- sample(size = specimensPerTimestep, 
-                x = species, replace = TRUE, 
-                prob = expRelativeAbundances)
+                    
+        fossilSamples <- sample(
+            size = specimensPerTimestep, 
+            x = species, 
+            replace = TRUE, 
+            prob = expRelativeAbundances)
         
         # count how many of each species were buried
         fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
