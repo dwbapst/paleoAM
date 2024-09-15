@@ -173,9 +173,13 @@ simulateTimestepAbundances <- function(
                     
         fossilSamples <- sample(
             size = specimensPerTimestep, 
-            x = species, 
+            x = as.character(species), 
             replace = TRUE, 
-            prob = expRelativeAbundances)
+            prob = expRelativeAbundances
+            )
+
+        # convert fossilSamples to integer
+        fossilSamples <- as.integer(fossilSamples)
         
         # count how many of each species were buried
         fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
