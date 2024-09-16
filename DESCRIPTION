@@ -25,9 +25,5 @@ License: CC0
 Language: en-US
 Encoding: UTF-8
 ByteCompile: TRUE
-Description: Tools for modeling abundance distributions over environmental
-     gradients, and tools for simulating those communities over various 
-     sedimentary histories. For use with fossil records with detailed age
-     models and abundance distributions used for calculating environmental
-     gradients from ordinations or other indices based on fossil assemblages. 
+Description: Provides functions for fitting abundance distributions over environmental gradients to the species in ecological communities, and tools for simulating the fossil assemblages from those abundance models for such communities, as well as simulating assemblages across various patterns of sedimentary history and sampling. These tools are for particular use with fossil records with detailed age models and abundance distributions used for calculating environmental gradients from ordinations or other indices based on fossil assemblages.
 RoxygenNote: 7.3.2
