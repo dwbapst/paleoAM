@@ -98,8 +98,8 @@ plotHeatmapComparison <- function(
     ########################
     # setting up par to reset on exit 
         # as instructed by CRAN
-    oldpar <- par(no.readonly = TRUE) # code line i
-    on.exit(par(oldpar)) # code line i + 1
+    oldpar <- graphics::par(no.readonly = TRUE) # code line i
+    on.exit(graphics::par(oldpar)) # code line i + 1
     
     ########################    
     graphics::par(mar = margins)

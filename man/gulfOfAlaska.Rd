@@ -57,23 +57,21 @@ water depth in the Gulf of Alaska (Jaeger et al., 2014).
 \examples{
 data(gulfOfAlaska)
 
-############################################################
+########################
 # (This is not to be run, just showing how data was loaded)
-\dontrun{
+#
+# # Loading the data files used by Belanger & Bapst 2023
+#     # taken from Sharon et al. supplemental
+# fullDataTable_GOA <- read.table(
+#    "foram_abundances_forSimulations.txt",
+#    header = TRUE)
+# 
+# DCA1_GOA <- fullDataTable_GOA$DCA1
+# abundData_GOA <- fullDataTable_GOA[,-(1:5)]
+#
+# save(fullDataTable_GOA, DCA1_GOA, abundData_GOA, 
+#    file = "data/gulfOfAlaska.Rdata")
 
-# Loading the data files used by Belanger & Bapst 2023
-    # taken from Sharon et al. supplemental
-fullDataTable_GOA <- read.table(
-    "foram_abundances_forSimulations.txt",
-    header = TRUE)
-
-DCA1_GOA <- fullDataTable_GOA$DCA1
-abundData_GOA <- fullDataTable_GOA[,-(1:5)]
-
-save(fullDataTable_GOA, DCA1_GOA, abundData_GOA, 
-    file = "data/gulfOfAlaska.Rdata")
-
-}
 
 }
 \seealso{
