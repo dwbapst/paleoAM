@@ -142,7 +142,7 @@ plotHeatmapComparison <- function(
         color.palette = function(n) 
             grDevices::hcl.colors(n, palette = palette), 
         
-        plot.axes = { 
+        plot.axes = {
             
             if(!is.null(contourLineLevels)){
                 graphics::contour(

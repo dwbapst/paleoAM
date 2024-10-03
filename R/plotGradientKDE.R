@@ -66,7 +66,7 @@ plotGradientKDE <- function(
         plot(speciesKDEs[[1]],
              #main = "Scaled KDEs of Abundance for Every Species in the Dataset",
              main = "",
-             ylab = "Scaled Expected Abundance If Present",
+             ylab = "Log Scaled Expected Abundance\n(If Present)",
              xlab = "Gradient (DCA-1)",
              xlim = xlim,
              ylim = ylim,
@@ -78,6 +78,7 @@ plotGradientKDE <- function(
              #main = "Scaled KDEs of Abundance for Every Species in the Dataset",
              main = "",
              ylab = "Scaled Expected Abundance If Present",
+             # ylab = "Scaled Expected Abundance\n(If Present)",
              xlab = "Gradient (DCA-1)",
              xlim = xlim,
              ylim = ylim,
@@ -92,4 +93,4 @@ plotGradientKDE <- function(
             )
         }
 
-    }
+}
