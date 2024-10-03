@@ -13,6 +13,7 @@ Authors@R: c(person(given = c("David", "W"),
                   role = c("aut"))
                   )
 Maintainer: David W Bapst <dwbapst@gmail.com>
+BugReports: https://github.com/dwbapst/paleoAM/issues
 Depends:
 	R (>= 4.1.0)
 Imports:
@@ -22,6 +23,7 @@ Imports:
 Suggests:
     spelling, testthat	
 License: CC0
+URL: https://github.com/dwbapst/paleoAM
 Language: en-US
 Encoding: UTF-8
 ByteCompile: TRUE

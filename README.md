@@ -4,6 +4,18 @@
 
 Users of `paleoAM` functions can fit models of abundance to their data, and then simulate how time-averaging, bioturbation and other mixing processes might change or obscure a given paleoenvironmental signal that they infer from their ecological data.
 	
+The most recent public release of the code for `paleoAM` is on CRAN at: [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/paleoAM)](https://cran.r-project.org/package=paleoAM)
+
+You can install the most recent public release version of `paleoAM` in R from CRAN using:
+
+```
+install.packages("paleoAM")
+```
+	
+The latest pre-release version of `paleoAM` can be found at github:
+
+	https://github.com/dwbapst/paleoAM
+
 You can install this latest development version using the R function `install_github` in the package `devtools`:
 
 ```
