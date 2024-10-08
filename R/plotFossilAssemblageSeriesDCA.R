@@ -54,7 +54,7 @@ plotFossilAssemblageSeriesDCA <- function(
         simFossilAssemblageSeriesOut <- arguments[[1]]
         plotFossilAssemblageSeriesDCA_sepVariables(
             simTimeVar = simFossilAssemblageSeriesOut$simTimeVar, 
-            gradientRecovered = simFossilAssemblageSeriesOut$ecology$scoreDCA1_recovered,
+            gradientRecovered = simFossilAssemblageSeriesOut$sampleProperties$scoreDCA1_recovered,
             sampleAge = simFossilAssemblageSeriesOut$sampleProperties$sampleMidAge,
             colSimGenerating = colSimGenerating, 
             colSimRecovered = colSimRecovered

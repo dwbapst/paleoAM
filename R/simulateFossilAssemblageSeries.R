@@ -319,7 +319,7 @@ simulateFossilAssemblageSeries <- function(
         }
     
     thinList <- function(input){
-        out <- list(sampleProperties = list(), implicitParameters = list())
+        out <- list(sampleProperties = list(), implicitParameters = list(), simTimeVar = list())
         out$sampleProperties$sampleSedColumnDepth_start <- input$sampleProperties$sampleSedColumnDepth_start
         out$sampleProperties$sampleSedColumnDepth_end <- input$sampleProperties$sampleSedColumnDepth_end
         out$sampleProperties$sampleInterval_start  <- input$sampleProperties$sampleInterval_start 
@@ -327,9 +327,19 @@ simulateFossilAssemblageSeries <- function(
         out$sampleProperties$sampleMidAge <- input$sampleProperties$sampleMidAge
         out$sampleProperties$scoreDCA1_recovered <- input$sampleProperties$scoreDCA1_recovered
         out$implicitParameters <- input$implicitParameters
+        out$simTimeVar <- input$simTimeVar
         return(out)
         }
 
+        simFossilAssemblageSeriesOut <- arguments[[1]]
+        plotFossilAssemblageSeriesDCA_sepVariables(
+            simTimeVar = simFossilAssemblageSeriesOut$simTimeVar, 
+            gradientRecovered = simFossilAssemblageSeriesOut$sampleProperties$scoreDCA1_recovered,
+            sampleAge = simFossilAssemblageSeriesOut$sampleProperties$sampleMidAge,
+            colSimGenerating = colSimGenerating, 
+            colSimRecovered = colSimRecovered
+            )    
+    
     if(thinOutput){
         outList <- thinList(outList)
         }
