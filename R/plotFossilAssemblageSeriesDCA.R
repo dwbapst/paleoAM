@@ -82,10 +82,12 @@ plotFossilAssemblageSeriesDCA <- function(
     }
 
 plotFossilAssemblageSeriesDCA_sepVariables <- function(
-                    simTimeVar, gradientRecovered, sampleAge,
-                    colSimGenerating = "black", 
-                    colSimRecovered = "navy"
-                    ){
+    simTimeVar, 
+    gradientRecovered, 
+    sampleAge,
+    colSimGenerating = "black", 
+    colSimRecovered = "navy"
+    ){
     
     # calculate y limits
     DCA1lump <- c(simTimeVar$gradientValue, gradientRecovered)
