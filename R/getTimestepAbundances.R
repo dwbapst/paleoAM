@@ -167,20 +167,30 @@ simulateTimestepAbundances <- function(
             # fixed non-stochastic number of individuals 
         # sampled from that community (specimensPerTimestep) 
         
-        species <- (1:nSpecies)[expRelativeAbundances > 0]
-        species <- as.integer(species)
-        expRelativeAbundances <- expRelativeAbundances[expRelativeAbundances > 0]
-                    
-        fossilSamples <- sample(
-            size = specimensPerTimestep, 
-            x = as.character(species), 
-            replace = TRUE, 
-            prob = expRelativeAbundances
-            )
-
-        # convert fossilSamples to integer
-        fossilSamples <- as.integer(fossilSamples)
+        nonzeroAbund <- (expRelativeAbundances > 0)
         
+        if(sum(nonzeroAbund) > 1){
+        
+            species <- which(nonzeroAbund)
+            #species <- as.integer(species)
+            expRelativeAbundances <- expRelativeAbundances[nonzeroAbund]
+                    
+            fossilSamples <- sample(
+                size = specimensPerTimestep, 
+                x = species, # x = as.character(species), 
+                replace = TRUE, 
+                prob = expRelativeAbundances
+                )
+
+            # convert fossilSamples to integer
+              # this eats up an enormous amount of computational cycles -- why??
+            # fossilSamples <- as.integer(fossilSamples)
+        
+        }else{
+            # if there is only one species
+            fossilSamples <- rep(species, specimensPerTimestep)
+            }
+            
         # count how many of each species were buried
         fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
         timestepAbundances[i,] <- fossilCounts
