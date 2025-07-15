@@ -167,21 +167,22 @@ simulateTimestepAbundances <- function(
             # fixed non-stochastic number of individuals 
         # sampled from that community (specimensPerTimestep) 
         
-        nonzeroAbund <- (expRelativeAbundances > 0)
+        species <- which(expRelativeAbundances > 0)
         
-        if(sum(nonzeroAbund) > 1){
+        if(length(species) > 1){
         
-            species <- which(nonzeroAbund)
             #species <- as.integer(species)
-            expRelativeAbundances <- expRelativeAbundances[nonzeroAbund]
                     
-            fossilSamples <- sample(
+            fossilSamples <- sample.int(
+                n = length(species),
                 size = specimensPerTimestep, 
-                x = species, # x = as.character(species), 
+                # x = species, # x = as.character(species), 
                 replace = TRUE, 
-                prob = expRelativeAbundances
+                prob = expRelativeAbundances[species]
                 )
 
+            fossilSamples <- species[fossilSamples]
+            
             # convert fossilSamples to integer
               # this eats up an enormous amount of computational cycles -- why??
             # fossilSamples <- as.integer(fossilSamples)
