@@ -83,6 +83,8 @@ getProbOccViaPresAbs <- function(
         approxProbs <- lapply(gradientPropPresence, function(x)
             stats::approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
             )  
+        approxProbs <- matrix(unlist(approxProbs), ncol = length(gradientValue), byrow = TRUE)
+        return(approxProbs)
         }
 
     # testing lines for checking out calculations

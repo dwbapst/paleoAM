@@ -79,58 +79,72 @@ getTimestepAbundances <- function(
     expAbundFromKDE_List <- lapply(expAbundFromKDE_List, unlist)        
     
     # get species occurrences for each time step based on occurrence data
-    # 05-19-21
+    # 05-19-21: this is now unnecessary
     # only certain species can be sampled at some point along the gradient
         # use proportion of samples in each 0.2 bin as a rough approximation    
-    #OLD: speciesPresent_List <- lapply(unqGradient, probSpeciesOccur)
-    speciesPresent_List <- probSpeciesOccur(unqGradient) 
-    #that produce a list that is nspecies long, 
-        # with each species-specific element 
-        # containing values for each unique gradient value
+    #OLD: speciesPresent_Matrix <- lapply(unqGradient, probSpeciesOccur)
+    speciesPresent_Matrix <- probSpeciesOccur(unqGradient) 
+    #that produce a matrix that has nrow = nspecies, 
+        # values across the gradient are each column
+        # (ncol = length(unqGradient) (which is nUnqGradient)
     
     # test
-    if(length(speciesPresent_List) != nSpecies){
+    if(nrow(speciesPresent_Matrix) != nSpecies){
         stop("not getting right number of species from probSpeciesOccur")
         }
+    if(ncol(speciesPresent_Matrix) != nUnqGradient){
+        stop("not getting right number of gradient values from probSpeciesOccur")
+        }
     
+    # repeat each column for each unique gradient value
+    speciesPresent_Matrix <- speciesPresent_Matrix[,matchUnqGradient]
+    
+    # 07-16-25: this is old
     # need to make it a list with elements for each unique gradient value...
-    speciesPresent_List <- lapply(1:nUnqGradient, function(x) 
-        lapply(speciesPresent_List, function(y) y[[x]]))
-    # and now make it a list for each timestep, using matchUnqGradient
-    speciesPresent_List <- speciesPresent_List[matchUnqGradient]
-    # now it is a list that has elements for each timestep, 
-        # with each element being nSpecies long
-    # simplify
-    speciesPresent_List <- lapply(speciesPresent_List, unlist)
-    
+        # speciesPresent_List <- lapply(1:nUnqGradient, function(x) 
+            #     lapply(speciesPresent_List, function(y) y[[x]]))
+        # and now make it a list for each timestep, using matchUnqGradient
+        #speciesPresent_Matrix <- speciesPresent_List[matchUnqGradient]
+        # now it is a list that has elements for each timestep, 
+            # with each element being nSpecies long
+        # simplify
+        #speciesPresent_Matrix <- lapply(speciesPresent_List, unlist)
+        
     # test that its the right length
-    if(length(speciesPresent_List) != nTimeSteps){
-        stop("not getting right number of values for speciesPresent_List")
+    if(ncol(speciesPresent_Matrix) != nTimeSteps){
+        stop("not getting right number of values for speciesPresent_Matrix")
         }
     
     # now stochastically determine if species are present or not
     # first generate a large matrix of numbers pulled from a uniform distribution
-    uniformDistNumbers <- stats::runif(n = nSpecies * nTimeSteps, 
-         min = 0, max = 1)
-    uniformDistNumbers <- matrix(uniformDistNumbers, 
-         nTimeSteps, nSpecies)
-    
-    # sample from a uniform distribution (0 -> 1)
-        # as a way of getting stochastic presence/absence
-    speciesPresent_List <- lapply(1:nTimeSteps, 
-        function(i){
-            probs <- speciesPresent_List[[i]]
-            uniformDraw <- uniformDistNumbers[i,]
-            uniformDraw <= probs
-            }
-        )
+    uniformDistNumbers <- matrix(
+        stats::runif(
+            n = nSpecies * nTimeSteps, 
+            min = 0, max = 1
+            ), 
+        nSpecies, nTimeSteps) # rows = species, cols = timesteps
+
+    speciesPresent_Matrix <- uniformDistNumbers <= speciesPresent_Matrix    
+        
+    ## sample from a uniform distribution (0 -> 1)
+    #    # as a way of getting stochastic presence/absence
+    #speciesPresent_List <- lapply(1:nTimeSteps, 
+    #    function(i){
+    #        probs <- speciesPresent_List[[i]]
+    #        uniformDraw <- uniformDistNumbers[i,]
+    #        uniformDraw <= probs
+    #        }
+    #    )
+
+    # do I need to convert speciesPresent_Matrix to speciesPresent_List?
+        # maybe not...
 
     # now simulate actual specimen abundances for each time step    
     timestepAbundances <- simulateTimestepAbundances(
         specimensPerTimestep = specimensPerTimestep, 
         nSpecies = nSpecies, 
         nTimeSteps = nTimeSteps, 
-        speciesPresent_List = speciesPresent_List, 
+        speciesPresent_Matrix = speciesPresent_Matrix, 
         expAbundFromKDE_List = expAbundFromKDE_List
         )
     
@@ -143,58 +157,62 @@ simulateTimestepAbundances <- function(
             specimensPerTimestep, 
             nSpecies, 
             nTimeSteps, 
-            speciesPresent_List, 
+            speciesPresent_Matrix, 
             expAbundFromKDE_List){
     
     # make empty abundance matrix
     timestepAbundances <- matrix( 0, 
-          nrow = nTimeSteps, ncol = nSpecies)
+          nrow = nTimeSteps, 
+          ncol = nSpecies)
     
     for(i in 1:nTimeSteps){
         # figure out relative expected frequency 
         # of each species at each point in time
         expAbundFromKDE <- expAbundFromKDE_List[[i]]    
         # conditional on IF they were sampled    
-        speciesPresent <- speciesPresent_List[[i]]        
+        # speciesPresent <- speciesPresent_Matrix[,i]        
         # retain only present species
         # set expected abundance of all other species to 0
-        expAbundFromKDE[!speciesPresent] <- 0
+        expAbundFromKDE[!speciesPresent_Matrix[,i] ] <- 0
         # turn into expected relative abundances
         expRelativeAbundances <- expAbundFromKDE/sum(expAbundFromKDE)
-        
+
         # sample "specimensPerTimestep" fossil specimens for each timestep
         # We treat each timestep as having a 
-            # fixed non-stochastic number of individuals 
+        # fixed non-stochastic number of individuals 
         # sampled from that community (specimensPerTimestep) 
         
-        species <- which(expRelativeAbundances > 0)
-        
-        if(length(species) > 1){
-        
-            #species <- as.integer(species)
-                    
-            fossilSamples <- sample.int(
-                n = length(species),
-                size = specimensPerTimestep, 
-                # x = species, # x = as.character(species), 
-                replace = TRUE, 
-                prob = expRelativeAbundances[species]
-                )
-
-            fossilSamples <- species[fossilSamples]
+        # 07-15-25
+        # following code not needed, can replace sample+tabulate
+        # use a call to rmultinom instead
+        #
+            #species <- which(expRelativeAbundances > 0)
+            #if(length(species) > 1){
+                #species <- as.integer(species)
+            #    fossilSamples <- sample.int(
+            #        n = length(species),
+            #        size = specimensPerTimestep, 
+            #        # x = species, # x = as.character(species), 
+            #        replace = TRUE, 
+            #        prob = expRelativeAbundances[species]
+            #        )
+             #   fossilSamples <- species[fossilSamples]
+                # convert fossilSamples to integer
+                  # this eats up an enormous amount of computational cycles -- why??
+                # fossilSamples <- as.integer(fossilSamples)
+            # }else{
+                # if there is only one species
+              #  fossilSamples <- rep(species, specimensPerTimestep)
+              #  }
             
-            # convert fossilSamples to integer
-              # this eats up an enormous amount of computational cycles -- why??
-            # fossilSamples <- as.integer(fossilSamples)
         
-        }else{
-            # if there is only one species
-            fossilSamples <- rep(species, specimensPerTimestep)
-            }
-            
         # count how many of each species were buried
-        fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
-        timestepAbundances[i,] <- fossilCounts
+        #fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
+        
+        timestepAbundances[i,] <- rmultinom(n = 1, 
+                                            size = specimensPerTimestep, 
+                                            prob = expRelativeAbundances
+                                            )[,1]
         }
 
     return(timestepAbundances)
