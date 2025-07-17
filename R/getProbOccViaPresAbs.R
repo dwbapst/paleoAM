@@ -77,15 +77,27 @@ getProbOccViaPresAbs <- function(
         (x + occurrenceFloor) / (gradientHist$counts + occurrenceFloor)
         )
     
+    # Precompute interpolation functions for each species
+    approxFuncs <- lapply(gradientPropPresence, function(y)
+        approxfun(x = gradientHist$mids, y = y, rule = 2)
+        )
+    
     # Define the relationship between gradient and probability of occurrence
     # as an approximate function with `approx`
+    # probSpeciesOccur <- function(gradientValue){
+    #    approxProbs <- lapply(gradientPropPresence, function(x)
+    #        stats::approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
+    #        )  
+    #    approxProbs <- matrix(unlist(approxProbs), ncol = length(gradientValue), byrow = TRUE)
+    #    return(approxProbs)
+    #    }
     probSpeciesOccur <- function(gradientValue){
-        approxProbs <- lapply(gradientPropPresence, function(x)
-            stats::approx(y = x, x = gradientHist$mids, xout = gradientValue)$y
-            )  
-        approxProbs <- matrix(unlist(approxProbs), ncol = length(gradientValue), byrow = TRUE)
-        return(approxProbs)
+        approxProbs <- lapply(approxFuncs, function(f)
+            f(gradientValue)
+        )
+        matrix(unlist(approxProbs), ncol = length(gradientValue), byrow = TRUE)
         }
+    
 
     # testing lines for checking out calculations
         # when debugging
