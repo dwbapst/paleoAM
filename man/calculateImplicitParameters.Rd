@@ -16,7 +16,9 @@ calculateImplicitParameters(
   minSampleTimeStep = 3,
   samplingCompleteness,
   transitionDurationRatio,
-  bioturbDepthRatio
+  bioturbDepthRatio,
+  minBgDurMult = 2.1,
+  maxBgDurMult = 3.1
 )
 }
 \arguments{
@@ -97,9 +99,28 @@ For the purposes of this model, a bioturbation zone depth of
 at location X, the apparent fossil assemblage that would be 
 recovered is just as likely to include specimens that were 
 deposited five centimeters away as those deposited at location X.}
+
+\item{minBgDurMult}{Controls the minimum duration of background intervals, 
+including the initial background interval, as a multiplier of \emph{t}, 
+where \emph{t} is the longest duration of a set that includes event durations,
+transition durations, sample durations (the amount of time captured in the 
+smallest possible sediment sample containing fossil material), 
+and the duration in time between such sample intervals if sampled regularly.
+The default \code{minBgDurMult} makes it so the background intervals are 
+a minimum of 2.1 \emph{t} intervals in length.}
+
+\item{maxnBgDurMult}{Controls the maximum duration of background intervals, 
+including the initial background interval, as a multiplier of \emph{t}, 
+where \emph{t} is the longest duration of a set that includes event durations,
+transition durations, sample durations (the amount of time captured in the 
+smallest possible sediment sample containing fossil material), 
+and the duration in time between such sample intervals if sampled regularly.
+The default \code{maxBgDurMult} makes it so the background intervals are 
+a maximum of 3.1 \emph{t} intervals in length.}
 }
 \value{
-Returns a list giving the full set of parameters necessary for running \code{\link{simulateFossilAssemblageSeries}}.
+Returns a list giving the full set of parameters necessary 
+for running \code{\link{simulateFossilAssemblageSeries}}.
 }
 \description{
 Given a sufficient set of parameters for simulating fossil assemblages 
