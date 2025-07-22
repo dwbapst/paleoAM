@@ -92,8 +92,28 @@
 #' recovered is just as likely to include specimens that were 
 #' deposited five centimeters away as those deposited at location X.
 
+#' @param minBgDurMult Controls the minimum duration of background intervals, 
+#' including the initial background interval, as a multiplier of \emph{t}, 
+#' where \emph{t} is the longest duration of a set that includes event durations,
+#' transition durations, sample durations (the amount of time captured in the 
+#' smallest possible sediment sample containing fossil material), 
+#' and the duration in time between such sample intervals if sampled regularly.
+#' The default \code{minBgDurMult} makes it so the background intervals are 
+#' a minimum of 2.1 \emph{t} intervals in length.
+
+#' @param maxnBgDurMult Controls the maximum duration of background intervals, 
+#' including the initial background interval, as a multiplier of \emph{t}, 
+#' where \emph{t} is the longest duration of a set that includes event durations,
+#' transition durations, sample durations (the amount of time captured in the 
+#' smallest possible sediment sample containing fossil material), 
+#' and the duration in time between such sample intervals if sampled regularly.
+#' The default \code{maxBgDurMult} makes it so the background intervals are 
+#' a maximum of 3.1 \emph{t} intervals in length.
+
+
 #' @return
-#' Returns a list giving the full set of parameters necessary for running \code{\link{simulateFossilAssemblageSeries}}.
+#' Returns a list giving the full set of parameters necessary 
+#' for running \code{\link{simulateFossilAssemblageSeries}}.
 
 # @aliases
 
@@ -128,11 +148,15 @@ calculateImplicitParameters <- function(
             # to simulate per sample
         maxSampleTimeStep = 500,
         minSampleTimeStep = 3,
-  
+        
         # additional primary paramters
         samplingCompleteness,
         transitionDurationRatio,    
-        bioturbDepthRatio
+        bioturbDepthRatio,
+        
+        # parameters that control how long initial background is
+        minBgDurMult = 2.1,
+        maxBgDurMult = 3.1
         
         ){
 
@@ -266,14 +290,15 @@ calculateImplicitParameters <- function(
     
     # set duration of background times as a uniform distribution
       # to avoid artificial patterns of hits and misses for spikes
-    # Constrain so buffer around events is always at as large 
-      # as the effective duration represented by a sample's width
+    # Constrain so buffer around events is always TWICE at as large 
+      # as the effective duration represented by a sample's width,
+      # or an event width, or a transition width
     baseDurationBG <- max(
-        c(eventDuration, sampleDuration, bioturbZoneDepth, distBetweenSamples)
-        ) * 1.1
+        c(eventDuration, transitionDuration, sampleDuration, bioturbZoneDepth, distBetweenSamples)
+        )
 
-    minBgDuration <- baseDurationBG * 2
-    maxBgDuration <- baseDurationBG * 3
+    minBgDuration <- baseDurationBG * minBgDurMult
+    maxBgDuration <- baseDurationBG * maxBgDurMult
     bgDurationRange <- c(minBgDuration, maxBgDuration)
     
     # At `r sedRatePerTimestep` cm/yr sedimentation rate, 
