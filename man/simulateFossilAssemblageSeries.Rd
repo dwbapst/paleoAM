@@ -28,6 +28,8 @@ simulateFossilAssemblageSeries(
   powerRootTransform = 1,
   maxSampleTimeStep = 500,
   minSampleTimeStep = 3,
+  minBgDurMult = 2.1,
+  maxBgDurMult = 3.1,
   includeInitialBackgroundPhase = FALSE,
   plot = FALSE,
   thinOutput = FALSE
@@ -142,6 +144,16 @@ used for simulating a sample.}
 
 \item{minSampleTimeStep}{The minimum number of individual time-steps 
 used for simulating a sample.}
+
+\item{minBgDurMult}{Controls the minimum duration of background intervals, 
+including the initial background interval, as a multiplier of \emph{t}, 
+where \emph{t} is the longest duration of a set that includes event durations,
+transition durations, sample durations (the amount of time captured in the 
+smallest possible sediment sample containing fossil material),  
+the duration of time captured in regions of bioturbation,
+and the duration in time between such sample intervals if sampled regularly.
+The default \code{minBgDurMult} makes it so the background intervals are 
+a minimum of 2.1 \emph{t} intervals in length.}
 
 \item{includeInitialBackgroundPhase}{A logical indicating whether 
 to include a lengthy background phase, for use in calibrating a simulation. 

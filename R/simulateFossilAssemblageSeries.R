@@ -148,6 +148,9 @@ simulateFossilAssemblageSeries <- function(
                 powerRootTransform = 1,  
                 maxSampleTimeStep = 500,
                 minSampleTimeStep = 3,
+                # parameters that control how long initial background is
+                minBgDurMult = 2.1,
+                maxBgDurMult = 3.1,
                 includeInitialBackgroundPhase = FALSE,
                 # runChecks = TRUE,
                 plot = FALSE,
@@ -175,7 +178,11 @@ simulateFossilAssemblageSeries <- function(
           # additional primary paramters
           samplingCompleteness = samplingCompleteness,
           transitionDurationRatio = transitionDurationRatio,
-          bioturbDepthRatio = bioturbDepthRatio
+          bioturbDepthRatio = bioturbDepthRatio,
+          
+          # parameters that control how long initial background is
+          minBgDurMult = minBgDurMult,
+          maxBgDurMult = maxBgDurMult
           )
     
     # replace secondary parameters

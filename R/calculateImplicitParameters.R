@@ -96,7 +96,8 @@
 #' including the initial background interval, as a multiplier of \emph{t}, 
 #' where \emph{t} is the longest duration of a set that includes event durations,
 #' transition durations, sample durations (the amount of time captured in the 
-#' smallest possible sediment sample containing fossil material), 
+#' smallest possible sediment sample containing fossil material),  
+#' the duration of time captured in regions of bioturbation,
 #' and the duration in time between such sample intervals if sampled regularly.
 #' The default \code{minBgDurMult} makes it so the background intervals are 
 #' a minimum of 2.1 \emph{t} intervals in length.
@@ -106,6 +107,7 @@
 #' where \emph{t} is the longest duration of a set that includes event durations,
 #' transition durations, sample durations (the amount of time captured in the 
 #' smallest possible sediment sample containing fossil material), 
+#' the duration of time captured in regions of bioturbation,
 #' and the duration in time between such sample intervals if sampled regularly.
 #' The default \code{maxBgDurMult} makes it so the background intervals are 
 #' a maximum of 3.1 \emph{t} intervals in length.
@@ -154,7 +156,7 @@ calculateImplicitParameters <- function(
         transitionDurationRatio,    
         bioturbDepthRatio,
         
-        # parameters that control how long initial background is
+        # parameters that control how long background is
         minBgDurMult = 2.1,
         maxBgDurMult = 3.1
         
@@ -257,11 +259,17 @@ calculateImplicitParameters <- function(
       # sampling interval width and the sample width
     distBetweenSamples <- samplingIntervalWidth - sampleWidth
     
+    # duration between samples in time units
+    durBetweenSamples <- distBetweenSamples * eventSampleWidthRatio
+    
     # The depth of the bioturbation zone is given by 
       # the product of the bioturbation depth ratio and the sample width.
     
     # Size of region that sediment particle mixture occurs in (in centimeters)
     bioturbZoneDepth <- bioturbDepthRatio * sampleWidth
+    
+    # duration of time captured in sediment region where mixing occurs (in time units)
+    bioturbZoneDur <- bioturbZoneDepth * eventSampleWidthRatio
     
     # how long should it take for values to transition from background to peak values?
     transitionDuration <- transitionDurationRatio * eventDuration 
@@ -292,9 +300,10 @@ calculateImplicitParameters <- function(
       # to avoid artificial patterns of hits and misses for spikes
     # Constrain so buffer around events is always TWICE at as large 
       # as the effective duration represented by a sample's width,
-      # or an event width, or a transition width
+      # or an event width, or a transition width, or the width between samples
+      # or the duration of the size of the bioturbation zone
     baseDurationBG <- max(
-        c(eventDuration, transitionDuration, sampleDuration, bioturbZoneDepth, distBetweenSamples)
+        c(eventDuration, transitionDuration, sampleDuration, bioturbZoneDur, durBetweenSamples)
         )
 
     minBgDuration <- baseDurationBG * minBgDurMult

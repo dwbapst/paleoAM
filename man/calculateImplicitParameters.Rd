@@ -104,7 +104,8 @@ deposited five centimeters away as those deposited at location X.}
 including the initial background interval, as a multiplier of \emph{t}, 
 where \emph{t} is the longest duration of a set that includes event durations,
 transition durations, sample durations (the amount of time captured in the 
-smallest possible sediment sample containing fossil material), 
+smallest possible sediment sample containing fossil material),  
+the duration of time captured in regions of bioturbation,
 and the duration in time between such sample intervals if sampled regularly.
 The default \code{minBgDurMult} makes it so the background intervals are 
 a minimum of 2.1 \emph{t} intervals in length.}
@@ -114,6 +115,7 @@ including the initial background interval, as a multiplier of \emph{t},
 where \emph{t} is the longest duration of a set that includes event durations,
 transition durations, sample durations (the amount of time captured in the 
 smallest possible sediment sample containing fossil material), 
+the duration of time captured in regions of bioturbation,
 and the duration in time between such sample intervals if sampled regularly.
 The default \code{maxBgDurMult} makes it so the background intervals are 
 a maximum of 3.1 \emph{t} intervals in length.}
