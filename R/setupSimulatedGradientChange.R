@@ -88,33 +88,42 @@ setupSimulatedGradientChange <- function(
     # Background intervals are of uneven duration and thus will be obtained using runif
     bgDuration <- function(n=1, min = bgDurationRange[1], max = bgDurationRange[2]){
         stats::runif(n, min = min, max = max)
-        }
+    }
     
-    if(includeInitialBackgroundPhase){
-    
+    if(!includeInitialBackgroundPhase){
+        
+        # just start simulation with a single background interval 
+        # (followed by a second background interval...?)
+        simGradientTime <- c(0, bgDuration() )  # * 2
+        simGradientValue <- c(bgGradientValue, bgGradientValue)
+        backgroundStartEnd <- c(NA, NA)
+        
+    }else{
+        # if includeInitialBackgroundPhase
+        
         # The initial segment of the gradient timeline is used to calibrate later results, 
         # with both an instantaneous and a slow transition between two minimum and maximum values. 
         # The building of the timeline is iterative and needs to be done step-by-step 
         # as the length of some intervals depend on the length of previous interval durations.
         
         # first simulate a plateau at the peak, and at background
-        simGradientTime <- c(0, bgDuration()*3)
+        simGradientTime <- c(0, bgDuration())
         # fast transition from peak to background
         simGradientTime <- c(simGradientTime, max(simGradientTime) * 1.001)
-        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration()*3)
+        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
         # simulate a gradual slope-up and slope down
-        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration()*3)
-        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration()*3)
-        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration()*3)
+        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
+        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
+        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
         
         # long background interval
-            # record start and end for calculating a background envelope 
-            # but buffer before and after recording
+        # record start and end for calculating a background envelope 
+        # but buffer before and after recording
         # start buffer
         simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
         # record time
         backgroundStartEnd <- max(simGradientTime)
-        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration()*20)
+        simGradientTime <- c(simGradientTime, max(simGradientTime) + bgDuration())
         # record time
         backgroundStartEnd <- c(backgroundStartEnd, max(simGradientTime))
         # end buffer
@@ -131,11 +140,7 @@ setupSimulatedGradientChange <- function(
             bgGradientValue, bgGradientValue,
             bgGradientValue, bgGradientValue
             )
-    }else{
-        # just start simulation with a single background interval
-        simGradientTime <- c(0, bgDuration() * 2)
-        simGradientValue <- c(bgGradientValue, bgGradientValue)
-        backgroundStartEnd <- c(NA, NA)
+        
         }
     
     # record when spike simulation begins
@@ -143,56 +148,62 @@ setupSimulatedGradientChange <- function(
     eventStartEndTimes <- matrix(NA, nEvents, 2)
     
     # Now add in the spikes at the specified peak and background height.
+    
     for(i in 1:nEvents){
         lastTime <- max(simGradientTime)
         eventPhaseStartTimes[i] <- lastTime
         newGradientTime <- lastTime + bgDuration()
         lastTime <- newGradientTime
         
-        if(halfGradientOnly == FALSE){
-            newGradientTime <- c(newGradientTime,
+        #message(i)
+        
+        if(halfGradientOnly){  #  == "riseOnly"
+            
+            newGradientTime <- rev(c(
+                newGradientTime,
+                lastTime + transitionDuration,
+                lastTime + transitionDuration + eventDuration
+                ))
+            
+            # check
+            if(any(is.na(newGradientTime[2:3]))){
+                stop("NAs in newGradientTime in setupSimulatedGradientChange")
+            }
+            # 
+            eventStartEndTimes[i,] <- newGradientTime[2:3]
+            simGradientTime <- c(newGradientTime, simGradientTime)
+            #
+            newGradientValue <- rev(c(bgGradientValue,
+                                      peakGradientValue, peakGradientValue))
+            
+            simGradientValue <- c(newGradientValue, simGradientValue)
+            
+        }else{      # if(halfGradientOnly == FALSE){
+            
+            newGradientTime <- c(
+                newGradientTime,
                 lastTime + transitionDuration,
                 lastTime + transitionDuration + eventDuration,
                 lastTime + transitionDuration + eventDuration + transitionDuration,
                 lastTime + transitionDuration + eventDuration + transitionDuration + bgDuration()
                 )
+            
             # check
             if(any(is.na(newGradientTime[2:3]))){
                 stop("NAs in newGradientTime in setupSimulatedGradientChange")
                 }
-            # 
+            
+            #  
             eventStartEndTimes[i,] <- newGradientTime[2:3]
             simGradientTime <- c(simGradientTime, newGradientTime)
             #
             newGradientValue <- c(bgGradientValue,
-                peakGradientValue, peakGradientValue,
-                bgGradientValue, bgGradientValue)
+                                  peakGradientValue, peakGradientValue,
+                                  bgGradientValue, bgGradientValue)
             simGradientValue <- c(simGradientValue, newGradientValue)
             
-            }else{
-                if(halfGradientOnly == "riseOnly"){
-                    
-                    newGradientTime <- rev(c(
-                        newGradientTime,
-                        lastTime + transitionDuration,
-                        lastTime + transitionDuration + eventDuration
-                        ))
-                    
-                    # check
-                    if(any(is.na(newGradientTime[2:3]))){
-                        stop("NAs in newGradientTime in setupSimulatedGradientChange")
-                        }
-                    # 
-                    eventStartEndTimes[i,] <- newGradientTime[2:3]
-                    simGradientTime <- c(newGradientTime, simGradientTime)
-                    #
-                    newGradientValue <- rev(c(bgGradientValue,
-                        peakGradientValue, peakGradientValue))
-                    
-                    simGradientValue <- c(newGradientValue, simGradientValue)
-                    }
-                }
         }
+    }
     
     # get total gradient time -> maxTime
     #maxTime <- max(simGradientTime)
@@ -211,20 +222,20 @@ setupSimulatedGradientChange <- function(
     # checks
     if(any(is.na(eventStartEndTimes))){
         stop("NAs in eventStartEndTimes created by setupSimulatedGradientChange")
-        }
+    }
     if(any(is.na(eventPhaseStartTimes))){
         stop("NAs in eventPhaseStartTimes created by setupSimulatedGradientChange")
-        }    
+    }    
     #if(any(is.na(backgroundStartEnd))){
     #    stop("NAs in backgroundStartEnd created by setupSimulatedGradientChange")
     #    }
     if(any(is.na(simGradientTime))){
         stop("NAs in simGradientTime created by setupSimulatedGradientChange")
-        }       
-
+    }       
+    
     # 07-26-21
     # invert time scale so timesteps increases with depth
-        # like in a real sedimentary core, you nut job
+    # like in a real sedimentary core, you nut job
     eventStartEndTimes   <- max(simGradientTime) - eventStartEndTimes
     eventPhaseStartTimes <- max(simGradientTime) - eventPhaseStartTimes
     backgroundStartEnd   <- max(simGradientTime) - backgroundStartEnd
@@ -233,9 +244,9 @@ setupSimulatedGradientChange <- function(
     # build approximation function for gradient values
     approxGradientSeriesFunction <- function(time){
         stats::approx(x = simGradientTime, 
-               y = simGradientValue, 
-               xout = time)$y
-        }
+                      y = simGradientValue, 
+                      xout = time)$y
+    }
     
     if(plot){
         plot(1:max(simGradientTime), 
@@ -245,8 +256,9 @@ setupSimulatedGradientChange <- function(
              main = "Simulated Change in Gradient Values over Time",
              xlab = "Simulation Time", 
              ylab = "Simulated Gradient Values"
-            )
-        }
+        )
+    }
+    
     
     output <- list(
         simGradient = data.frame(time = simGradientTime, value = simGradientValue),
