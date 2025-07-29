@@ -201,12 +201,13 @@ setupSimulatedGradientChange <- function(
     # for each point in time in the simulation.
     
     if(length(simGradientTime) != length(simGradientValue)){
-        stop(paste0("simGradientTime length (", length(simGradientTime), 
-             ") is not equal to simGradientValue length (",
-             length(simGradientValue),")"
-             ))
-        }
-
+        stop(paste0(
+            "simGradientTime length (", length(simGradientTime), 
+            ") is not equal to simGradientValue length (",
+            length(simGradientValue),")"
+        ))
+    }
+    
     # checks
     if(any(is.na(eventStartEndTimes))){
         stop("NAs in eventStartEndTimes created by setupSimulatedGradientChange")
