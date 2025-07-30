@@ -51,11 +51,26 @@
 #' in the same units as \code{sampleWidth}), over time 
 #' (given in the same time units as \code{eventDuration}. 
 
-#' @param maxSampleTimeStep The maximum number of individual time-steps 
-#' used for simulating a sample.
+#' @param nSimStepsPerSample The number of individual successive communities 
+#' simulated for each sedimentary sample. The default is 20 successive simulation
+#' steps, with a seperate community drawn for each one.
+#' This number should be greater than the number of transition intervals 
+#' or event intervals that can be fit into a single sample interval. 
+#' If \code{nSimStepsPerSample} is less than those numbers,
+#' an error message may be returned. See argument \code{adaptMinSimStepPerSample}.
+#'  
+#' @param adaptMinSimStepPerSample If \code{TRUE} (the default), 
+#' \code{nSimStepsPerSample} is adjusted upwards to be equal to the greater of: 
+#' (a) the number of transition intervals that can be fit into a single sample interval,
+#' or (b) the number of event intervals that can be fit into a single sample interval. 
+#' If \code{FALSE}, then an error message is reported instead if 
+#' \code{nSimStepsPerSample} is less than either of those numbers.
 
-#' @param minSampleTimeStep The minimum number of individual time-steps 
-#' used for simulating a sample.
+# @param maxSampleTimeStep The maximum number of individual time-steps 
+# used for simulating a sample.
+
+# @param minSampleTimeStep The minimum number of individual time-steps 
+# used for simulating a sample.
 
 #' @param samplingCompleteness The relative completeness of stratigraphic 
 #' sampling. For example, if two-centimeter wide samples of sediment are 
