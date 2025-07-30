@@ -148,7 +148,8 @@ setupSimulatedGradientChange <- function(
     eventStartEndTimes <- matrix(NA, nEvents, 2)
     
     # Now add in the spikes at the specified peak and background height.
-    
+    # reorder time-series so that they are constructed begin -> end
+    # reverse later
     for(i in 1:nEvents){
         lastTime <- max(simGradientTime)
         eventPhaseStartTimes[i] <- lastTime
@@ -159,11 +160,11 @@ setupSimulatedGradientChange <- function(
         
         if(halfGradientOnly){  #  == "riseOnly"
             
-            newGradientTime <- rev(c(
+            newGradientTime <- c(
                 newGradientTime,
                 lastTime + transitionDuration,
                 lastTime + transitionDuration + eventDuration
-                ))
+            )
             
             # check
             if(any(is.na(newGradientTime[2:3]))){
@@ -171,27 +172,30 @@ setupSimulatedGradientChange <- function(
             }
             # 
             eventStartEndTimes[i,] <- newGradientTime[2:3]
-            simGradientTime <- c(newGradientTime, simGradientTime)
+            simGradientTime <- c(simGradientTime, newGradientTime)
             #
-            newGradientValue <- rev(c(bgGradientValue,
-                                      peakGradientValue, peakGradientValue))
+            newGradientValue <- c(
+                bgGradientValue,
+                peakGradientValue, 
+                peakGradientValue
+            )
             
-            simGradientValue <- c(newGradientValue, simGradientValue)
+            simGradientValue <- c(simGradientValue, newGradientValue)
             
         }else{      # if(halfGradientOnly == FALSE){
             
-            newGradientTime <- c(
+            newGradientTime <- rev(c(
                 newGradientTime,
                 lastTime + transitionDuration,
                 lastTime + transitionDuration + eventDuration,
                 lastTime + transitionDuration + eventDuration + transitionDuration,
                 lastTime + transitionDuration + eventDuration + transitionDuration + bgDuration()
-                )
+            ))
             
             # check
             if(any(is.na(newGradientTime[2:3]))){
                 stop("NAs in newGradientTime in setupSimulatedGradientChange")
-                }
+            }
             
             #  
             eventStartEndTimes[i,] <- newGradientTime[2:3]
@@ -199,7 +203,8 @@ setupSimulatedGradientChange <- function(
             #
             newGradientValue <- c(bgGradientValue,
                                   peakGradientValue, peakGradientValue,
-                                  bgGradientValue, bgGradientValue)
+                                  bgGradientValue, bgGradientValue
+            )
             simGradientValue <- c(simGradientValue, newGradientValue)
             
         }
@@ -232,6 +237,11 @@ setupSimulatedGradientChange <- function(
     if(any(is.na(simGradientTime))){
         stop("NAs in simGradientTime created by setupSimulatedGradientChange")
     }       
+    
+    # 07-29-25
+    # reverse time series
+    simGradientTime <- rev(simGradientTime)
+    simGradientValue <- rev(simGradientValue)
     
     # 07-26-21
     # invert time scale so timesteps increases with depth
