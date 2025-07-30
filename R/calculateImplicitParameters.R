@@ -46,7 +46,7 @@
 #' may be more difficult to determine 
 #' (what is the thickness of a horizon in a shale unit?).
 
-#' @param sedRatePerTimestep The rate of sedimentation, given as a 
+#' @param sedRatePerTimeunit The rate of sedimentation, given as a 
 #' ratio of sediment thickness (given in linear dimensions, 
 #' in the same units as \code{sampleWidth}), over time 
 #' (given in the same time units as \code{eventDuration}. 
@@ -145,11 +145,15 @@ calculateImplicitParameters <- function(
         # initial secondary parameters
         sampleWidth = NULL,
         eventDuration = NULL,
-        sedRatePerTimestep = NULL,
+        sedRatePerTimeunit = NULL,
+        
         # number of time-step assemblages
             # to simulate per sample
-        maxSampleTimeStep = 500,
-        minSampleTimeStep = 3,
+        nSimStepsPerSample = 20,
+        adaptMinSimStepPerSample = TRUE,
+        
+        #maxSampleTimeStep = 500,
+        #minSampleTimeStep = 3,
         
         # additional primary paramters
         samplingCompleteness,
@@ -172,8 +176,8 @@ calculateImplicitParameters <- function(
     
     # To calculate the necessary parameters, we need to set *THREE* of *FOUR* arbitrary 'nuisance' parameters: 
       # **sample width** (in cm),
-      # **duration** that an event 'plateaus' at some peak value (in time-steps) 
-      # **sedimentation rate** (in cm per time-steps)
+      # **duration** that an event 'plateaus' at some peak value (in time-units) 
+      # **sedimentation rate** (in cm per time-units)
       # **sample/peak width ratio** (the ratio of the length of the event relative to the sample width
     # Combining the three known variables composes a closed system, 
       # and the fourth unknown can be calculated from the other three variables.
@@ -185,55 +189,83 @@ calculateImplicitParameters <- function(
         is.null(eventSampleWidthRatio), 
         is.null(sampleWidth), 
         is.null(eventDuration), 
-        is.null(sedRatePerTimestep)
+        is.null(sedRatePerTimeunit)
         ))
     if(nAbsentSecParam < 1){
         stop(paste0("eventSampleWidthRatio and the three", 
-            " related secondary parameters (sampleWidth, eventDuration and sedRatePerTimestep)\n",
+            " related secondary parameters (sampleWidth, eventDuration and sedRatePerTimeunit)\n",
             " cannot *all* be given input values, as any three constrain the fourth."))
         }
     if(nAbsentSecParam > 1){
         stop(paste0("Three, and only three, of the variables eventSampleWidthRatio\n", 
-            " and related secondary parameters (sampleWidth, eventDuration and sedRatePerTimestep)\n",
+            " and related secondary parameters (sampleWidth, eventDuration and sedRatePerTimeunit)\n",
             " must be given input values, so to constrain the fourth."))
         }
 
     if(is.null(eventSampleWidthRatio)){
-        eventSampleWidthRatio <- sedRatePerTimestep * eventDuration / sampleWidth
+        eventSampleWidthRatio <- sedRatePerTimeunit * eventDuration / sampleWidth
         }
         
     if(is.null(sampleWidth)){
-        sampleWidth <- sedRatePerTimestep * eventDuration / eventSampleWidthRatio
+        sampleWidth <- sedRatePerTimeunit * eventDuration / eventSampleWidthRatio
         }
     
     if(is.null(eventDuration)){
-        eventDuration <- sampleWidth * eventSampleWidthRatio / sedRatePerTimestep 
+        eventDuration <- sampleWidth * eventSampleWidthRatio / sedRatePerTimeunit 
         }
     
-    if(is.null(sedRatePerTimestep)){
+    if(is.null(sedRatePerTimeunit)){
         # Given the above, we can calculate the effective sedimentation rate as:
-        sedRatePerTimestep <- sampleWidth * eventSampleWidthRatio / eventDuration 
+        sedRatePerTimeunit <- sampleWidth * eventSampleWidthRatio / eventDuration 
         }
     
-    # adjust all four of above so we don't simulate too many time-steps per sample
-    #multPar <- maxSampleTimeStep / (sampleWidth/sedRatePerTimestep) 
+    # adjust all four of above so we don't simulate too many time-units per sample
+    #multPar <- maxSampleTimeStep / (sampleWidth/sedRatePerTimeunit) 
     # adjust sampling rate or sampleWidth? Hmmmmm. Both?
-    #sampleWidth <- sampleWidth * multPar
-    #sedRatePerTimestep <- multPar/sedRatePerTimestep
-    #eventSampleWidthRatio <- 
-    expStepsPerSample <- (sampleWidth/sedRatePerTimestep)
-    if(maxSampleTimeStep < expStepsPerSample){
-        stop("More time steps expected in a sample than maxSampleTimeStep -- may be too computationally intensive")
+    
+    
+    # how many transition intervals fit inside a sample?
+    transitionSampleRatio <- transitionDurationRatio * eventSampleWidthRatio 
+    # find the smallest of sample/event and sample/trans ratios
+        # minimum Number of simulation steps per Sample
+    minSimStepPerSample <- min(1/eventSampleWidthRatio, 1/transitionSampleRatio)
+    # reset if adaptMinSimStepPerSample
+    if(minSimStepPerSample > nSimStepsPerSample){
+        if(adaptMinSimStepPerSample){
+            nSimStepsPerSample <- minSimStepPerSample
+        }else{
+            stop(paste0(
+                "Given the length of event and transition phases, nSimStepsPerSample should be greater than ",
+                minSimStepPerSample
+                ))
+            }
         }
-    if(minSampleTimeStep > expStepsPerSample){
-        stop("Fewer time steps expected in a sample than minSampleTimeStep -- may be too computationally intensive")
+
+    #checks
+    if(500 < nSimStepsPerSample){
+        stop("nSimStepsPerSample should be less than 500 or resulting simulation may be too computationally intensive")
+        }
+    if(3 > nSimStepsPerSample){
+        stop("nSimStepsPerSample should be less than 3 or resulting simulation may be too computationally intensive")
         }
     
+    expSimStepsPerSample <- (sampleWidth/sedRatePerTimeunit)
+
+    if(expSimStepsPerSample != nSimStepsPerSample){
+        # calculate a ratio to correct the values
+        corrSimStepsRatio <- nSimStepsPerSample/expSimStepsPerSample
+        sampleWidth <- sampleWidth * corrSimStepsRatio
+        eventDuration <- eventDuration * corrSimStepsRatio
+        # eventSampleWidthRatio shouldn't change 
+        # sedRatePerTimeunit shouldn't change
+        }
+    
+    # check there are no nulls
     nAbsentSecParam <- sum(c(
         is.null(eventSampleWidthRatio), 
         is.null(sampleWidth), 
         is.null(eventDuration), 
-        is.null(sedRatePerTimestep)
+        is.null(sedRatePerTimeunit)
         ))
     
     if(nAbsentSecParam > 0){
@@ -271,6 +303,7 @@ calculateImplicitParameters <- function(
     # duration of time captured in sediment region where mixing occurs (in time units)
     bioturbZoneDur <- bioturbZoneDepth * eventSampleWidthRatio
     
+    # recalculate
     # how long should it take for values to transition from background to peak values?
     transitionDuration <- transitionDurationRatio * eventDuration 
     
@@ -303,16 +336,21 @@ calculateImplicitParameters <- function(
       # or an event width, or a transition width, or the width between samples
       # or the duration of the size of the bioturbation zone
     baseDurationBG <- max(
-        c(eventDuration, transitionDuration, sampleDuration, bioturbZoneDur, durBetweenSamples)
+        c(eventDuration, transitionDuration, sampleDuration, 
+            bioturbZoneDur, durBetweenSamples)
         )
 
+    if(minBgDurMult > maxBgDurMult){
+        stop("minBgDurMult cannot be more than maxBgDurMult")
+        }
+    
     minBgDuration <- baseDurationBG * minBgDurMult
     maxBgDuration <- baseDurationBG * maxBgDurMult
     bgDurationRange <- c(minBgDuration, maxBgDuration)
     
-    # At `r sedRatePerTimestep` cm/yr sedimentation rate, 
+    # At `r sedRatePerTimeunit` cm/yr sedimentation rate, 
       # that would mean that there is (on average) 
-      # `r (minBgDuration + maxBgDuration)/2*sedRatePerTimestep` cm in a background interval.
+      # `r (minBgDuration + maxBgDuration)/2*sedRatePerTimeunit` cm in a background interval.
     
     # The sampling resolution of each event is, much like the sedimentation rate, 
       # an emergent property of the model when other parameters are defined,
@@ -352,7 +390,7 @@ calculateImplicitParameters <- function(
         eventSampleWidthRatio = eventSampleWidthRatio,
         sampleWidth = sampleWidth,
         eventDuration = eventDuration,
-        sedRatePerTimestep = sedRatePerTimestep,
+        sedRatePerTimeunit = sedRatePerTimeunit,
         # output implicit parameters
         peakGradientValue = peakGradientValue,
         sampleDuration = sampleDuration,
