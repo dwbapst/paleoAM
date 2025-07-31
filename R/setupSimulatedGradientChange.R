@@ -82,8 +82,8 @@ setupSimulatedGradientChange <- function(
     if(halfGradientOnly == FALSE){
         if(nEvents != 1){
             stop("halfGradientOnly options can only be used if simulating a single event")
-            }
         }
+    }
     
     # Background intervals are of uneven duration and thus will be obtained using runif
     bgDuration <- function(n=1, min = bgDurationRange[1], max = bgDurationRange[2]){
@@ -135,13 +135,13 @@ setupSimulatedGradientChange <- function(
         # peak, peak, background, background, peak, peak, background, background
         simGradientValue <- c(
             peakGradientValue, peakGradientValue,
-            bgGradientValue,   bgGradientValue,
+            bgGradientValue, bgGradientValue,
             peakGradientValue, peakGradientValue,
-            bgGradientValue,   bgGradientValue,
-            bgGradientValue,   bgGradientValue
-            )
+            bgGradientValue, bgGradientValue,
+            bgGradientValue, bgGradientValue
+        )
         
-        }
+    }
     
     # record when spike simulation begins
     eventPhaseStartTimes <- numeric(length = nEvents)
@@ -163,13 +163,14 @@ setupSimulatedGradientChange <- function(
             newGradientTime <- c(
                 newGradientTime,
                 lastTime + transitionDuration,
-                lastTime + transitionDuration + eventDuration
+                lastTime + transitionDuration + eventDuration/2
             )
             
             # check
             if(any(is.na(newGradientTime[2:3]))){
                 stop("NAs in newGradientTime in setupSimulatedGradientChange")
             }
+            
             # 
             eventStartEndTimes[i,] <- newGradientTime[2:3]
             simGradientTime <- c(simGradientTime, newGradientTime)
@@ -255,7 +256,8 @@ setupSimulatedGradientChange <- function(
     approxGradientSeriesFunction <- function(time){
         stats::approx(x = simGradientTime, 
                       y = simGradientValue, 
-                      xout = time)$y
+                      xout = time
+        )$y
     }
     
     if(plot){
