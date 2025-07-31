@@ -14,7 +14,7 @@ simulateFossilAssemblageSeries(
   eventSampleWidthRatio = NULL,
   sampleWidth = NULL,
   eventDuration = NULL,
-  sedRatePerTimestep = NULL,
+  sedRatePerTimeunit = NULL,
   samplingCompleteness,
   transitionDurationRatio,
   bioturbDepthRatio,
@@ -26,8 +26,8 @@ simulateFossilAssemblageSeries(
   useTransformedRelAbundance = TRUE,
   projectIntoOrigDCA = TRUE,
   powerRootTransform = 1,
-  maxSampleTimeStep = 500,
-  minSampleTimeStep = 3,
+  nSimStepsPerSample = 20,
+  adaptMinSimStepPerSample = TRUE,
   minBgDurMult = 2.1,
   maxBgDurMult = 3.1,
   includeInitialBackgroundPhase = FALSE,
@@ -76,7 +76,7 @@ may be more difficult to determine
 simulated event during which the environmental gradient 
 is at an excursion 'peak' level.}
 
-\item{sedRatePerTimestep}{The rate of sedimentation, given as a 
+\item{sedRatePerTimeunit}{The rate of sedimentation, given as a 
 ratio of sediment thickness (given in linear dimensions, 
 in the same units as \code{sampleWidth}), over time 
 (given in the same time units as \code{eventDuration}.}
@@ -139,11 +139,20 @@ The default is \code{FALSE} which signals to not simulated a half-gradient.}
 
 \item{powerRootTransform}{The power-root transform to be used on the abundance data before applying the DCA. By default this is 1, which means the data is not transformed at all. Note that the power-root transform is only performed if \code{useTransformedRelAbundance = TRUE}.}
 
-\item{maxSampleTimeStep}{The maximum number of individual time-steps 
-used for simulating a sample.}
+\item{nSimStepsPerSample}{The number of individual successive communities 
+simulated for each sedimentary sample. The default is 20 successive simulation
+steps, with a seperate community drawn for each one.
+This number should be greater than the number of transition intervals 
+or event intervals that can be fit into a single sample interval. 
+If \code{nSimStepsPerSample} is less than those numbers,
+an error message may be returned. See argument \code{adaptMinSimStepPerSample}.}
 
-\item{minSampleTimeStep}{The minimum number of individual time-steps 
-used for simulating a sample.}
+\item{adaptMinSimStepPerSample}{If \code{TRUE} (the default), 
+\code{nSimStepsPerSample} is adjusted upwards to be equal to the greater of: 
+(a) the number of transition intervals that can be fit into a single sample interval,
+or (b) the number of event intervals that can be fit into a single sample interval. 
+If \code{FALSE}, then an error message is reported instead if 
+\code{nSimStepsPerSample} is less than either of those numbers.}
 
 \item{minBgDurMult}{Controls the minimum duration of background intervals, 
 including the initial background interval, as a multiplier of \emph{t}, 
@@ -238,10 +247,10 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
        
       # don't need to define eventSampleWidthRatio 
         # - only need to define three of eventSampleWidthRatio, 
-        # sampleWidth, eventDuration, sedRatePerTimestep
+        # sampleWidth, eventDuration, sedRatePerTimeunit
       sampleWidth = 3,
       eventDuration = 100, 
-      sedRatePerTimestep = 0.1,
+      sedRatePerTimeunit = 0.1,
       
       # sample every third sample-width worth of core
       samplingCompleteness = 1/3,

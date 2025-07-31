@@ -101,10 +101,10 @@
 #'        
 #'       # don't need to define eventSampleWidthRatio 
 #'         # - only need to define three of eventSampleWidthRatio, 
-#'         # sampleWidth, eventDuration, sedRatePerTimestep
+#'         # sampleWidth, eventDuration, sedRatePerTimeunit
 #'       sampleWidth = 3,
 #'       eventDuration = 100, 
-#'       sedRatePerTimestep = 0.1,
+#'       sedRatePerTimeunit = 0.1,
 #'       
 #'       # sample every third sample-width worth of core
 #'       samplingCompleteness = 1/3,
@@ -133,7 +133,7 @@ simulateFossilAssemblageSeries <- function(
                 eventSampleWidthRatio = NULL,
                 sampleWidth = NULL,
                 eventDuration = NULL,
-                sedRatePerTimestep = NULL,
+                sedRatePerTimeunit = NULL,
                 samplingCompleteness,
                 transitionDurationRatio,
                 bioturbDepthRatio,
@@ -173,7 +173,7 @@ simulateFossilAssemblageSeries <- function(
           # initial secondary parameters
           sampleWidth = sampleWidth,
           eventDuration = eventDuration,
-          sedRatePerTimestep = sedRatePerTimestep,
+          sedRatePerTimeunit = sedRatePerTimeunit,
           
           # number of simulated steps per colllection
           nSimStepsPerSample = nSimStepsPerSample,
@@ -196,7 +196,7 @@ simulateFossilAssemblageSeries <- function(
     #eventSampleWidthRatio <- implicitParameters$eventSampleWidthRatio
     #sampleWidth <- implicitParameters$sampleWidth
     #eventDuration <- implicitParameters$eventDuration
-    #sedRatePerTimestep <- implicitParameters$sedRatePerTimestep
+    #sedRatePerTimeunit <- implicitParameters$sedRatePerTimeunit
         
     # Set Up the Pattern of Simulated Gradient Change Over Time
     simGradientChangeOut <- setupSimulatedGradientChange(
@@ -230,7 +230,7 @@ simulateFossilAssemblageSeries <- function(
         timestep = 1:maxTime,
         # reverse core depth so oldest time is at bottom (biggest depths)
           # 07-08-21: subtract one to start from 0
-        sedColumnDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerTimestep,
+        sedColumnDepth = ((1:maxTime) - 1) * implicitParameters$sedRatePerTimeunit,
         gradientValue = simGradientChangeOut$
             approxGradientSeriesFunction(1:maxTime)
         )

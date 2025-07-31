@@ -11,9 +11,9 @@ calculateImplicitParameters(
   eventSampleWidthRatio = NULL,
   sampleWidth = NULL,
   eventDuration = NULL,
-  sedRatePerTimestep = NULL,
-  maxSampleTimeStep = 500,
-  minSampleTimeStep = 3,
+  sedRatePerTimeunit = NULL,
+  nSimStepsPerSample = 20,
+  adaptMinSimStepPerSample = TRUE,
   samplingCompleteness,
   transitionDurationRatio,
   bioturbDepthRatio,
@@ -55,16 +55,25 @@ may be more difficult to determine
 simulated event during which the environmental gradient 
 is at an excursion 'peak' level.}
 
-\item{sedRatePerTimestep}{The rate of sedimentation, given as a 
+\item{sedRatePerTimeunit}{The rate of sedimentation, given as a 
 ratio of sediment thickness (given in linear dimensions, 
 in the same units as \code{sampleWidth}), over time 
 (given in the same time units as \code{eventDuration}.}
 
-\item{maxSampleTimeStep}{The maximum number of individual time-steps 
-used for simulating a sample.}
+\item{nSimStepsPerSample}{The number of individual successive communities 
+simulated for each sedimentary sample. The default is 20 successive simulation
+steps, with a seperate community drawn for each one.
+This number should be greater than the number of transition intervals 
+or event intervals that can be fit into a single sample interval. 
+If \code{nSimStepsPerSample} is less than those numbers,
+an error message may be returned. See argument \code{adaptMinSimStepPerSample}.}
 
-\item{minSampleTimeStep}{The minimum number of individual time-steps 
-used for simulating a sample.}
+\item{adaptMinSimStepPerSample}{If \code{TRUE} (the default), 
+\code{nSimStepsPerSample} is adjusted upwards to be equal to the greater of: 
+(a) the number of transition intervals that can be fit into a single sample interval,
+or (b) the number of event intervals that can be fit into a single sample interval. 
+If \code{FALSE}, then an error message is reported instead if 
+\code{nSimStepsPerSample} is less than either of those numbers.}
 
 \item{samplingCompleteness}{The relative completeness of stratigraphic 
 sampling. For example, if two-centimeter wide samples of sediment are 

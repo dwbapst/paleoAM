@@ -35,10 +35,10 @@ fossilSeriesOut <- simulateFossilAssemblageSeries(
        
       # don't need to define eventSampleWidthRatio 
         # - only need to define three of eventSampleWidthRatio, 
-        # sampleWidth, eventDuration, sedRatePerTimestep
+        # sampleWidth, eventDuration, sedRatePerTimeunit
       sampleWidth = 3,
       eventDuration = 100, 
-      sedRatePerTimestep = 0.1,
+      sedRatePerTimeunit = 0.1,
       
       # sample every third sample-width worth of core
       samplingCompleteness = 1/3,
