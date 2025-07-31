@@ -135,10 +135,10 @@ setupSimulatedGradientChange <- function(
         # peak, peak, background, background, peak, peak, background, background
         simGradientValue <- c(
             peakGradientValue, peakGradientValue,
-            bgGradientValue, bgGradientValue,
+            bgGradientValue,   bgGradientValue,
             peakGradientValue, peakGradientValue,
-            bgGradientValue, bgGradientValue,
-            bgGradientValue, bgGradientValue
+            bgGradientValue,   bgGradientValue,
+            bgGradientValue,   bgGradientValue
         )
         
     }
