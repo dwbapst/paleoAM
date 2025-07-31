@@ -146,8 +146,11 @@ simulateFossilAssemblageSeries <- function(
                 useTransformedRelAbundance = TRUE,
                 projectIntoOrigDCA = TRUE,
                 powerRootTransform = 1,  
-                maxSampleTimeStep = 500,
-                minSampleTimeStep = 3,
+                # number of simulated steps per colllection
+                nSimStepsPerSample = 20,
+                adaptMinSimStepPerSample = TRUE,
+                #maxSampleTimeStep = 500,
+                #minSampleTimeStep = 3,
                 # parameters that control how long initial background is
                 minBgDurMult = 2.1,
                 maxBgDurMult = 3.1,
@@ -171,9 +174,13 @@ simulateFossilAssemblageSeries <- function(
           sampleWidth = sampleWidth,
           eventDuration = eventDuration,
           sedRatePerTimestep = sedRatePerTimestep,
-        
-          maxSampleTimeStep = maxSampleTimeStep,
-          minSampleTimeStep = minSampleTimeStep,
+          
+          # number of simulated steps per colllection
+          nSimStepsPerSample = nSimStepsPerSample,
+          adaptMinSimStepPerSample = adaptMinSimStepPerSample,
+          
+          #maxSampleTimeStep = maxSampleTimeStep,
+          #minSampleTimeStep = minSampleTimeStep,
     
           # additional primary paramters
           samplingCompleteness = samplingCompleteness,
