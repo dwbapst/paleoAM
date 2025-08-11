@@ -94,7 +94,7 @@ setupSimulatedGradientChange <- function(
         
         # just start simulation with a single background interval 
         # (followed by a second background interval...?)
-        simGradientTime <- c(0, bgDuration() )  # * 2
+        simGradientTime <- c(0, bgDuration()*2 )  # * 2
         simGradientValue <- c(bgGradientValue, bgGradientValue)
         backgroundStartEnd <- c(NA, NA)
         
@@ -153,7 +153,7 @@ setupSimulatedGradientChange <- function(
     for(i in 1:nEvents){
         lastTime <- max(simGradientTime)
         eventPhaseStartTimes[i] <- lastTime
-        newGradientTime <- lastTime + bgDuration()
+        newGradientTime <- lastTime + bgDuration() #/2
         lastTime <- newGradientTime
         
         #message(i)
@@ -163,7 +163,7 @@ setupSimulatedGradientChange <- function(
             newGradientTime <- c(
                 newGradientTime,
                 lastTime + transitionDuration,
-                lastTime + transitionDuration + eventDuration/2
+                lastTime + transitionDuration + eventDuration #/2
             )
             
             # check
@@ -254,9 +254,10 @@ setupSimulatedGradientChange <- function(
     
     # build approximation function for gradient values
     approxGradientSeriesFunction <- function(time){
-        stats::approx(x = simGradientTime, 
-                      y = simGradientValue, 
-                      xout = time
+        stats::approx(
+            x = simGradientTime, 
+            y = simGradientValue, 
+            xout = time
         )$y
     }
     
