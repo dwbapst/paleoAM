@@ -32,6 +32,10 @@
 #' @param thinOutput Should the output be thinned to just the 
 #' sample properties and intrinsic variables? Default is FALSE.
 
+#' @param requireEventSample Should simulations be halted if no sample overlaps 
+#' with an event? May have issues getting simulations to complete if 
+#' this is \code{TRUE} and sampling completeness is very low.
+
 #' @return
 #' Returns a list, which by default has seven components: 
 #' \code{implicitParameters}, the full list of parameters used for generating the simulated data; 
@@ -155,6 +159,7 @@ simulateFossilAssemblageSeries <- function(
                 minBgDurMult = 2.1,
                 maxBgDurMult = 3.1,
                 includeInitialBackgroundPhase = FALSE,
+                requireEventSample = FALSE,
                 # runChecks = TRUE,
                 plot = FALSE,
                 thinOutput = FALSE
@@ -286,7 +291,8 @@ simulateFossilAssemblageSeries <- function(
         fossilSeries = fossilSeries,
         eventStartEndTimes = simGradientChangeOut$eventStartEndTimes,
         initialBackgroundIntervalIncluded = includeInitialBackgroundPhase,
-        backgroundStartEnd = simGradientChangeOut$backgroundStartEnd
+        backgroundStartEnd = simGradientChangeOut$backgroundStartEnd,
+        requireEventSample = requireEventSample
         )
     
     # check event sampling
@@ -294,7 +300,7 @@ simulateFossilAssemblageSeries <- function(
         # test if any unsampled events
             uniqueEvents <- unique(sampleProperties$eventID[!is.na(sampleProperties$eventID)])
             if(length(uniqueEvents) != nEvents){
-                stop("Fully sampled record but not all events sampled -- that's impossible Dave!")
+                stop("Fully sampled record but not all events sampled -- that's impossible, Dave!")
                }
         }
 
@@ -340,6 +346,7 @@ simulateFossilAssemblageSeries <- function(
         out$sampleProperties$sampleInterval_end <- input$sampleProperties$sampleInterval_end   
         out$sampleProperties$sampleMidAge <- input$sampleProperties$sampleMidAge
         out$sampleProperties$scoreDCA1_recovered <- input$sampleProperties$scoreDCA1_recovered
+        out$sampleProperties$eventID <- input$sampleProperties$eventID
         out$implicitParameters <- input$implicitParameters
         out$simTimeVar <- input$simTimeVar
         return(out)
