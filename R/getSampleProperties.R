@@ -38,7 +38,8 @@ getSampleProperties <- function(
             fossilSeries, 
             eventStartEndTimes,
             initialBackgroundIntervalIncluded,
-            backgroundStartEnd
+            backgroundStartEnd,
+            requireEventSample
             ){
     
     if(any(is.na(eventStartEndTimes))){
@@ -105,9 +106,12 @@ getSampleProperties <- function(
 
     # first... did the simulation even include an initial background segment?
     
+    
     if(initialBackgroundIntervalIncluded){
-        isBackgroundSegment <- (sampleIntervalAges[,1] > backgroundStartEnd[2]  &  
-            sampleIntervalAges[,2] < backgroundStartEnd[1])
+        isBackgroundSegment <- (
+            sampleIntervalAges[,1] > backgroundStartEnd[2]  &  
+            sampleIntervalAges[,2] < backgroundStartEnd[1]
+            )
         
         if(length(isBackgroundSegment)<1 | sum(isBackgroundSegment)<1){
             stop("No samples from background interval?")
@@ -120,18 +124,20 @@ getSampleProperties <- function(
     eventID <- apply(sampleIntervalAges, 1, ageMatchFun, 
         eventStartEndTimes = eventStartEndTimes)   
 
-    if(all(is.na(eventID))){
+    if(requireEventSample & all(is.na(eventID))){
         stop("No samples found during events. Something very bad happened.")
         }
     
-    if(any(c(length(sampleInterval_start), 
-             length(sampleInterval_end), 
-             nrow(fossilSeries$bioturbIntervals), 
-             length(sampleGradientValues), 
-             length(isBackgroundSegment)
-             ) != length(eventID))){
-                 stop("sample-wise variables are not identical length")
-                 }
+    if(any(c(
+            length(sampleInterval_start), 
+            length(sampleInterval_end), 
+            nrow(fossilSeries$bioturbIntervals), 
+            length(sampleGradientValues), 
+            length(isBackgroundSegment)
+            ) != length(eventID))
+        ){
+        stop("sample-wise variables are not identical length")
+        }
     
     output <- data.frame(    
         sampleInterval_start = sampleInterval_start,
