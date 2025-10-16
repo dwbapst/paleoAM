@@ -79,7 +79,7 @@ setupSimulatedGradientChange <- function(
     # This will effectively be a time-series of gradient values, 
     # with irregular intervals between dates.
     
-    if(halfGradientOnly == FALSE){
+    if(halfGradientOnly != FALSE){
         if(nEvents != 1){
             stop("halfGradientOnly options can only be used if simulating a single event")
         }
