@@ -124,7 +124,21 @@ getTimestepAbundances <- function(
             ), 
         nSpecies, nTimeSteps) # rows = species, cols = timesteps
 
-    speciesPresent_Matrix <- uniformDistNumbers <= speciesPresent_Matrix    
+    # need to condition function on sampling at least one species at every site
+    speciesPresent_Matrix_test <- uniformDistNumbers <= speciesPresent_Matrix    
+    
+    if(any(apply(speciesPresent_Matrix_test, 2, sum) == 0)){
+        for(i in 1:ncol(speciesPresent_Matrix)){
+            accepted <- FALSE
+            while(!accepted){
+                uniformDistNumbers <- stats::runif(n= nSpecies, min = 0, max = 1)
+                presenceAbsence <- uniformDistNumbers <= speciesPresent_Matrix[,i]
+                accepted <- sum(presenceAbsence) > 0
+            }
+            speciesPresent_Matrix_test[,i] <- presenceAbsence
+        }
+    }
+    speciesPresent_Matrix <- speciesPresent_Matrix_test  
         
     ## sample from a uniform distribution (0 -> 1)
     #    # as a way of getting stochastic presence/absence
@@ -205,6 +219,10 @@ simulateTimestepAbundances <- function(
               #  fossilSamples <- rep(species, specimensPerTimestep)
               #  }
             
+        
+        if(any(is.na(expRelativeAbundances))){
+            stop("Some expected abundances from the KDEs are NA...")
+            }
         
         # count how many of each species were buried
         #fossilCounts <- tabulate(fossilSamples, nbins = nSpecies)
